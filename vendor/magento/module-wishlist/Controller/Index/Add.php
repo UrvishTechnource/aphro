@@ -1,8 +1,10 @@
 <?php
+
 /**
  * Copyright © 2013-2017 Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Magento\Wishlist\Controller\Index;
 
 use Magento\Catalog\Api\ProductRepositoryInterface;
@@ -15,8 +17,8 @@ use Magento\Framework\Controller\ResultFactory;
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-class Add extends \Magento\Wishlist\Controller\AbstractIndex
-{
+class Add extends \Magento\Wishlist\Controller\AbstractIndex {
+
     /**
      * @var \Magento\Wishlist\Controller\WishlistProviderInterface
      */
@@ -45,11 +47,7 @@ class Add extends \Magento\Wishlist\Controller\AbstractIndex
      * @param Validator $formKeyValidator
      */
     public function __construct(
-        Action\Context $context,
-        \Magento\Customer\Model\Session $customerSession,
-        \Magento\Wishlist\Controller\WishlistProviderInterface $wishlistProvider,
-        ProductRepositoryInterface $productRepository,
-        Validator $formKeyValidator
+    Action\Context $context, \Magento\Customer\Model\Session $customerSession, \Magento\Wishlist\Controller\WishlistProviderInterface $wishlistProvider, ProductRepositoryInterface $productRepository, Validator $formKeyValidator
     ) {
         $this->_customerSession = $customerSession;
         $this->wishlistProvider = $wishlistProvider;
@@ -67,8 +65,7 @@ class Add extends \Magento\Wishlist\Controller\AbstractIndex
      * @SuppressWarnings(PHPMD.NPathComplexity)
      * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      */
-    public function execute()
-    {
+    public function execute() {
 
         /** @var \Magento\Framework\Controller\Result\Redirect $resultRedirect */
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
@@ -90,7 +87,7 @@ class Add extends \Magento\Wishlist\Controller\AbstractIndex
             $session->unsBeforeWishlistRequest();
         }
 
-        $productId = isset($requestParams['product']) ? (int)$requestParams['product'] : null;
+        $productId = isset($requestParams['product']) ? (int) $requestParams['product'] : null;
         if (!$productId) {
             $resultRedirect->setPath('*/');
             return $resultRedirect;
@@ -118,8 +115,7 @@ class Add extends \Magento\Wishlist\Controller\AbstractIndex
             $wishlist->save();
 
             $this->_eventManager->dispatch(
-                'wishlist_add_product',
-                ['wishlist' => $wishlist, 'product' => $product, 'item' => $result]
+                    'wishlist_add_product', ['wishlist' => $wishlist, 'product' => $product, 'item' => $result]
             );
 
             $referer = $session->getBeforeWishlistUrl();
@@ -132,24 +128,23 @@ class Add extends \Magento\Wishlist\Controller\AbstractIndex
             $this->_objectManager->get('Magento\Wishlist\Helper\Data')->calculate();
 
             $this->messageManager->addComplexSuccessMessage(
-                'addProductSuccessMessage',
-                [
-                    'product_name' => $product->getName(),
-                    'referer' => $referer
-                ]
+                    'addProductSuccessMessage', [
+                'product_name' => $product->getName(),
+                'referer' => $referer
+                    ]
             );
         } catch (\Magento\Framework\Exception\LocalizedException $e) {
             $this->messageManager->addErrorMessage(
-                __('We can\'t add the item to Wish List right now: %1.', $e->getMessage())
+                    __('We can\'t add the item to Wish List right now: %1.', $e->getMessage())
             );
         } catch (\Exception $e) {
             $this->messageManager->addExceptionMessage(
-                $e,
-                __('We can\'t add the item to Wish List right now.')
+                    $e, __('We can\'t add the item to Wish List right now.')
             );
         }
-// $resultRedirect->setPath('artwork/account/favorited/');
-    $resultRedirect->setPath('*', ['wishlist_id' => $wishlist->getId()]);
+        $resultRedirect->setPath('artwork/account/favorited/');
+//    $resultRedirect->setPath('*', ['wishlist_id' => $wishlist->getId()]);
         return $resultRedirect;
     }
+
 }

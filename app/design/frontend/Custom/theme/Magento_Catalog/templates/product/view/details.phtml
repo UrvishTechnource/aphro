@@ -32,13 +32,14 @@ $rf = $om->get('Magento\Catalog\Block\Product\ReviewRendererInterface')->getRevi
         <?php $layout = $block->getLayout(); ?>
         <div class="product data items" data-mage-init='{"tabs":{"openedState":"active"}}'>
             <?php foreach ($newOrderTabbing as $name):
-               ?>
+                ?>
                 <?php
                 $html = $layout->renderElement($name);
 
 
                 $alias = $layout->getElementAlias($name);
-                $label = $block->getChildData($alias, 'title'); ?>
+                $label = $block->getChildData($alias, 'title');
+                ?>
                 <div class="data item title" aria-labeledby="tab-label-<?php /* @escapeNotVerified */ echo $alias; ?>-title" data-role="collapsible" id="tab-label-<?php /* @escapeNotVerified */ echo $alias; ?>">
                     <a class="data switch" tabindex="-1" data-toggle="switch" href="#<?php /* @escapeNotVerified */ echo $alias; ?>" id="tab-label-<?php /* @escapeNotVerified */ echo $alias; ?>-title">
                         <?php /* @escapeNotVerified */ echo $label; ?>
@@ -47,14 +48,16 @@ $rf = $om->get('Magento\Catalog\Block\Product\ReviewRendererInterface')->getRevi
                         <?php } elseif ($label == "Commodity") { ?>
                             <i class="fa fa-commodity" aria-hidden="true" id="commodity_no">
 
-                              </i><?php
+                            </i><?php
                         } elseif ($label == "Reviews") {
                             echo '';
-                        } elseif ($label == "Tags") { ?>
+                        } elseif ($label == "Tags") {
+                            ?>
                             <i class="fa fa-tags" aria-hidden="true"></i><?php
                         } else {
                             echo $rf;
-                        } ?>
+                        }
+                        ?>
                     </a>
                     <?php if ($label == "Reviews") { ?> <i class="fa fa-review" aria-hidden="true"></i><?php } ?>
                 </div>
@@ -156,37 +159,42 @@ foreach ($result as $key) {
             array_push($arr, $follower_name);
             ?>
             <img src="<?php echo $artist_pic; ?>" width="40" height="40" alt="">
-            <span id="follower_name"><a href="<?php echo $blockObj->getUserUrl($art_user) //echo $stat_prof_img.'artwork/account/user/'.'?='.$art_user;             ?>"><?php echo $follower_name . "'s Shop"; ?></a></span>
+            <span id="follower_name"><a href="<?php echo $blockObj->getUserUrl($art_user) //echo $stat_prof_img.'artwork/account/user/'.'?='.$art_user;                      ?>"><?php echo $follower_name . "'s Shop"; ?></a></span>
             <input type="hidden" id="artist" name="artist" value="<?php echo $art_user; ?>">
             <?php if (isset($cid)) { ?>
-                                                      <!--        <button class="btn btn-warning btn-round follow" name="follow" id="follow" data-follow = '0' onclick="myFunction(this)" title="<?php /* @escapeNotVerified */ echo __('Follow') ?>"><span id="follow_text"><?php /* @escapeNotVerified */ echo __('Follow') ?></span></button>		-->
+                                                                                          <!--        <button class="btn btn-warning btn-round follow" name="follow" id="follow" data-follow = '0' onclick="myFunction(this)" title="<?php /* @escapeNotVerified */ echo __('Follow') ?>"><span id="follow_text"><?php /* @escapeNotVerified */ echo __('Follow') ?></span></button>		-->
             <?php } ?>
             <div id="result"></div>
             <?php
-$result4 = $connection->fetchAll("SELECT artist_following_id FROM artist_follow_followers WHERE artist_follower_id=" . $art_user);
- $isFollower = false;
- if (isset($cid)) {
-   $result5 = $connection->fetchAll("SELECT artist_following_id FROM artist_follow_followers WHERE artist_following_id=" . $art_user . " AND artist_follower_id = " . $cid);
-   if (count($result5)) {
-     $isFollower = true;
-    }
- }
-if (isset($cid) ) {
-  $dataFollow = 0;
-  $title = __("Follow");
-  if ($isFollower) {
-    $dataFollow = 1;
-    $title = __("Unfollow");
-  }
+            $result4 = $connection->fetchAll("SELECT artist_following_id FROM artist_follow_followers WHERE artist_follower_id=" . $art_user);
+            $isFollower = false;
+            if (isset($cid)) {
+                $result5 = $connection->fetchAll("SELECT artist_following_id FROM artist_follow_followers WHERE artist_following_id=" . $art_user . " AND artist_follower_id = " . $cid);
+                if (count($result5)) {
+                    $isFollower = true;
+                }
+            }
+            if (isset($cid)) {
+                $dataFollow = 0;
+                $title = __("Follow");
+                if ($isFollower) {
+                    $dataFollow = 1;
+                    $title = __("Unfollow");
+                }
 
-if($cid!=$art_user){
-
-  ?>
-  <a class="btn yellow" id="follow" data-follow ='<?php echo $dataFollow; ?>' onclick="<?php if(isset($cid)){ echo "myFunction(this)";} else { echo " alert('okk');";}?>" href="javascript:void(0);"><span><?php /* @escapeNotVerified */ echo $title; ?></span></a>
-  <?php
-}
-}
- ?>
+                if ($cid != $art_user) {
+                    ?>
+                    <a class="btn yellow" id="follow" data-follow ='<?php echo $dataFollow; ?>' onclick="<?php
+                    if (isset($cid)) {
+                        echo "myFunction(this)";
+                    } else {
+                        echo " alert('okk');";
+                    }
+                    ?>" href="javascript:void(0);"><span><?php /* @escapeNotVerified */ echo $title; ?></span></a>
+                       <?php
+                   }
+               }
+               ?>
 
         <?php } ?>
     </div>

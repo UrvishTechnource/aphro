@@ -47,28 +47,37 @@ class Remove extends \Magento\Wishlist\Controller\AbstractIndex
     public function execute()
     {
         /** @var \Magento\Framework\Controller\Result\Redirect $resultRedirect */
+//        var_dump($_POST);
+//        die();
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
-        if (!$this->formKeyValidator->validate($this->getRequest())) {
-            return $resultRedirect->setPath('*/*/');
-        }
+//        if (!$this->formKeyValidator->validate($this->getRequest())) {
+//            return $resultRedirect->setPath('*/*/');
+//        }
 
         $id = (int)$this->getRequest()->getParam('item');
         $item = $this->_objectManager->create('Magento\Wishlist\Model\Item')->load($id);
+//        echo "item-loaded<br/>";
         if (!$item->getId()) {
             throw new NotFoundException(__('Page not found.'));
         }
         $wishlist = $this->wishlistProvider->getWishlist($item->getWishlistId());
+        
         if (!$wishlist) {
             throw new NotFoundException(__('Page not found.'));
         }
+//        echo "wishlist-loaded<br/>";
         try {
             $item->delete();
+//            echo "item-deleted<br/>";
             $wishlist->save();
+//            echo "wishlist-saved<br/>";
         } catch (\Magento\Framework\Exception\LocalizedException $e) {
+//            echo $e->getMessage()."<br/>";
             $this->messageManager->addError(
                 __('We can\'t delete the item from Wish List right now because of an error: %1.', $e->getMessage())
             );
         } catch (\Exception $e) {
+//            echo $e->getMessage()."<br/>";
             $this->messageManager->addError(__('We can\'t delete the item from the Wish List right now.'));
         }
 
@@ -76,6 +85,7 @@ class Remove extends \Magento\Wishlist\Controller\AbstractIndex
         $request = $this->getRequest();
         $refererUrl = (string)$request->getServer('HTTP_REFERER');
         $url = (string)$request->getParam(\Magento\Framework\App\Response\RedirectInterface::PARAM_NAME_REFERER_URL);
+//        die();
         if ($url) {
             $refererUrl = $url;
         }

@@ -1,24 +1,38 @@
 <?php
 $_product = $block->getProduct(); // GET THE PRODUCT
-$productImageUrl = $block->getUrl('pub/media/catalog').'product'.$_product->getImage();
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$productImageUrl = $block->getUrl('pub/media/catalog') . 'product' . $_product->getImage();
+$productCategoryIds = $_product->getCategoryIds();
+if (count($productCategoryIds)) {
+    $productCategory = $objectManager->create('Magento\Catalog\Model\Category')->load($productCategoryIds[0]);
+
+    $productParentCategory = $productCategory->getParentCategory();
+    $productCategoryHandle = "(" . $productCategory->getName();
+    if ($productParentCategory)
+        $productCategoryHandle.="-" . $productParentCategory->getName() . ")";
+}
 ?>
 
 <div class="wdm-social-icons" data-role="wdm-social-icons" style="display: none">
-<!-- FACEBOOK -->
-<a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode($_product->getProductUrl());?>&t=<?php echo urlencode($_product->getName())?>" onclick='javascript:window.open(this.href,"","width=640,height=480,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes");return false' title="Share on FaceBook">
-<img src="<?php echo $this->getViewFileUrl('images/facebook1.png'); ?>" alt="FaceBook" width="5%">
-</a>
+    <!-- FACEBOOK -->
+    <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode($_product->getProductUrl()); ?>&t=<?php echo urlencode($_product->getName()) ?>" onclick='javascript:window.open(this.href, "", "width=640,height=480,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes");return false' title="Share on FaceBook">
+        <img src="<?php echo $this->getViewFileUrl('images/facebook1.png'); ?>" alt="FaceBook" width="5%">
+    </a>
 
-<!-- TWITTER -->
-<a href="http://twitter.com/home/?status=<?php echo urlencode($_product->getProductUrl());?>(<?php echo urlencode($_product->getName())?>)" onclick='javascript:window.open(this.href,"","width=640,height=480,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes");return false' title="Share on Twitter">
-<img src="<?php echo $this->getViewFileUrl('images/twitter1.png'); ?>" alt="Twitter" width="5%">
-</a>
+    <!-- TWITTER -->
+    <a href="http://twitter.com/home/?status=<?php echo urlencode($_product->getProductUrl()); ?> <?php
+    $productNamePieces = explode(":", $_product->getName());
 
-<!-- GOOGLE -->
-<a href="http://plus.google.com/share?url=<?php echo urlencode($_product->getProductUrl());?>&t=<?php echo urlencode($_product->getName())?>" onclick='javascript:window.open(this.href,"","width=640,height=480,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes");return false' title="Share on Google+">
-<img src="<?php echo $this->getViewFileUrl('images/google1.png'); ?>" alt="Google+" width="5%">
-</a>
+    echo urlencode(trim($productNamePieces[0])) . " " . $productCategoryHandle;
+    ?>" onclick='javascript:window.open(this.href, "", "width=640,height=480,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes");return false' title="Share on Twitter">
+        <img src="<?php echo $this->getViewFileUrl('images/twitter1.png'); ?>" alt="Twitter" width="5%">
+    </a>
 
-<!-- PINTREST -->
-<a href="http://pinterest.com/pin/create/button/?description=<?php echo urlencode($_product->getName());?>&media=<?php echo urlencode($productImageUrl);?>&url=<?php echo urlencode($_product->getProductUrl())?>" onclick='javascript:window.open(this.href,"","width=640,height=480,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes");return false' title="Share on Pinterest"><i class="fa fa-pinterest-square fa-2x" aria-hidden="true"></i></a>
+    <!-- GOOGLE -->
+    <a href="http://plus.google.com/share?url=<?php echo urlencode($_product->getProductUrl()); ?>&t=<?php echo urlencode(trim($productNamePieces[0])) . " " . $productCategoryHandle; ?>" onclick='javascript:window.open(this.href, "", "width=640,height=480,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes");return false' title="Share on Google+">
+        <img src="<?php echo $this->getViewFileUrl('images/google1.png'); ?>" alt="Google+" width="5%">
+    </a>
+
+    <!-- PINTREST -->
+    <a href="http://pinterest.com/pin/create/button/?description=<?php echo urlencode(trim($productNamePieces[0])) . " " . $productCategoryHandle; ?>&media=<?php echo urlencode($productImageUrl); ?>&url=<?php echo urlencode($_product->getProductUrl()) ?>" onclick='javascript:window.open(this.href, "", "width=640,height=480,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes");return false' title="Share on Pinterest"><i class="fa fa-pinterest-square fa-2x" aria-hidden="true"></i></a>
 </div>
