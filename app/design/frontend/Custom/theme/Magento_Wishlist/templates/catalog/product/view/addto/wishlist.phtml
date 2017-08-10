@@ -16,13 +16,14 @@ $connection = $objectManager->get('Magento\Framework\App\ResourceConnection')->g
 $wish_result = $connection->fetchAll("SELECT * FROM wishlist INNER JOIN wishlist_item ON wishlist.wishlist_id = wishlist.wishlist_id WHERE wishlist.customer_id=".$userid." AND wishlist_item.product_id=" . $_productId);
 if(count($wish_result)>0){
   $wish="true";
+
 }
 else{
   $wish="false";
 }
 ?>
 <?php if ($block->isWishListAllowed()) : ?>
-  <a href="#" data-role="remove" data-post-remove='<?php /* @escapeNotVerified */ echo $block->getItemRemoveParams($block->getItem()); ?>' title="<?php /* @escapeNotVerified */ echo __('Remove Item') ?>" class="btn-remove action delete">
+  <a href="#" data-role="remove" data-post-remove='{"action":"http:\/\/52.36.220.97\/projects\/aphro\/wishlist\/index\/remove\/","data":{"item":"<?php echo $wish_result[0]['wishlist_item_id']; ?>","uenc":"aHR0cDovLzUyLjM2LjIyMC45Ny9wcm9qZWN0cy9hcGhyby93aXNobGlzdC9pbmRleC9pbmRleC93aXNobGlzdF9pZC85NC8,"}}' title="<?php /* @escapeNotVerified */ echo __('Remove Item') ?>" class="btn-remove action delete">
       <span><?php /* @escapeNotVerified */ echo __('Remove item');?></span>
   </a>
   <a href="#"

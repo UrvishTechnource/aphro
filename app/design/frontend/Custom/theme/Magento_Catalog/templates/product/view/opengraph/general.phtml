@@ -1,0 +1,35 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var $block \Magento\Catalog\Block\Product\View */
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
+$_productId = $block->getProduct()->getId();
+$currentProduct = $objectManager->get('Magento\Catalog\Model\Product')->load($_productId);
+$productCategoryIds = $currentProduct->getCategoryIds();
+if (count($productCategoryIds)) {
+    $productCategory = $objectManager->create('Magento\Catalog\Model\Category')->load($productCategoryIds[0]);
+
+    $productParentCategory = $productCategory->getParentCategory();
+    $productCategoryHandle = "(" . $productCategory->getName();
+    if ($productParentCategory)
+        $productCategoryHandle.="-".$productParentCategory->getName().")";
+    }
+?>
+
+<meta property="og:type" content="og:product" />
+<meta property="og:title" content="<?php $title=$block->escapeHtml($block->getProduct()->getName());
+$title = explode(":",$title);
+echo $title[0]." ".$productCategoryHandle; ?>" />
+<meta property="og:image" content="<?php echo $block->escapeUrl($block->getImage($block->getProduct(), 'product_base_image')->getImageUrl()); ?>" />
+<meta property="og:description" content="<?php echo $block->escapeHtml($block->getProduct()->getShortDescription()); ?>" />
+<meta property="og:url" content="<?php echo $block->escapeUrl($block->getProduct()->getProductUrl()); ?>" />
+<?php if ($priceAmount = $block->getProduct()->getFinalPrice()):?>
+    <meta property="product:price:amount" content="<?php /* @escapeNotVerified */ echo $priceAmount; ?>"/>
+    <?php echo $block->getChildHtml('meta.currency'); ?>
+<?php endif;?>
