@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Inchoo_MenuItem::first_level_demo"
+             title="Artist"
+             module="Inchoo_MenuItem"
+             sortOrder="50"
+             resource="Magento_Backend::content" />
+        <add id="Inchoo_MenuItem::second_level_demo"
+             title="All Artist"
+             module="Inchoo_MenuItem"
+             sortOrder="0"
+             action="menuitem/artists/index"
+             parent="Inchoo_MenuItem::first_level_demo"
+             resource="Magento_Backend::content" />
+    </menu>
+</config>

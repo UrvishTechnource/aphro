@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <referenceBlock name="product_tab" remove="true" />
+    <referenceBlock name="artist_slider" remove="true" />
+    <referenceContainer name="sidebar.main">
+        <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-navigation-account-order-link">
+            <arguments>
+                <argument name="label" xsi:type="string" translate="true">Order History</argument>
+                <argument name="path" xsi:type="string">purchase/index/order</argument>
+            </arguments>
+        </block>
+        <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-navigation-account-sales-link">
+            <arguments>
+                <argument name="label" xsi:type="string" translate="true">Sales History</argument>
+                <argument name="path" xsi:type="string">purchase/index/sales</argument>
+            </arguments>
+        </block>
+    </referenceContainer>
+    <referenceContainer name="content">
+        <block class="Purchase\History\Block\Sales" name="purchase_sales" template="Purchase_History::sales.phtml" />
+    </referenceContainer>
+</page>

@@ -1,0 +1,6 @@
+<body>
+    <referenceBlock name="product_tab" remove="true" />
+    <referenceBlock name="artist_slider" remove="true" /> 
+    <referenceBlock name="wishlist_sidebar" remove="true" />
+</body>
+

@@ -1,0 +1,159 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+// @codingStandardsIgnoreFile
+
+/** @var \Magento\Customer\Block\Form\Edit $block */
+?>
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+$media_url = $objectManager->get('Magento\Store\Model\StoreManagerInterface')->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+$stat_img = $storeManager->getStore()->getBaseUrl() . "pub/static/frontend/Custom/theme/en_US/images/upload1.png";
+$bu = $storeManager->getStore()->getBaseUrl() . "pub/media/artwork/";
+$customerSession = $objectManager->create('Magento\Customer\Model\Session');
+if ($customerSession->isLoggedIn()) {
+    $cid = $customerSession->getCustomer()->getId();
+}
+$connection = $objectManager->get('Magento\Framework\App\ResourceConnection')->getConnection('\Magento\Framework\App\ResourceConnection::DEFAULT_CONNECTION');
+$result1 = $connection->fetchAll("SELECT * FROM art_table WHERE art_user =" . $cid);
+//echo $cid; exit();
+//print_r($result1); exit();
+
+
+
+foreach ($result1 as $key) {
+    $art_id = $key['art_id'];
+    $art_image = $key['art_image'];
+}
+//echo $abc; die;
+$add_work = "";
+/* if($block->getCustomer()->getCustomAttribute('add_work')) 
+  {
+  $add_work = $block->getCustomer()->getCustomAttribute('add_work')->getValue();
+  } */
+if ($add_work == "") {
+    $av = 1;
+} else {
+    $av = 2;
+}
+//echo $av;
+?>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h4>Add your work</h4>
+        </div>
+        <div class="col-lg-12">
+            <img src="<?php echo $bu . $art_image; ?>" id="upld_img" alt="" width="150px" height="150px">
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h4>Product Previews</h4>
+        </div>
+    </div>
+    <div class="row product-list">
+        <?php
+        $productCollection = $objectManager->create('Magento\Catalog\Model\ResourceModel\Product\CollectionFactory');
+        $media_url = $objectManager->get('Magento\Store\Model\StoreManagerInterface')->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+
+        $collection = $productCollection->create()->addAttributeToSelect('*')->addAttributeToFilter('status', array('eq' => 1))->load(); //'eq' => 2 Disable 
+        foreach ($collection as $product) {
+            ?>
+            <div class="col-lg-4 product-div" >
+                <div class="slide-overlay" >
+                    <div class="img-cell">
+                        <div class="img-middle">
+                            <img src="<?php echo $bu . $art_image; ?>" class="canvas-export" >  
+                            <img src="<?php echo $media_url . "catalog/product" . $product->getData('thumbnail'); ?>"  style="height: 100%;width: 100%" alt="<?php echo $product->getName(); ?>">  
+                        </div>
+                    </div>
+                </div>
+                <div class="preview-info" style="text-align: center">
+                    <strong><?php echo $product->getName(); ?></strong>
+                </div>
+                <div class="action-area">
+                    <!--          <button type="button" class="btn-edit btn-default">Edit</button>-->
+                    <button type="button" class="btn-end en-bt btn-success" id="en-bt<?php echo $product->getId(); ?>" onclick="enable_art(this.id)" value="<?php echo $product->getId(); ?>">Enable</button>
+                    <button type="button" class="btn-end btn-danger btn-round ds-bt"  id="ds-bt<?php echo $product->getId(); ?>" onclick="disable_art(this.id)" value="<?php echo $product->getId(); ?>" style="display: none;float:right;">Disable</button>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
+    <div>
+        <hr>
+    </div>
+    <div class="row">
+        <form class="form form-save-art" action="<?php /* @escapeNotVerified */ echo $block->getUrl('artwork/account/saveArt') ?>" method="post" id="form-validate" enctype="multipart/form-data" data-hasrequired="<?php /* @escapeNotVerified */ echo __('* Required Fields') ?>" autocomplete="off"> 
+            <div class="col-lg-6">    
+                <input type="text" name="title" id="title_art" class="title_art" placeholder="Title"> 
+                <input type="hidden" name="art_work" id="art_work" class="add_work" value="<?php echo $art_id; ?>"> 
+                <!--<input type="hidden" name="art_attr" id="art_attr" class="art_attr" value="<?php echo $add_work; ?>">--> 
+                <input type="hidden" name="art_enb[]" id="art_enb" class="art_enb" value=""> 
+                <input type="hidden" name="art_dsb" id="art_dsb" class="art_dsb" value=""> 
+                <textarea name="tag" id="tag_art" class="tag_art" placeholder="Tag"></textarea>     
+            </div>
+            <div class="col-lg-6">
+                <div class="default-block">
+                    <label><strong>Default view</strong></label>
+                    <select name="cat" id="cat_art" class="cat_art">
+                        <?php foreach ($collection as $product1) { ?>
+                            <option value="<?php echo $product1->getID(); ?>"><?php echo $product1->getName(); ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+                <div class="who-block">
+                    <label><strong>Who can view this work?</strong></label>
+                    <input type="radio" name="who" id="who" value="1" class="who"  checked="true"> Anybody(public)
+                    <input type="radio" name="who" id="who" value="0" class="who"> Only you (private)
+                </div>
+                <div class="mature-block">
+                    <label><strong>Is this mature content?</strong></label>
+                    <ul>
+                        <li>Nudity or Lingerie</li> 
+                        <li>Adult Language</li> 
+                        <li>Alcohol or Drugs</li> 
+                        <li>Blood, Guns or Violence</li> 
+                    </ul>
+                    <input type="radio" name="mature" id="mature" value="1" class="mature" required="true"> yes
+                    <input type="radio" name="mature" id="mature" value="0" class="mature"> No
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <input type="submit" class="btn btn-warning btn-round" name="add_art" value="Publish">
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    var elems_arr = [];
+
+    function enable_art(a) {
+        jQuery("#" + a).hide();
+        jQuery("#" + a).closest('.action-area').children('.ds-bt').show();
+        var elems_val = jQuery("#" + a).val();
+        elems_arr.push(elems_val);
+        jQuery("#art_enb").val(JSON.stringify(elems_arr));
+    }
+    function disable_art(b) {
+
+        jQuery("#" + b).hide();
+        jQuery("#" + b).closest('.action-area').children('.en-bt').show();
+        var removeItem = jQuery("#" + b).val();
+
+        var value1 = jQuery('#art_enb').val(); //retrieve array
+        value1 = JSON.parse(value1);
+
+        y = jQuery.grep(elems_arr, function (value) {
+            return value != removeItem;
+        });
+        jQuery("#art_enb").val(JSON.stringify(y));
+        elems_arr = y;
+    }
+</script>

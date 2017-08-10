@@ -1,0 +1,85 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+// @codingStandardsIgnoreFile
+
+/** @var \Magento\Customer\Block\Account\Dashboard\Address $block */
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+$base_url = $storeManager->getStore()->getBaseUrl();
+$customerAddress = $objectManager->get('Magento\Customer\Helper\Session\CurrentCustomerAddress');
+$shippingAddressExists = true;
+$billingAddressExists = true;
+try {
+    $address = $customerAddress->getDefaultShippingAddress();
+    $addressId = $address ? $address->getId() : null;
+    if (!$addressId) {
+        $shippingAddressExists = false;
+    }
+} catch (Exception $ex) {
+    echo "<pre class='exception'>";
+    echo $ex->getMessage();
+    echo "</pre>";
+}
+
+try {
+    $address = $customerAddress->getDefaultBillingAddress();
+    $addressId = $address ? $address->getId() : null;
+    if (!$addressId) {
+        $billingAddressExists = false;
+    }
+} catch (Exception $ex) {
+    echo "<pre class='exception'>";
+    echo $ex->getMessage();
+    echo "</pre>";
+}
+?>
+<div class="block block-dashboard-addresses">
+    <div class="block-title">
+        <strong><?php /* @escapeNotVerified */ echo __('Address Book') ?></strong>        
+    </div>
+    <div class="block-content">
+        <div class="box box-billing-address">
+            <strong class="box-title">
+                <span><?php /* @escapeNotVerified */ echo __('Default Billing Address') ?></span>
+            </strong>
+            <div class="box-content">
+                <address>
+                    <?php echo $block->getPrimaryBillingAddressHtml() ?>
+                </address>
+            </div>
+            <div class="box-actions">
+                <a class="action edit" href="<?php
+                /* @escapeNotVerified */
+//                if ($billingAddressExists) {
+                    echo $block->getPrimaryBillingAddressEditUrl();
+//                } else {
+//                    echo $base_url . "customer/address/addressform/";
+//                }
+                ?>" data-ui-id="default-billing-edit-link"><span><?php /* @escapeNotVerified */ echo __('Edit Address') ?></span></a>
+            </div>
+        </div>
+        <div class="box box-shipping-address">
+            <strong class="box-title">
+                <span><?php /* @escapeNotVerified */ echo __('Default Shipping Address') ?></span>
+            </strong>
+            <div class="box-content">
+                <address>
+                    <?php echo $block->getPrimaryShippingAddressHtml() ?>                    
+                </address>
+            </div>
+            <div class="box-actions">
+                <a class="action edit" href="<?php
+                   /* @escapeNotVerified */
+//                   if ($shippingAddressExists) {
+                       echo $block->getPrimaryShippingAddressEditUrl();
+//                   } else {
+//                       echo $base_url . "customer/address/addressform/";
+//                   }
+                   ?>" data-ui-id="default-shipping-edit-link"><span><?php /* @escapeNotVerified */ echo __('Edit Address') ?></span></a>
+            </div>
+        </div>
+    </div>
+</div>

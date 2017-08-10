@@ -1,0 +1,42 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+// @codingStandardsIgnoreFile
+
+/** @var \Magento\Customer\Block\Form\Edit $block */
+?>
+<?php
+$productid = $this->getRequest()->getParam('id');
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$media_url = $objectManager->get('Magento\Store\Model\StoreManagerInterface')->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+
+$connection = $objectManager->get('Magento\Framework\App\ResourceConnection')->getConnection('\Magento\Framework\App\ResourceConnection::DEFAULT_CONNECTION');
+$result1 = $connection->fetchAll("SELECT * FROM art_table WHERE art_cat =" . $productid);
+foreach ($result1 as $key) {
+    $art_id = $key['art_id'];
+    $art_image = $key['art_image'];
+    $cat_id = $key['art_cat'];
+    $product = $objectManager->get('Magento\Catalog\Model\Product')->load($productid);
+    $product_img = $product->getData('thumbnail');
+    $price = $product->getPrice();
+    $priceHelper = $objectManager->create('Magento\Framework\Pricing\Helper\Data');
+    $formattedPrice = $priceHelper->currency($price, true, false);
+    ?>
+    <div class="col-lg-4 product-div" style="width: 250px;float: left;margin: 10px;position: relative;">
+        <div class="slide-overlay" style="border: 2px solid gray;height: 300px;width: 240;">
+
+            <img src="<?php echo $media_url . "artwork/" . $key['art_image']; ?>" class="canvas-export" width="40" height="40" alt="<?php echo $key['art_title']; ?>">
+            <img src="<?php echo $media_url . "catalog/product" . $product_img; ?>"  style="height: 100%;width: 100%" alt="<?php echo $product->getName(); ?>">
+        </div>
+        <div class="preview-info" style="text-align: center">
+            <strong><?php echo $key['art_title']; ?></strong>-<strong><?php echo $formattedPrice; ?></strong>
+        </div>
+    </div>
+<?php } ?>
+</div>
+
+
+
+

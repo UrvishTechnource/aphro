@@ -1,0 +1,155 @@
+<div class="gallery-placeholder _block-content-loading" data-gallery-role="gallery-placeholder">
+    <div data-role="loader" class="loading-mask">
+        <div class="loader">
+            <img src="<?php echo $block->getViewFileUrl('images/loader-1.gif'); ?>" alt="<?php echo __('Loading...') ?>">
+        </div>
+    </div>
+</div>
+<?php $_product = $block->getProduct(); ?>
+<?php $pid = $_product->getId(); ?>
+<?php $p_img = $_product->getThumbnail(); ?>
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+$baseUrl = $storeManager->getStore()->getBaseUrl();
+$media_url = $objectManager->get('Magento\Store\Model\StoreManagerInterface')->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+$image_url = $media_url . "catalog/product" . $p_img; ?>
+<?php
+$connection = $objectManager->get('Magento\Framework\App\ResourceConnection')->getConnection('\Magento\Framework\App\ResourceConnection::DEFAULT_CONNECTION');
+$art_table_data = $connection->fetchAll("SELECT * FROM art_table WHERE art_cat =" . $pid);
+if (count($art_table_data) > 0) {
+    $art_user = $art_table_data[0]['art_user'];
+    //Get watermark image
+
+    $watermark_table_data = $connection->fetchAll("SELECT * FROM image_settings WHERE artist_id =" . $art_user);
+    if (count($watermark_table_data) > 0) {
+        $watermark = $objectManager->get('Magento\Store\Model\StoreManagerInterface')->getStore()->getBaseUrl() . "pub/media/watermark/";
+        $watermark_image = $watermark . $watermark_table_data[0]['watermark_image'];
+        $attr_id = $watermark_table_data[0]['attr_id'];
+        $new_image_url = $baseUrl . "watermark/index.php?image=" . $image_url . "&watermark=" . $watermark_image;
+        $view_image = $new_image_url;
+    } else {
+        $view_image = $image_url;
+    }
+    $view_image = $image_url;
+} else {
+    $view_image = $image_url;
+}
+echo 'work';
+?>
+
+<script>
+    require(['jquery', 'jquery/ui'], function ($) {
+        $(document).ready(function ($) {
+            $('.product media, .gallery-placeholder, .fotorama-item, .modals-wrapper, .fotorama__nav fotorama__nav--thumbs, .fotorama__stage__shaft fotorama__grab').live('contextmenu', function (e) {
+                //return false;
+                e.preventDefault();
+            });
+
+            $(".fotorama__img").click(function () {
+                $(".fotorama__img--full").attr('src', '<?php echo $view_image; ?>');
+            });
+
+
+            //Watermark image code
+            $(document).on('click', '.fotorama-item', function (e) {
+                $(".fotorama__img--full").attr('src', '<?php echo $view_image; ?>');
+                if ($('body').hasClass('fotorama__fullscreen')) {
+                    $(".fotorama__img--full").attr('src', '<?php echo $view_image; ?>');
+                }
+            });//end on 
+        });//end ready
+    });//end require
+</script>
+<script>
+    var config = {
+        "width": <?php echo $block->getImageAttribute('product_page_image_medium', 'width'); ?>,
+        "thumbheight": <?php echo $block->getImageAttribute('product_page_image_small', 'height')
+? : $block->getImageAttribute('product_page_image_small', 'width');
+?>,
+        "navtype": "<?php  echo $block->getVar("gallery/navtype"); ?>",
+        "height": <?php echo $block->getImageAttribute('product_page_image_medium', 'height'); ?>
+    },
+    thumbBarHeight = 0,
+    loader = document.querySelectorAll('[data-gallery-role="gallery-placeholder"] [data-role="loader"]')[0];
+    if (config.navtype === 'horizontal') {
+        thumbBarHeight = config.thumbheight;
+    }
+    loader.style.paddingBottom = (config.height / config.width * 100) + "%";
+</script>
+<script type="text/x-magento-init">
+    {
+    "[data-gallery-role=gallery-placeholder]": {
+    "mage/gallery/gallery": {
+    "mixins":["magnifier/magnify"],
+    "magnifierOpts": <?php /* @escapeNotVerified */ echo $block->getMagnifier(); ?>,
+    "data": <?php /* @escapeNotVerified */ echo $block->getGalleryImagesJson(); ?>,
+    "options": {
+    "nav": "<?php /* @escapeNotVerified */ echo $block->getVar("gallery/nav"); ?>",
+    <?php if (($block->getVar("gallery/loop"))): ?>
+        "loop": <?php /* @escapeNotVerified */ echo $block->getVar("gallery/loop"); ?>,
+    <?php endif; ?>
+    <?php if (($block->getVar("gallery/keyboard"))): ?>
+        "keyboard": <?php /* @escapeNotVerified */ echo $block->getVar("gallery/keyboard"); ?>,
+    <?php endif; ?>
+    <?php if (($block->getVar("gallery/arrows"))): ?>
+        "arrows": <?php /* @escapeNotVerified */ echo $block->getVar("gallery/arrows"); ?>,
+    <?php endif; ?>
+    <?php if (($block->getVar("gallery/allowfullscreen"))): ?>
+        "allowfullscreen": <?php /* @escapeNotVerified */ echo $block->getVar("gallery/allowfullscreen"); ?>,
+    <?php endif; ?>
+    <?php if (($block->getVar("gallery/caption"))): ?>
+        "showCaption": <?php /* @escapeNotVerified */ echo $block->getVar("gallery/caption"); ?>,
+    <?php endif; ?>
+    "width": "<?php /* @escapeNotVerified */ echo $block->getImageAttribute('product_page_image_medium', 'width'); ?>",
+    "thumbwidth": "<?php /* @escapeNotVerified */ echo $block->getImageAttribute('product_page_image_small', 'width'); ?>",
+    <?php if ($block->getImageAttribute('product_page_image_small', 'height') || $block->getImageAttribute('product_page_image_small', 'width')): ?>
+        "thumbheight": <?php
+        /* @escapeNotVerified */ echo $block->getImageAttribute('product_page_image_small', 'height')
+        ? : $block->getImageAttribute('product_page_image_small', 'width');
+        ?>,
+    <?php endif; ?>
+    <?php if ($block->getImageAttribute('product_page_image_medium', 'height') || $block->getImageAttribute('product_page_image_medium', 'width')): ?>
+        "height": <?php
+        /* @escapeNotVerified */ echo $block->getImageAttribute('product_page_image_medium', 'height')
+        ? : $block->getImageAttribute('product_page_image_medium', 'width');
+        ?>,
+    <?php endif; ?>
+    <?php if ($block->getVar("gallery/transition/duration")): ?>
+        "transitionduration": <?php /* @escapeNotVerified */ echo $block->getVar("gallery/transition/duration"); ?>,
+    <?php endif; ?>
+    "transition": "<?php /* @escapeNotVerified */ echo $block->getVar("gallery/transition/effect"); ?>",
+    <?php if (($block->getVar("gallery/navarrows"))): ?>
+        "navarrows": <?php /* @escapeNotVerified */ echo $block->getVar("gallery/navarrows"); ?>,
+    <?php endif; ?>
+    "navtype": "<?php /* @escapeNotVerified */ echo $block->getVar("gallery/navtype"); ?>",
+    "navdir": "<?php /* @escapeNotVerified */ echo $block->getVar("gallery/navdir"); ?>"
+    },
+    "fullscreen": {
+    "nav": "<?php /* @escapeNotVerified */ echo $block->getVar("gallery/fullscreen/nav"); ?>",
+    <?php if ($block->getVar("gallery/fullscreen/loop")): ?>
+        "loop": <?php /* @escapeNotVerified */ echo $block->getVar("gallery/fullscreen/loop"); ?>,
+    <?php endif; ?>
+    "navdir": "<?php /* @escapeNotVerified */ echo $block->getVar("gallery/fullscreen/navdir"); ?>",
+    <?php if ($block->getVar("gallery/transition/navarrows")): ?>
+        "navarrows": <?php /* @escapeNotVerified */ echo $block->getVar("gallery/fullscreen/navarrows"); ?>,
+    <?php endif; ?>
+    "navtype": "<?php /* @escapeNotVerified */ echo $block->getVar("gallery/fullscreen/navtype"); ?>",
+    <?php if ($block->getVar("gallery/fullscreen/arrows")): ?>
+        "arrows": <?php /* @escapeNotVerified */ echo $block->getVar("gallery/fullscreen/arrows"); ?>,
+    <?php endif; ?>
+    <?php if ($block->getVar("gallery/fullscreen/caption")): ?>
+        "showCaption": <?php /* @escapeNotVerified */ echo $block->getVar("gallery/fullscreen/caption"); ?>,
+    <?php endif; ?>
+    <?php if ($block->getVar("gallery/fullscreen/transition/duration")): ?>
+        "transitionduration": <?php /* @escapeNotVerified */ echo $block->getVar("gallery/fullscreen/transition/duration"); ?>,
+    <?php endif; ?>
+    "transition": "<?php /* @escapeNotVerified */ echo $block->getVar("gallery/fullscreen/transition/effect"); ?>"
+    },
+    "breakpoints": <?php /* @escapeNotVerified */ echo $block->getBreakpoints(); ?>
+    }
+    }
+    }
+</script>
+
+

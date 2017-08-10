@@ -1,0 +1,18 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**  @var $block \Magento\Checkout\Block\Cart */
+?>
+<div class="cart-empty">
+    <?php echo $block->getChildHtml('checkout_cart_empty_widget'); ?>
+    <div class="empty-row">
+      <h2 class="empty-notice" style="text-align: center;font-weight: bold;color: #9f9da0;"><?php /* @escapeNotVerified */ echo __('Have no items in my cart') ?></h2>
+    </div>
+    <div class="empty-img-box" style="width: 300px;margin:0 auto;">
+        <img src="<?php echo $block->getViewFileUrl('images/emptycart.gif');?>"  height="250" width="250"/>
+    </div>
+    <?php echo $block->getChildHtml('shopping.cart.table.after'); ?>
+</div>

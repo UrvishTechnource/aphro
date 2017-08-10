@@ -1,0 +1,64 @@
+<div class="history-container">
+    <div class="history-title">
+        <h1><b>Sales History</b></h1>
+    </div>
+    <div class="history-box">
+        <?php $_orders = $block->getOrders(); ?>
+        <?php
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $imageHelper = $objectManager->get('\Magento\Catalog\Helper\Image');
+        ?>
+        <table>
+            <thead>
+                <tr>
+                    <td>Product</td>
+                    <td>Sales Date</td>
+                    <td>QTY</td>
+                    <td>Amount</td>
+                    <td>Review</td>
+                </tr>
+            </thead>
+            <tbody>
+
+                <?php foreach ($_orders as $_order): ?>
+                    <tr><td colspan="5"><?php echo "Order #" . $_order->getRealOrderId(); ?></td></tr>
+                    <?php
+                    $_items = $_order->getItemsCollection();
+                    foreach ($_items as $_item) {
+                        $productId = $_item->getProductId();
+                        $_product = $objectManager->get('Magento\Catalog\Model\Product')->load($_item->getProductId());
+                        if ($_product->getTypeId() == \Magento\ConfigurableProduct\Model\Product\Type\Configurable::TYPE_CODE) {
+                            continue;
+                        }
+                        $ratingsObj = $block->getRatingSummary($productId);
+                        $ratings = $ratingsObj->getRatingSummary();
+                        $item_image = $imageHelper->init($_product, 'product_page_image_small')->setImageFile($_product->getFile())->resize(100, 100)->getUrl();
+                        $purchase_date = $_order->getCreatedAt();
+                        $qty = $_item->getQtyOrdered();
+                        $price = $_product->getPrice();
+                        ?>
+                        <tr>
+                            <td><img src="<?php echo $item_image ?>" /></td>
+                            <td><?php echo date("Y/m/d", strtotime($purchase_date)) ?></td>
+                            <td><?php echo $qty * 1 ?></td>
+                            <td><?php echo $_order->formatPrice($price) ?></td>
+                            <td>
+                                <div class="rating-summary">
+                                    <div title="<?php echo (int) $ratings; ?>%" class="rating-result">
+                                        <span style="width:<?php echo (int) $ratings; ?>%"><span><?php echo (int) $ratings; ?>%</span></span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
+                <?php endforeach; ?>
+
+            </tbody>
+        </table>
+        <?php if ($block->getPagerHtml()): ?>
+            <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+        <?php endif ?>
+    </div>
+</div>

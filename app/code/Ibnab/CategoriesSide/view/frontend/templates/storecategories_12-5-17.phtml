@@ -1,0 +1,51 @@
+<?php
+/*$categories = $this->getStoreCategories(true,false,true);
+$categoryHelper = $this->getCategoryHelper();
+?>
+<ul>
+<?php
+foreach($categories as $category):
+     if (!$category->getIsActive()) {
+        continue;
+     }
+
+?>
+<li><a href="<?php echo $categoryHelper->getCategoryUrl($category) ?>"><?php echo $category->getName() ?></a></li>
+<?php  
+if($childrenCategories = $this->getChildCategories($category)):
+?>
+<ul>
+<?php
+foreach($childrenCategories as $childrenCategory):
+     if (!$childrenCategory->getIsActive()) {
+        continue;
+     }
+?>
+<li><a href="<?php echo $categoryHelper->getCategoryUrl($childrenCategory) ?>"><?php echo $childrenCategory->getName() ?></a></li>
+<?php
+endforeach;
+?>
+</ul>
+<?php
+endif;
+endforeach;
+?>
+</ul>*/ ?>
+<div class="cat">Category</div>
+<ul class="dropdown" style="display:none;">
+<?php echo $this->getHtml() ?>
+</ul>
+
+
+<script>
+require([ 'jquery', 'jquery/ui'], function($){ $(document).ready(function($) {
+
+
+$('.cat').click(function() {
+$('.dropdown').toggle();
+//$('.level0 nav-2 last parent').css("display","none");
+//alert("hello");
+});
+
+}); });
+</script>

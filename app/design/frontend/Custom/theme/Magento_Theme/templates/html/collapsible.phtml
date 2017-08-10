@@ -1,0 +1,41 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+$cl="";
+if(isset($_SESSION['customer_base']['pslogin_referer_store']))
+{
+$cl="fbUser";
+}
+?>
+	
+<div class="block <?php echo $cl;?> <?php /* @escapeNotVerified */ echo $block->getBlockCss(); ?>">
+    <div class="title <?php /* @escapeNotVerified */ echo $block->getBlockCss();?>-title" data-mage-init='{"toggleAdvanced": {"toggleContainers": "#<?php /* @escapeNotVerified */ echo $block->getBlockCss(); ?>", "selectorsToggleClass": "active"}}'>
+        <strong><?php /* @escapeNotVerified */ echo $block->getBlockTitle(); ?></strong>
+    </div>
+    <div class="content <?php /* @escapeNotVerified */ echo $block->getBlockCss(); ?>-content" id="<?php /* @escapeNotVerified */ echo $block->getBlockCss(); ?>">
+        <?php echo $block->getChildHtml(); ?>
+	<div id="nav-trigger">
+    		<span id="abc">Close</span>
+    	</div>
+    </div>
+</div>
+
+<script>
+require([ 'jquery', 'jquery/ui'], function($){ $(document).ready(function($) {
+    $('#abc').click(function() {
+    {
+      //alert('hello');
+	$('#block-collapsible-nav').removeClass('active');
+	
+	//$('#mymenu').removeClass('active');
+    }
+  });
+}); });
+</script>

@@ -1,0 +1,193 @@
+<div class="container"><?php echo $block->getBlockHtml('formkey') ?><?php
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $media_url = $objectManager->get('Magento\Store\Model\StoreManagerInterface')->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+    $customerSession = $objectManager->create('Magento\Customer\Model\Session');
+    $storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+    if ($customerSession->isLoggedIn()) {
+        $id = $customerSession->getCustomer()->getId();
+        $name = $customerSession->getCustomer()->getName();
+    }
+    $customerRepository = $objectManager->get('Magento\Customer\Api\CustomerRepositoryInterface');
+    $customer = $customerRepository->getById($id);
+
+    $bu = $storeManager->getStore()->getBaseUrl() . "pub/media/customer";
+    $edit = $storeManager->getStore()->getBaseUrl() . "customer/account/edit";
+    $followers = $storeManager->getStore()->getBaseUrl() . "artwork/account/followers";
+    $following = $storeManager->getStore()->getBaseUrl() . "artwork/account/following";
+    $favorited = $storeManager->getStore()->getBaseUrl() . "artwork/account/favorited";
+    $stat_cov = $storeManager->getStore()->getBaseUrl() . "pub/static/frontend/Custom/theme/en_US/images/cover.jpg";
+    $stat_prof = $storeManager->getStore()->getBaseUrl() . "pub/static/frontend/Custom/theme/en_US/images/edit-profile.png";
+    $prof_img = "";
+    $cover_img = "";
+    $username = "";
+    $priceHelper = $objectManager->create('Magento\Framework\Pricing\Helper\Data');
+    if ($customer->getCustomAttribute('uname')) {
+        $username = $customer->getCustomAttribute('uname')->getValue();
+    }
+    if ($block->getCustomer()->getCustomAttribute('prof_image')) {
+        $prof_img = $block->getCustomer()->getCustomAttribute('prof_image')->getValue();
+    }
+
+    if ($block->getCustomer()->getCustomAttribute('cover_image')) {
+        $cover_img = $block->getCustomer()->getCustomAttribute('cover_image')->getValue();
+    }
+    ?>
+    <div class="field cover_image" data-container="change-cover_image">
+        <label class="label" for="cover_image"><span><?php /* @escapeNotVerified */ echo __('') ?></span></label>
+        <div class="cover_center">
+            <img src="<?php
+            if ($cover_img)
+                echo $bu . $cover_img;
+            else
+                echo $stat_cov;
+            ?>" id="cov_img" alt="" width="100%" height="auto">
+        </div>
+    </div>
+    <div class="follow-section">
+        <div class="field prof_image" data-container="change-prof_image">
+            <label class="label" for="prof_image"><span><?php /* @escapeNotVerified */ echo __('') ?></span></label><?php
+            $photoPath = $this->helper('Plumrocket\SocialLoginFree\Helper\Data')->getPhotoPath();
+            if (isset($_SESSION['customer_base']['pslogin_referer_store']) && $prof_img != '') {
+                ?>
+                <img src="<?php echo $bu . $prof_img; ?>" id="pro_img" alt="" width="100px" height="100px" /><?php } elseif (isset($_SESSION['customer_base']['pslogin_referer_store']) && $prof_img == '') {
+                ?>
+                <img src="<?php echo $photoPath; ?>" id="pro_img" alt="" width="100px" height="100px" /><?php } elseif (!isset($_SESSION['customer_base']['pslogin_referer_store']) && $prof_img != '') {
+                ?>
+                <img src="<?php echo $bu . $prof_img; ?>" id="pro_img" alt="" width="100px" height="100px" /><?php } else {
+                ?>
+                <img src="<?php echo $stat_prof; ?>" id="pro_img" alt="" width="100px" height="100px" /><?php }
+            ?>
+            <span><?php echo $username; ?></span>
+        </div><?php
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $customerSession = $objectManager->create('Magento\Customer\Model\Session');
+        if ($customerSession->isLoggedIn()) {
+            $id = $customerSession->getCustomer()->getId();
+        }
+        $connection = $objectManager->get('Magento\Framework\App\ResourceConnection')->getConnection('\Magento\Framework\App\ResourceConnection::DEFAULT_CONNECTION');
+        $result11 = $connection->fetchAll("SELECT * FROM art_table WHERE art_user =" . $id);
+        $result1 = $connection->fetchAll("SELECT artist_follower_id FROM artist_follow_followers WHERE artist_following_id=" . $id);
+        $result3 = $connection->fetchAll("SELECT artist_following_id FROM artist_follow_followers WHERE artist_follower_id=" . $id);
+        $follow_count = count($result1);
+        $following_count = count($result3);
+        ?>
+        <div class="inner-secton">
+            <div class="follow">
+                <a class="" href="<?php echo $followers; ?>"><span><?php /* @escapeNotVerified */ echo __('followers') ?></span></a>
+                <a class="" href="<?php echo $following; ?>"><span><?php /* @escapeNotVerified */ echo __('following') ?></span></a>
+                <a class="" href="<?php echo $favorited; ?>"><span><?php /* @escapeNotVerified */ echo __('favorited') ?></span></a>
+                <span>
+                    <?php
+                    if ($customer->getCustomAttribute('description')) {
+                        echo $customer->getCustomAttribute('description')->getValue();
+                    }
+                    ?>
+                </span>
+
+            </div>
+            <div class="count-follow">
+                <span><?php echo $follow_count; ?></span>
+                <span><?php echo $following_count; ?></span>
+                <?php
+                $whishlishCollection = $objectManager->create('\Magento\Wishlist\Model\ResourceModel\Item\Collection');
+                $whishlishCollection1 = $whishlishCollection->addCustomerIdFilter($id);
+                ?>
+                <span><?php echo count($whishlishCollection1); ?></span>
+            </div>
+            <!--<?php echo $block->getLayout()->createBlock('Magento\Customer\Block\Widget\Name')->setObject($block->getCustomer())->toHtml() ?>
+            <?php $_dob = $block->getLayout()->createBlock('Magento\Customer\Block\Widget\Dob') ?>
+            <?php $_taxvat = $block->getLayout()->createBlock('Magento\Customer\Block\Widget\Taxvat') ?>
+            <?php $_gender = $block->getLayout()->createBlock('Magento\Customer\Block\Widget\Gender') ?>
+            <?php if ($_dob->isEnabled()): ?>
+                <?php echo $_dob->setDate($block->getCustomer()->getDob())->toHtml() ?>
+            <?php endif ?>
+            <?php if ($_taxvat->isEnabled()): ?>
+                <?php echo $_taxvat->setTaxvat($block->getCustomer()->getTaxvat())->toHtml() ?>
+            <?php endif ?>
+            <?php if ($_gender->isEnabled()): ?>
+                <?php echo $_gender->setGender($block->getCustomer()->getGender())->toHtml() ?>
+            <?php endif ?>-->
+            <div class="field choice" style="display:none;">
+                <input type="checkbox" name="change_email" id="change-email" data-role="change-email" value="1" title="<?php /* @escapeNotVerified */ echo __('Change Email') ?>" class="checkbox" />
+                <label class="label" for="change-email"><span><?php /* @escapeNotVerified */ echo __('Change Email') ?></span></label>
+            </div>
+            <div class="field choice" style="display:none;">
+                <input type="checkbox" name="change_password" id="change-password" data-role="change-password" value="1" title="<?php /* @escapeNotVerified */ echo __('Change Password') ?>"<?php if ($block->getChangePassword()): ?> checked="checked"<?php endif; ?> class="checkbox" />
+                <label class="label" for="change-password"><span><?php /* @escapeNotVerified */ echo __('Change Password') ?></span></label>
+            </div>
+            <div class="editprof-left-field">
+                <?php
+                try {
+                    if ($customer->getCustomAttribute('facebook')) {
+                        ?>
+                        <a target="_blank" href="https://<?php echo $customer->getCustomAttribute('facebook')->getValue(); ?>"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+                        <?php
+                    }
+                    if ($customer->getCustomAttribute('twitter')) {
+                        ?>
+                        <a target="_blank" href="https://<?php echo $customer->getCustomAttribute('twitter')->getValue(); ?>"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                        <?php
+                    }
+                    if ($customer->getCustomAttribute('instagram')) {
+                        ?>
+                        <a target="_blank" href="https://<?php echo $customer->getCustomAttribute('instagram')->getValue(); ?>"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        <?php
+                    }
+                    if ($customer->getCustomAttribute('pinterest')) {
+                        ?>
+                        <a target="_blank" href="https://<?php echo $customer->getCustomAttribute('pinterest')->getValue(); ?>"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a>
+                        <?php
+                    }
+                } catch (Exception $e) {
+                    echo $e->getMessage();
+                }
+                ?>
+                <a class="edit" href="<?php echo $edit; ?>"><span><?php /* @escapeNotVerified */ echo __('Edit') ?></span></a>
+            </div>
+        </div>
+
+        <legend class="legend"><span><?php /* @escapeNotVerified */ echo __('') ?></span></legend>
+
+        <div class="favorites">Favorites</div>
+    </div>
+</div>
+<script>
+    require([
+            "jquery",
+            "mage/mage"
+    ], function($){
+    var dataForm = $('#form-validate');
+    var ignore = <?php /* @escapeNotVerified */ echo $_dob->isEnabled() ? '\'input[id$="full"]\'' : 'null'; ?>;
+    dataForm.mage('validation', {
+<?php if ($_dob->isEnabled()): ?>
+        errorPlacement: function(error, element) {
+        if (element.prop('id').search('full') !== - 1) {
+        var dobElement = $(element).parents('.customer-dob'),
+                errorClass = error.prop('class');
+        error.insertAfter(element.parent());
+        dobElement.find('.validate-custom').addClass(errorClass)
+                .after('<div class="' + errorClass + '"></div>');
+        }
+        else {
+        error.insertAfter(element);
+        }
+        },
+                ignore: ':hidden:not(' + ignore + ')'
+<?php else: ?>
+        ignore: ignore ? ':hidden:not(' + ignore + ')' : ':hidden'
+<?php endif ?>
+    });
+    });
+</script>
+<script type="text/x-magento-init">
+    {
+    "[data-role=change-email], [data-role=change-password]": {
+    "changeEmailPassword": {
+    "titleChangeEmail": "<?php /* @escapeNotVerified */ echo __('Change Email') ?>",
+    "titleChangePassword": "<?php /* @escapeNotVerified */ echo __('Change Password') ?>",
+    "titleChangeEmailAndPassword": "<?php /* @escapeNotVerified */ echo __('Change Email and Password') ?>"
+    }
+    }
+    }
+</script>
+

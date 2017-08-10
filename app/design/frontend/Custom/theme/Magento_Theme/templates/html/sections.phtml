@@ -1,0 +1,172 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+
+/**
+*  General template for displaying group of blocks devided into sections
+*/
+
+$group = $block->getGroupName();
+$groupCss = $block->getGroupCss();
+$groupBehavior = $block->getGroupBehaviour() ? $block->getGroupBehaviour() : '{"tabs":{"openedState":"active"}}';
+?>
+<?php
+
+	//$om = \Magento\Framework\App\ObjectManager::getInstance();
+	$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+	$customerSession = $objectManager->create('Magento\Customer\Model\Session');
+	$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+
+	if($customerSession->isLoggedIn()) {
+    	$id = $customerSession->getCustomer()->getId();
+        $name = $customerSession->getCustomer()->getName();
+       
+    
+	$bu =  $storeManager->getStore()->getBaseUrl()."pub/media/customer";
+	$stat_img =  $storeManager->getStore()->getBaseUrl()."pub/static/frontend/Custom/theme/en_US/images/profile.png";
+    
+    $customerRepository = $objectManager->get('Magento\Customer\Api\CustomerRepositoryInterface');
+	$customer = $customerRepository->getById($id);
+    
+    $cattrValue = "";
+	if($customer->getCustomAttribute('prof_image'))
+	{
+      $cattrValue = $customer->getCustomAttribute('prof_image')->getValue();
+	}
+    
+    $username = "";
+	if($customer->getCustomAttribute('uname'))
+	{
+      $username = $customer->getCustomAttribute('uname')->getValue();
+	}
+	?>
+<?php if ($detailedInfoGroup = $block->getGroupChildNames($group, 'getChildHtml')):?>
+    <div class="sections <?php /* @escapeNotVerified */ echo $groupCss ?> aa">
+        <?php $layout = $block->getLayout(); ?>
+        <div class="section-items <?php /* @escapeNotVerified */ echo $groupCss ?>-items" data-mage-init='<?php /* @escapeNotVerified */ echo $groupBehavior ?>'>
+            <?php $i=0;?>
+            <?php
+            $detailedInfoGroupRev=array_reverse($detailedInfoGroup);            
+            ?>
+            <?php foreach ($detailedInfoGroupRev as $name):?>
+                
+                <?php if($i==0){ ?>
+                <?php
+                    $html = $layout->renderElement($name);
+                    if (!trim($html) && ($block->getUseForce() != true)) {
+                        continue;
+                    }
+                    $alias = $layout->getElementAlias($name);
+                    $label = $block->getChildData($alias, 'title');
+                ?>
+                <div class="section-item-title <?php /* @escapeNotVerified */ echo $groupCss ?>-item-title" data-role="collapsible">
+                    <a class="<?php /* @escapeNotVerified */ echo $groupCss ?>-item-switch" data-toggle="switch" href="#<?php /* @escapeNotVerified */ echo $alias; ?>"><?php 
+		$photoPath = $this->helper('Plumrocket\SocialLoginFree\Helper\Data')->getPhotoPath();
+		if (isset($_SESSION['customer_base']['pslogin_referer_store']) && $cattrValue!='')
+		{ ?>
+			<img src="<?php echo $bu.$cattrValue; ?>" alt="" width="25" height="25" />
+		<?php }
+		elseif(isset($_SESSION['customer_base']['pslogin_referer_store']) && $cattrValue=='')
+		{ ?>
+			<img src="<?php echo $photoPath; ?>" alt="" width="25" height="25" />
+		<?php }
+		elseif(!isset($_SESSION['customer_base']['pslogin_referer_store']) && $cattrValue!='')
+		{ ?>
+			<img src="<?php echo $bu.$cattrValue; ?>" alt="" width="25" height="25" />
+			
+		<?php }
+		else
+		{ ?>
+            
+			<img src="<?php echo $stat_img; ?>" alt="" width="25" height="25" />
+		<?php } ?><span><?php /* @escapeNotVerified */ echo $username; ?> <i class="fa fa-caret-down" aria-hidden="true"></i></span></a>
+                </div>
+                <?php }else{ ?>
+            <?php
+                $html1 = $layout->renderElement($name);
+                if (!trim($html1) && ($block->getUseForce() != true)) {
+                    continue;
+                }
+                $alias1 = $layout->getElementAlias($name);
+                $label1 = $block->getChildData($alias1, 'title');
+            ?>
+                  <div class="section-item-title <?php /* @escapeNotVerified */ echo $groupCss ?>-item-title">
+                    <a class="<?php /* @escapeNotVerified */ echo $groupCss ?>-item-switch"  href="<?php /* @escapeNotVerified */ echo $storeManager->getStore()->getBaseUrl()."customer/account/logout"; ?>"><span><?php /* @escapeNotVerified */ echo "SIGN OUT"; ?></span></a>
+                </div>
+                
+                <?php } ?>
+                <?php $i=$i+1;?>
+            <?php endforeach;?>
+            
+                <div class="section-item-content <?php /* @escapeNotVerified */ echo $groupCss ?>-item-content" id="<?php /* @escapeNotVerified */ echo $alias; ?>" data-role="content"><?php /* @escapeNotVerified */ echo $html.$html1; ?></div>
+        </div>
+        <div style="color:white; bottom: 0;width:100%;">
+<!--            <span class="close-mob-menu"><i class="fa fa-angle-up fa-3x " id="mbcl" aria-hidden="true"></i></span>-->
+            <div class="close-mob-menu" style="width: 10%;margin: 0 auto;display: none;"><i class="fa fa-3x fa-angle-up" id="mbcl" aria-hidden="true"></i></div>
+        </div>
+    </div>
+<?php endif; ?>
+<script>
+  require([
+    'jquery',
+  ], function ($) {
+    $(document).ready(function () {
+      // code here
+      $(".nav-toggle").click(function(){
+        $(".section-item-content").children(".navigation").insertAfter( $(".section-item-content").children(".links"));
+        $(".close-mob-menu").toggle();
+      });
+      $(".section-item-content .links li:last-child").remove();
+      $(".close-mob-menu").click(function(){
+          $(".section-item-content").children(".navigation").slideToggle();
+          if($( "#mbcl" ).hasClass( "fa-angle-up")){
+            $("#mbcl").removeClass('fa-angle-up');
+            $("#mbcl").addClass('fa-angle-down');
+          }else{
+            $("#mbcl").removeClass('fa-angle-down');
+            $("#mbcl").addClass('fa-angle-up');
+          }
+      });
+    });
+  });
+</script>
+<?php }else{?>
+<?php if ($detailedInfoGroup = $block->getGroupChildNames($group, 'getChildHtml')):?>
+    <div class="sections <?php /* @escapeNotVerified */ echo $groupCss ?>">
+        <?php $layout = $block->getLayout(); ?>
+        <div class="section-items <?php /* @escapeNotVerified */ echo $groupCss ?>-items" data-mage-init='<?php /* @escapeNotVerified */ echo $groupBehavior ?>'>
+             <?php $i=0;?>
+            <?php foreach ($detailedInfoGroup as $name):?>
+                <?php
+                    $html = $layout->renderElement($name);
+                    if (!trim($html) && ($block->getUseForce() != true)) {
+                        continue;
+                    }
+                    $alias = $layout->getElementAlias($name);
+                    $label = $block->getChildData($alias, 'title');
+                ?>
+            <?php if($i==0){?>
+            <div class="section-item-title <?php /* @escapeNotVerified */ echo $groupCss ?>-item-title" data-role="collapsible">
+                    <a class="<?php /* @escapeNotVerified */ echo $groupCss ?>-item-switch" data-toggle="switch" href="#<?php /* @escapeNotVerified */ echo $alias; ?>"><?php /* @escapeNotVerified */ echo $label; ?></a>
+                </div>
+                <div class="section-item-content <?php /* @escapeNotVerified */ echo $groupCss ?>-item-content" id="<?php /* @escapeNotVerified */ echo $alias; ?>" data-role="content"><?php /* @escapeNotVerified */ echo $html; ?></div>
+            <?php }else{?>
+                <div class="section-item-title <?php /* @escapeNotVerified */ echo $groupCss ?>-item-title">
+                    <a class="<?php /* @escapeNotVerified */ echo $groupCss ?>-item-switch" href="<?php /* @escapeNotVerified */ echo $storeManager->getStore()->getBaseUrl()."customer/account/login"; ?>"><?php /* @escapeNotVerified */ echo "SIGN IN"; ?></a>
+                </div>
+                
+            <?php }?>
+                <?php $i=$i+1;?>
+            <?php endforeach;?>
+        </div>
+<!--        <div style="color:white; bottom: 0;width:100%;"><span class="close-mob-menu"><i class="fa fa-angle-up fa-3x" aria-hidden="true"></i></span></div>-->
+    </div>
+<?php endif; ?>      
+<?php }?>

@@ -1,0 +1,54 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var \Magento\Customer\Block\Form\Edit $block */
+?>
+
+<form class="form form-edit-account" action="<?php /* @escapeNotVerified */ echo $block->getUrl('settings/account/editPost') ?>" method="post" id="form-validate" enctype="multipart/form-data" data-hasrequired="<?php /* @escapeNotVerified */ echo __('* Required Fields') ?>" autocomplete="off">
+	<?php echo $block->getBlockHtml('formkey')?>
+	<?php echo $block->getChildHtml('form_additional_info'); ?>
+	<fieldset class="fieldset">
+		<legend class="legend"><span>Image Settings</span></legend>
+	<div class="image-settings">
+			<strong role="heading" aria-level="2"><span><?php echo __('Download protection') ?></span></strong>
+			<div class="control">
+				<span class="checkbox">
+					<label for="right_click">
+						<input type="checkbox" id="right_click" name="right_click" class="checkbox" value="1">
+						Discourage people from right-clicking or saving my images by placing a transparent image over the top of them.
+					</label>
+					<div class="note">
+					Please understand its impossible to prevent downloading of images displayed on web pages, but activating this feature will make it more difficult. Your original high-resolution images are never displayed on the website, and cannot be downloaded.
+					</div>
+				</span>
+			</div>
+			<div></div><br />
+			<strong role="heading" aria-level="2"><span><?php echo __('Zoom View Watermark') ?></span></strong>
+			<div class="control">
+				<span class="checkbox">
+					<label for="upload_watermark">
+						<input type="checkbox" id="upload_watermark" name="upload_watermark" class="checkbox" value="1">Place a large watermark in the center of my images
+					</label>
+				</span>
+			</div>
+	</div>
+	</fieldset>
+	
+	
+    <div class="actions-toolbar">
+        <div class="primary">
+            <button type="submit" class="action save primary" title="<?php /* @escapeNotVerified */ echo __('Save Changes') ?>"><span><?php /* @escapeNotVerified */ echo __('Save Changes') ?></span></button>
+        </div>
+        <div class="secondary">
+            <a class="action back" href="<?php echo $block->escapeUrl($block->getBackUrl()) ?>"><span><?php /* @escapeNotVerified */ echo __('Go back') ?></span></a>
+        </div>
+    </div>
+</form>
+
+
+

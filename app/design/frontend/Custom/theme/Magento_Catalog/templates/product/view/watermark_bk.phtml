@@ -1,0 +1,47 @@
+<?php
+
+function imagecreatefromfile( $filename ) {
+    if (!file_exists($filename)) {
+        throw new InvalidArgumentException('File "'.$filename.'" not found.');
+    }
+     switch ( strtolower( array_pop( explode('.', substr($filename, 0, strpos($filename, '?'))))) ) {
+        case 'jpeg':
+        case 'jpg':
+            return imagecreatefromjpeg($filename);
+        break;
+
+        case 'png':
+            return imagecreatefrompng($filename);
+        break;
+
+        case 'gif':
+            return imagecreatefromgif($filename);
+        break;
+
+        default:
+            throw new InvalidArgumentException('File "'.$filename.'" is not valid jpg, png or gif image.');
+        break;
+    }
+}
+// load source image to memory
+$image = imagecreatefromfile(base64_decode($_GET['image']));
+// load watermark to memory
+$watermark = imagecreatefromfile(base64_decode($_GET['watermark']));
+// calculate the position of the watermark in the output image (the
+// watermark shall be placed in the lower right corner)
+$watermark_pos_x = imagesx($image) - imagesx($watermark) - 8;
+$watermark_pos_y = imagesy($image) - imagesy($watermark) - 10;
+
+// merge the source image and the watermark
+imagecopy($image, $watermark,  $watermark_pos_x, $watermark_pos_y, 0, 0,
+  imagesx($watermark), imagesy($watermark));
+
+// output watermarked image to browser
+header('Content-Type: image/jpeg');
+imagejpeg($image, NULL, 100);  // use best image quality (100)
+
+// remove the images from memory
+imagedestroy($image);
+imagedestroy($watermark);
+
+?>

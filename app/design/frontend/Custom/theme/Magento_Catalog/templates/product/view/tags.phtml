@@ -1,0 +1,29 @@
+<!--<?php echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('tags')->toHtml(); ?>-->
+<?php
+$pid = $block->getProduct()->getId();
+$blockObj = $block->getLayout()->createBlock('Artist\Artwork\Block\Product');
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$connection = $objectManager->get('Magento\Framework\App\ResourceConnection')->getConnection('\Magento\Framework\App\ResourceConnection::DEFAULT_CONNECTION');
+$result = $connection->fetchAll("SELECT * FROM art_table WHERE art_cat=" . $pid);
+$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+$follow = $storeManager->getStore()->getBaseUrl() . "artwork/account/product";
+foreach ($result as $key) {
+    //$count=0;
+    $art_user = $key['art_user'];
+    $cat_id = $key['art_cat'];
+    $art_tags = $key['art_tag'];
+    $product = $objectManager->get('Magento\Catalog\Model\Product')->load($cat_id);
+    ?>
+
+            <!--    <a class="art_tags" href="<?php echo $blockObj->getProductUrl($pid) ?>">-->
+    <?php
+    $tags = explode(",", $art_tags);
+    foreach ($tags as $tag) {
+        ?>
+        <div class="tag-element" ><span class="tag-element-text"><?php echo $tag; ?></span></div>
+                        <?php
+                    }
+                    ?>    
+    <!--</a>-->
+<?php }
+?>

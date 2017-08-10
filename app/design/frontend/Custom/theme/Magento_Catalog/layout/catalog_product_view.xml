@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+<head>
+	<css src="Magento_Catalog::css/arts.css"/>
+	
+	<!--<css src="Magento_Catalog::css/owl.carousel.min.css"/>
+        <css src="Magento_Catalog::css/owl.theme.css"/>
+	
+	<script src="Magento_Catalog::js/owl.carousel.min.js"></script>-->
+</head>
+    
+    <body>
+	<move element="page.main.title" destination="content" before="product.info.main"/>
+	<move element="product.info.social" destination="product.info.main" before="-"/>
+	<move element="product.info.price" destination="product.info.main" after="product.info.media"/>
+	<!--<move element="product.info.price" destination="product.info.main" after="product.info.options.wrapper"/>-->
+        <!--<move element="product.info.options.wrapper" destination="product.info.main" before="product.info.price"/>-->
+	<referenceBlock name="view.addto.compare" remove="true" />
+	<referenceBlock name="product.info.overview" remove="true" />
+	<referenceBlock name="product.info.stock.sku" remove="true" />
+	<referenceBlock name="product_tab" remove="true" />
+	<referenceBlock name="artist_slider" remove="true" />
+	<referenceBlock name="catalog.product.related" remove="true" />
+	<referenceBlock name="bml.right.logo" remove="true" />
+	<!--<referenceBlock name="product.info.options.wrapper" remove="true" />-->
+        <!--<referenceBlock name="product.info.review" remove="true" />-->
+	<referenceBlock name="product.info.description">
+            <action method="setTitle">
+                <argument name="title" xsi:type="string">Features</argument>
+            </action>
+	</referenceBlock>
+	
+	<referenceBlock name="product.info.details">
+            <block class="Magento\Catalog\Block\Product\View" name="commodity.tab" as="commodity" template="product/view/commodity.phtml" group="detailed_info">
+                <arguments>
+                    <argument translate="true" name="title" xsi:type="string">Commodity</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Catalog\Block\Product\View" name="tags.tab" as="tags" template="product/view/tags.phtml" group="detailed_info" >
+                <arguments>
+                    <argument translate="true" name="title" xsi:type="string">Tags</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+        <referenceBlock name="product.info.social">
+            <block class="Magento\Catalog\Block\Product\View" name="product.info.wdm" template="product/view/wdm-social.phtml"/>
+	</referenceBlock>
+    </body>
+</page>

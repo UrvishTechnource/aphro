@@ -1,0 +1,50 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var $block \Magento\Wishlist\Block\Catalog\Product\View\Addto\Wishlist */
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$customerSession = $objectManager->create('Magento\Customer\Model\Session');
+$_productId = $block->getProduct()->getId();
+$currentProduct = $objectManager->get('Magento\Catalog\Model\Product')->load($_productId);
+$userid = $currentProduct->getData("yourcustomattribute_id");
+$connection = $objectManager->get('Magento\Framework\App\ResourceConnection')->getConnection('\Magento\Framework\App\ResourceConnection::DEFAULT_CONNECTION');
+$wish_result = $connection->fetchAll("SELECT * FROM wishlist INNER JOIN wishlist_item ON wishlist.wishlist_id = wishlist.wishlist_id WHERE wishlist.customer_id=".$userid." AND wishlist_item.product_id=" . $_productId);
+if(count($wish_result)>0){
+  $wish="true";
+}
+else{
+  $wish="false";
+}
+?>
+<?php if ($block->isWishListAllowed()) : ?>
+  <a href="#" data-role="remove" data-post-remove='<?php /* @escapeNotVerified */ echo $block->getItemRemoveParams($block->getItem()); ?>' title="<?php /* @escapeNotVerified */ echo __('Remove Item') ?>" class="btn-remove action delete">
+      <span><?php /* @escapeNotVerified */ echo __('Remove item');?></span>
+  </a>
+  <a href="#"
+    class="action towishlist 123 <?php if($wish=='true'){ echo 'red';} ?>"
+    data-post='<?php /* @escapeNotVerified */ echo $block->getWishlistParams(); ?>'
+    data-action="add-to-wishlist"
+    <?php if($customerSession->isLoggedIn()) { ?>
+
+    <?php }else{ ?>
+    onclick="altmsg()"
+   <?php } ?>><span><?php /* @escapeNotVerified */ echo __('') ?></span></a>
+<?php endif; ?>
+<script type="text/x-magento-init">
+    {
+        "body": {
+            "addToWishlist": <?php /* @escapeNotVerified */ echo $block->getWishlistOptionsJson() ?>
+        }
+    }
+</script>
+<script type="text/javascript">
+  function altmsg()
+  {
+    alert("Please login first or create an account if you want to mark any product as favourite.");
+  }
+</script>

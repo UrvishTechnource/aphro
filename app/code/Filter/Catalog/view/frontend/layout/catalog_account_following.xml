@@ -1,0 +1,18 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd" layout="2columns-left">
+    <body>
+        <referenceContainer name="content">
+            <block class="Filter\Catalog\Block\Following" name="following_filter" template="following.phtml" cacheable="false"/>
+        </referenceContainer>
+        <attribute name="class" value="page-with-filter"/>
+        <referenceContainer name="sidebar.main">
+            <block type="catalog/navigation" name="following.leftnav" template="catalog/navigation/my_left_nav.phtml" />
+            <block class="Magento\LayeredNavigation\Block\Navigation\Category" name="following.leftnav" before="-" template="layer/view.phtml">
+                <block class="Magento\LayeredNavigation\Block\Navigation\State" name="following.navigation.state" as="state" />
+                <block class="Magento\LayeredNavigation\Block\Navigation\FilterRenderer" name="following.navigation.renderer" as="renderer" template="layer/filter.phtml"/>
+            </block>
+        </referenceContainer>
+        <referenceBlock name="product_tab" remove="true" />
+        <referenceBlock name="artist_slider" remove="true" /> 
+        <referenceBlock name="wishlist_sidebar" remove="true" />
+    </body>
+</page>

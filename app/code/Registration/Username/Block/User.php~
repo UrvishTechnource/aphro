@@ -1,0 +1,10 @@
+<?php
+namespace Registration\Username\Block;
+ 
+class User extends \Magento\Customer\Block\Form\Edit
+{
+    public function getHelloWorldTxt()
+    {
+        return 'Hello world!';
+    }
+}

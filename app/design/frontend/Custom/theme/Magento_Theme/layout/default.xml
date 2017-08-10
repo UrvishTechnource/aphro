@@ -1,0 +1,128 @@
+<body>
+
+    <referenceBlock name="store.menu" after="top.search">
+        <arguments><argument name="title" xsi:type="string" translate="true">Categories</argument></arguments>
+    </referenceBlock>
+    <referenceBlock name="store.links" >
+        <arguments>
+            <argument name="title" translate="true" xsi:type="string">SIGN OUT</argument>
+        </arguments>
+    </referenceBlock>
+    <referenceBlock name="top.links">
+        <referenceBlock name="my-account-link" remove="true" />
+        <referenceBlock name="wish-list-link" remove="true" />
+        <block class="Magento\Framework\View\Element\Html\Link" name="edit-profile">
+            <arguments>
+                <argument name="label" xsi:type="string" translate="true">My Profile</argument>
+                <argument name="path" xsi:type="string" translate="true">customer/account/edit</argument>
+            </arguments>
+        </block>
+        <block class="Magento\Framework\View\Element\Html\Link" name="my-shop" after="edit-profile">
+            <arguments>
+                <argument name="label" xsi:type="string" translate="true">My Shop</argument>
+                <argument name="path" xsi:type="string" translate="true">artwork/account/shop</argument>
+            </arguments>
+        </block>
+        <block class="Magento\Framework\View\Element\Html\Link" name="favorites" after="my-shop-link">
+            <arguments>
+                <argument name="label" xsi:type="string" translate="true">Favorites</argument>
+                <argument name="path" xsi:type="string" translate="true">artwork/account/favorited</argument>
+            </arguments>
+        </block>
+        <block class="Magento\Framework\View\Element\Html\Link" name="history" after="favorites-link">
+            <arguments>
+                <argument name="label" xsi:type="string" translate="true">History</argument>
+                <argument name="path" xsi:type="string" translate="true">purchase/index/order/</argument>
+            </arguments>
+        </block>
+        <block class="Magento\Framework\View\Element\Html\Link" name="settings" after="history-link">
+            <arguments>
+                <argument name="label" xsi:type="string" translate="true">Settings</argument>
+                <argument name="path" xsi:type="string" translate="true">mymodule/account/editaccount</argument>
+            </arguments>
+        </block>
+        <block class="Magento\Framework\View\Element\Html\Link" name="upload" after="settings-link">
+            <arguments>
+                <argument name="label" xsi:type="string" translate="true">Upload</argument>
+                <argument name="path" xsi:type="string" translate="true">artwork/account/art</argument>
+            </arguments>
+        </block>
+        <block class="Magento\Framework\View\Element\Html\Link" name="sign-out" after="upload-link">
+            <arguments>
+                <argument name="label" xsi:type="string" translate="true">Sign Out</argument>
+                <argument name="path" xsi:type="string" translate="true">customer/account/logout</argument>
+            </arguments>
+        </block>
+    </referenceBlock>
+
+    <!--<move element="header.links" destination="page.top" before="-" />-->
+    <!--<move element="header.links" destination="header-wrapper" after="top.search" />-->
+    <!--<move element="top.search" destination="header-wrapper" after="logo" />
+    <move element="header.links" destination="header-wrapper" after="top.search" />
+    <move element="dth_footer_social_links" destination="header-wrapper" after="header.links" />
+    <move element="minicart" destination="header-wrapper" after="dth_footer_social_links" />-->
+    <move element="logo" destination="header.panel" before="-" />
+    <move element="top.search" destination="header.panel" after="logo" />
+    <!--<move element="header.links" destination="header.panel" after="top.search" />-->
+    <move element="dth_footer_social_links" destination="header.panel" after="header.links" />
+    <move element="header.links" destination="header.panel" after="store.menu" />
+    <move element="minicart" destination="header.panel" after="dth_footer_social_links" />
+    
+    
+    <referenceBlock name="form.subscribe" remove="true"/>
+    <referenceBlock name="footer_links" remove="true"/>
+    <!--<referenceBlock name="store.menu" remove="true"/>-->
+    <referenceBlock name="authorization-link" remove="true"/>
+    <referenceBlock name="copyright" remove="true"/>
+    <referenceBlock name="register-link" remove="true"/>
+    <referenceBlock name="footer">
+        <block class="Magento\Cms\Block\Block" name="footer_social_links_block">
+            <arguments>
+                <argument name="block_id" xsi:type="string" translate="true">dth_footer_social_links</argument>
+            </arguments>
+        </block>
+    </referenceBlock>
+    <referenceBlock name="footer">
+        <block class="Magento\Cms\Block\Block" name="footer_links_block">
+            <arguments>
+                <argument name="block_id" xsi:type="string" translate="true">footer_links_block</argument>
+            </arguments>
+        </block>
+    </referenceBlock>
+
+    <referenceBlock name="content">
+        <block class="Mageplaza\Productslider\Block\NewProducts" name="artist_slider" template="artistslider.phtml" after="-">
+            <arguments>
+                <argument name="products_count" xsi:type="number">8</argument>
+                <argument name="margin" xsi:type="string">5</argument>
+                <argument name="heading" xsi:type="string">Artists of the Day !</argument>
+                <argument name="description" xsi:type="string"></argument>
+            </arguments>
+        </block>
+    </referenceBlock>
+
+    <referenceBlock name="content">
+        <block class="Magento\Cms\Block\Block" name="product_tab" after="-">
+            <arguments>
+                <argument name="block_id" xsi:type="string" translate="true">product_tab</argument>
+            </arguments>
+        </block>
+    </referenceBlock>
+
+    <referenceContainer name="header.panel">
+        <container name="custom.header" htmlClass="headerSitemenu" htmlTag="div">
+            <block class="Magento\Framework\View\Element\Template" name="social.links" before="-" template="Magento_Theme::social-links.phtml">
+            </block>
+        </container>
+    </referenceContainer>
+     <referenceBlock name="wish-list-link" remove="true" />
+     <referenceBlock name="customer-account-navigation-wish-list-link" remove="true"/>
+     <move element="messages" destination="page.bottom.container" before="page.bottom" />
+<!--     <move element="top.links" destination="page.bottom.container" before="page.bottom" />-->
+	<!--<referenceContainer name="header.container">
+        <container name="header.containertwo" as="header_containertwo" label="Page Header Container"  htmlTag="header" htmlClass="header-mini-container" after="header.panel.wrapper"/>
+    </referenceContainer>
+<referenceContainer name="header.containertwo">
+    <block class="Magento\Framework\View\Element\Template" name="header.mini.container" template="Magento_Theme::test.phtml"/>
+</referenceContainer>-->
+</body>

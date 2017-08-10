@@ -1,0 +1,1871 @@
+/* Compiled Less CSS File */
+/* Generated from "local-l.css" */
+
+/* LESS Document */
+@font-face {
+  font-family: fontAwesome;
+  src: url('../projects/aphro/app/design/frontend/Custom/theme/web/fonts/fontawesome-webfont.eot');
+  src: url('../projects/aphro/app/design/frontend/Custom/theme/web/fonts/fontawesome-webfont.svg');
+  src: url('../projects/aphro/app/design/frontend/Custom/theme/web/fonts/fontawesome-webfont.ttf');
+  src: url('../projects/aphro/app/design/frontend/Custom/theme/web/fonts/fontawesome-webfont.woff');
+  src: url('../projects/aphro/app/design/frontend/Custom/theme/web/fonts/fontawesome-webfont.woff2');
+  src: url('../projects/aphro/app/design/frontend/Custom/theme/web/fonts/FontAwesome.otf');
+}
+@font-face {
+  font-family: helveticaneue;
+  src: url('../projects/aphro/app/design/frontend/Custom/theme/web/fonts/helveticaneue-lightcondobl.otf');
+}
+a {
+  text-decoration: none !important;
+}
+.page-wrapper header.page-header {
+  height: 65px;
+  vertical-align: middle;
+}
+.page-wrapper header.page-header .header.content {
+  padding: 12px 30px;
+  height: 65px;
+}
+.page-wrapper header.page-header .panel.wrapper {
+  background-color: #4a4f58;
+  border: medium none;
+  display: block;
+  height: 50px;
+}
+.page-wrapper .nav-sections {
+  margin: 0;
+}
+.page-wrapper .page-main {
+  padding: 0 !important;
+  min-width: 100% !important;
+  width: 100%;
+}
+.page-wrapper .page-main .columns .sidebar .block.block-compare {
+  display: none;
+}
+.page-wrapper .page-main .columns .column.main p {
+  margin: 0;
+}
+.page-wrapper .page-main .columns .column.main .custom-slider .owl-carousel.owl-theme .owl-stage-outer {
+  padding: 0 !important;
+  width: 100%;
+  min-height: 250px;
+}
+.page-wrapper .page-main .columns .column.main .custom-slider .owl-carousel.owl-theme .banner-item.banner-1 {
+  margin: 0 !important;
+}
+.page-wrapper .page-main .columns .column.main .custom-slider .owl-carousel.owl-theme .owl-dots {
+  bottom: 20px;
+  position: absolute;
+  text-align: right;
+  width: 98%;
+}
+.page-wrapper .page-main .columns .column.main .custom-slider .owl-carousel.owl-theme .owl-dots .owl-dot span {
+  backface-visibility: visible;
+  background: #d6d6d6;
+  border-radius: 0 !important;
+  display: block;
+  height: 6px !important;
+  margin: 5px 7px;
+  transition: opacity 200ms ease 0s;
+  width: 20px;
+}
+.page-wrapper .page-main .columns .column.main .custom-slider .owl-carousel.owl-theme .owl-dots .owl-dot.active span {
+  background: #000000;
+}
+.page-wrapper .page-main .page-title-wrapper .page-title {
+  display: none;
+}
+.page.messages {
+  margin: 0 auto;
+  width: 500px !important;
+}
+.page-header {
+  background: #4a4f58;
+}
+.header.content .logo {
+  margin: 0 auto;
+}
+.header.content .header.links {
+  display: inline-block;
+  padding: 0;
+  margin: 7px;
+  text-align: center;
+  width: 30%;
+}
+.header.content .header.links li {
+  display: inline-block;
+  margin: 0 21px;
+  padding: 0 10px;
+}
+.header.content .header.links li a {
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  vertical-align: middle;
+}
+.header.content .headerSitemenu {
+  display: inline-block;
+  float: right;
+  width: 10%;
+  margin: auto 10px;
+}
+.header.content .headerSitemenu select {
+  background: none !important;
+  border: medium none;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  height: 32px;
+  padding-right: 10px;
+  cursor: pointer;
+}
+header .panel.header .logo {
+  margin: 0 auto !important;
+}
+header .panel.header .block.block-search {
+  float: left;
+  margin: 0px 10px 0 55px;
+  padding-left: 15px;
+  position: relative;
+  width: 400px;
+  z-index: 4;
+}
+header .panel.header .block.block-search .block-content {
+  margin: 0;
+}
+header .panel.header .block.block-search input {
+  border-radius: 20px;
+  font-size: 16px;
+  height: 45px;
+  margin: 0;
+  padding: 0 16px;
+}
+header .panel.header .block.block-search input::placeholder {
+  color: #8f8f8f !important;
+  font-size: 18px;
+  font-weight: bold;
+}
+header .panel.header .block.block-search .action.search::before {
+  line-height: 45px;
+  margin: 0 5px 0 0;
+}
+header .panel.header .header.links {
+  float: left;
+  list-style: outside none none;
+  margin: 10px;
+  padding: 0;
+  width: 25%;
+}
+header .panel.header .header.links li {
+  margin: 0;
+}
+header .panel.header .header.links li a {
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+}
+header .panel.header .minicart-wrapper {
+  display: inline-block;
+  float: right;
+  margin: 0 !important;
+  position: relative;
+  top: 8px;
+}
+header .panel.header .minicart-wrapper .action.showcart::before {
+  color: #fff;
+}
+header .panel.header .minicart-wrapper .action.showcart:hover::before {
+  color: #ffc91b !important;
+}
+header .panel.header .headerSitemenu {
+  background: none;
+  float: left;
+  width: 130px !important;
+}
+header .panel.header .headerSitemenu .category {
+  background: none;
+  border: medium none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  height: 45px;
+  padding: 5px;
+}
+header .panel.header .greet.welcome,
+header .panel.header .pslogin-welcome-msg {
+  display: none !important;
+}
+.cms-home.cms-index-index.page-layout-1column .headerSitemenu::after,
+.customer-account-login .headerSitemenu::after {
+  bottom: 0;
+  color: #fff;
+  content: "\f0d7";
+  display: inline-block;
+  font-family: fontawesome;
+  font-size: 18px;
+  left: 42px;
+  position: relative;
+  right: 0;
+  top: -42px;
+  cursor: pointer;
+}
+.cms-home.cms-index-index.page-layout-1column .authorization-link,
+.customer-account-login .authorization-link {
+  position: relative;
+  top: 0;
+}
+.page-wrapper footer.page-footer {
+  background: #4c5058;
+  margin-top: auto;
+  padding: 15px;
+}
+.page-wrapper footer.page-footer .footer.content {
+  padding: 5px;
+  border-top: medium none;
+}
+.page-wrapper footer.page-footer .footer.content .footer-content {
+  text-align: center;
+  width: 100%;
+}
+.page-wrapper footer.page-footer .footer.content .footer-content .first-part {
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  display: inline-block;
+}
+.page-wrapper footer.page-footer .footer.content .footer-content .first-part .footer-text {
+  color: #a7a9ac;
+}
+.page-wrapper footer.page-footer .footer.content .footer-content .fa.fa-globe {
+  color: #fff;
+  margin: 0 6px;
+}
+.page-wrapper footer.page-footer .footer.content .footer-content .fa.fa-caret-down {
+  color: #fff;
+  cursor: pointer;
+}
+.page-wrapper footer.page-footer .footer.content .footer-content select {
+  display: inline-block;
+  width: 62px;
+  -moz-appearance: none;
+  background: none;
+  border: medium none;
+  color: #fff;
+  font-weight: bold;
+  height: 32px;
+  padding: 0;
+}
+.page-wrapper footer.page-footer .footer.content p:nth-child(2) {
+  display: none;
+}
+.page-wrapper footer.page-footer .footer.content .social-icons {
+  margin: 15px;
+  text-align: center;
+}
+.page-wrapper footer.page-footer .footer.content .social-icons i {
+  color: #fff;
+  font-size: 30px;
+  margin: 0 10px;
+}
+.page-wrapper footer.page-footer .footer.content .social-icons .fa.fa-facebook-square:hover,
+.page-wrapper footer.page-footer .footer.content .social-icons .fa.fa-facebook-square:focus {
+  color: #3b5998;
+}
+.page-wrapper footer.page-footer .footer.content .social-icons .fa.fa-twitter:hover,
+.page-wrapper footer.page-footer .footer.content .social-icons .fa.fa-twitter:focus {
+  color: #1da1f2;
+}
+.page-wrapper footer.page-footer .footer.content .social-icons .fa.fa-instagram:hover,
+.page-wrapper footer.page-footer .footer.content .social-icons .fa.fa-instagram:focus {
+  color: #f77737;
+}
+.page-wrapper footer.page-footer .footer.content .social-icons .fa.fa-pinterest-p:hover,
+.page-wrapper footer.page-footer .footer.content .social-icons .fa.fa-pinterest-p:focus {
+  color: #bd081c;
+}
+.page-wrapper footer.page-footer .footer.content .copy-rights {
+  color: #a7a9ac;
+  font-weight: bold;
+  text-align: center;
+  margin: 25px 0 0;
+}
+.page-wrapper footer.page-footer .footer.content .copy-rights a {
+  color: #a7a9ac;
+  margin: 5px;
+}
+.page-wrapper footer.page-footer .footer.content .copy-rights a:hover,
+.page-wrapper footer.page-footer .footer.content .copy-rights a:focus {
+  color: #ffca14 !important;
+}
+.login-container {
+  text-align: center;
+}
+.login-container .block.block-customer-login {
+  border: 1px solid #a7a9ac;
+  border-radius: 5px;
+  margin: 20px;
+  display: inline-block;
+  float: none !important;
+  width: 500px;
+  padding-bottom: 25px;
+}
+.login-container .block.block-customer-login .block-title a {
+  background: #a7a9ac;
+  color: #fff;
+  display: inline-block;
+  float: left;
+  padding: 10px 0;
+  width: 50%;
+  border-top-right-radius: 4px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.login-container .block.block-customer-login .block-title a:first-child {
+  background: #fff !important;
+  border-top-left-radius: 4px;
+  color: #a7a9ac;
+}
+.login-container .block.block-customer-login .block-title a:hover {
+  background: #e9e9e9 none repeat scroll 0 0 !important;
+  color: #a7a9ac !important;
+}
+.login-container .block.block-customer-login .block-title strong {
+  font-weight: bold !important;
+  letter-spacing: 0.5px;
+}
+.login-container .block.block-customer-login .block-content .fieldset.login {
+  padding: 10px 15px;
+  margin: 0 40px;
+}
+.login-container .block.block-customer-login .block-content .fieldset.login .field label {
+  float: left;
+}
+.login-container .block.block-customer-login .block-content .fieldset.login .field .control {
+  width: 100%;
+}
+.login-container .block.block-customer-login .block-content .fieldset.login .field .control .input-text {
+  border-radius: 4px ;
+  border-width: 2px ;
+  height: 35px ;
+}
+.login-container .block.block-customer-login .block-content .fieldset.login .actions-toolbar {
+  /*	
+							.pslogin-block{
+								.pslogin-buttons {
+									ul{
+										text-align: center;
+										li{
+											float: none;
+										}
+									}
+								}
+							}*/
+
+}
+.login-container .block.block-customer-login .block-content .fieldset.login .actions-toolbar .primary {
+  width: 100%;
+}
+.login-container .block.block-customer-login .block-content .fieldset.login .actions-toolbar .primary button {
+  background: #ffc91b none repeat scroll 0 0;
+  border: 1px solid #ffc91b;
+  height: 50px;
+  margin: 0 !important;
+  width: 100%;
+}
+.login-container .block.block-customer-login .block-content .fieldset.login .actions-toolbar .primary button span {
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+.login-container .block.block-customer-login .block-content .fieldset.login .actions-toolbar .secondary {
+  margin: 5px 0;
+  text-align: center;
+  width: 100%;
+}
+.login-container .block.block-customer-login .block-content .fieldset.login .actions-toolbar .secondary a {
+  text-decoration: none;
+}
+.login-container .block.block-customer-login .block-content .fieldset.login .actions-toolbar .secondary a span {
+  color: #ffc91b;
+  font-weight: bold;
+}
+.login-container .block.block-customer-login .block-content .fieldset.login .actions-toolbar .secondary a span:hover {
+  border-bottom: 2px solid #ffc91b;
+}
+.block.block-new-customer {
+  display: none;
+}
+.customer-account-login .page-wrapper .columns,
+.customer-account-create .page-wrapper .columns,
+.customer-account-forgotpassword .page-wrapper .columns {
+  margin: 50px 0 0;
+}
+.customer-account-create .columns {
+  text-align: center;
+  width: 100%;
+}
+.customer-account-create .columns .column.main {
+  display: inline-block;
+  float: none !important;
+  margin: 15px;
+  /* width:500px !important;*/
+
+  border-radius: 4px;
+}
+.customer-account-create .columns .column.main .create.container {
+  border: 1px solid #a7a9ac;
+  border-radius: 4px;
+  display: inline-block;
+  float: none !important;
+  margin: 15px;
+  width: 500px !important;
+}
+.customer-account-create .columns .column.main .create.container .form.create.account.form-create-account {
+  min-width: 100% !important;
+  text-align: center;
+  width: 100%;
+}
+.customer-account-create .columns .column.main .create.container .form.create.account.form-create-account .fieldset.create.info {
+  display: inline-block;
+  width: 100% !important;
+}
+.customer-account-create .columns .column.main .create.container .form.create.account.form-create-account .fieldset.create.info .legend {
+  border-bottom: medium none !important;
+}
+.customer-account-create .columns .column.main .create.container .form.create.account.form-create-account .fieldset.create.info .legend a {
+  background: #a7a9ac;
+  color: #fff;
+  display: inline-block;
+  float: left;
+  padding: 15px 0;
+  width: 50%;
+  border-top-left-radius: 4px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.customer-account-create .columns .column.main .create.container .form.create.account.form-create-account .fieldset.create.info .legend a:last-child {
+  background: #fff !important;
+  border-top-right-radius: 4px;
+  color: #a7a9ac;
+}
+.customer-account-create .columns .column.main .create.container .form.create.account.form-create-account .fieldset.create.info .legend a:hover {
+  background: #e9e9e9 none repeat scroll 0 0 !important;
+  color: #a7a9ac !important;
+}
+.customer-account-create .columns .column.main .create.container .form.create.account.form-create-account .fieldset.create.info .legend strong {
+  font-weight: bold !important;
+  letter-spacing: 0.5px;
+}
+.customer-account-create .columns .column.main .create.container .form.create.account.form-create-account .fieldset.create.info .field {
+  margin: 0 40px;
+  padding: 10px 15px;
+}
+.customer-account-create .columns .column.main .create.container .form.create.account.form-create-account .fieldset.create.info .field input {
+  border-radius: 4px;
+  border-width: 2px;
+}
+.customer-account-create .columns .column.main .create.container .form.create.account.form-create-account .fieldset.create.account legend {
+  background: #ccc none repeat scroll 0 0;
+  padding: 7px;
+  width: 100%;
+}
+.customer-account-create .columns .column.main .create.container .form.create.account.form-create-account .fieldset.create.account legend span {
+  color: #fff;
+  font-weight: bold !important;
+  vertical-align: middle;
+}
+.customer-account-create .columns .column.main .create.container .form.create.account.form-create-account .fieldset.create.account .field {
+  margin: 0 40px;
+  padding: 10px 15px;
+}
+.customer-account-create .columns .column.main .create.container .form.create.account.form-create-account .fieldset.create.account .password-strength-meter {
+  background: none ;
+  color: #ffc91b;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+.customer-account-create .columns .column.main .create.container .form.create.account.form-create-account .actions-toolbar {
+  margin: 0 40px 10px;
+  padding: 10px 15px;
+}
+.customer-account-create .columns .column.main .create.container .form.create.account.form-create-account .actions-toolbar .primary {
+  width: 100%;
+}
+.customer-account-create .columns .column.main .create.container .form.create.account.form-create-account .actions-toolbar .primary button {
+  background: #ffc91b none repeat scroll 0 0;
+  border: 1px solid #ffc91b;
+  height: 50px;
+  margin: 0 !important;
+  width: 100%;
+}
+.customer-account-create .columns .column.main .create.container .form.create.account.form-create-account .actions-toolbar .primary button span {
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+.customer-account-create .field.choice.newsletter input {
+  float: left;
+}
+/*12-04-2017*/.agree {
+  font-weight: bold;
+  color: #A7A9AC;
+}
+.agree a {
+  color: #ffc91b;
+  font-weight: bold;
+}
+.action.search {
+  right: -1px !important;
+  background: #FFCA14 !important;
+  border-bottom-right-radius: 100%;
+  border-top-right-radius: 100%;
+  width: 50px;
+}
+.fieldset.create.account {
+  margin-bottom: 10px;
+}
+.block-search .action.search.disabled,
+.block-search .action.search {
+  opacity: 1 !important;
+}
+.product-item .product-item-details {
+  background: #d8d8d9;
+  padding: 5px 10px;
+  text-align: left;
+}
+.product-item .product-item-details strong,
+.product-item .product-item-details .price-box {
+  margin-bottom: 0;
+}
+.product-item .product-item-details strong .product-item-link:hover,
+.product-item .product-item-details .price-box .product-item-link:hover {
+  color: #fff !important;
+  text-decoration: none !important;
+}
+.product-item .price-box {
+  display: inline-block;
+  float: right;
+  margin: 5px 0;
+}
+.product-item .product-item-actions {
+  display: inline-block;
+  margin: 0 !important;
+  width: 100%;
+}
+.product-item .product-item-name {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 125px;
+}
+.product-item .price-box .price {
+  font-weight: normal;
+  white-space: nowrap;
+}
+.product-item .action.tocompare {
+  display: none !important;
+}
+.products-grid .product-item-info:hover,
+.products-grid .product-item-info.active:hover {
+  border: none;
+  box-shadow: none;
+}
+.products-grid .product-item-info:hover a .product-image-container,
+.products-grid .product-item-info.active:hover a .product-image-container {
+  transform: scale(1.05);
+  transition: all 0.2s linear;
+}
+.product-image-container {
+  transition: all 0.2s linear;
+  background: #f9fafb ;
+}
+.cms-home {
+  text-align: center;
+}
+.cms-home .block-products-list.grid {
+  display: inline-block;
+  float: none;
+  margin: 0 auto;
+  max-width: 1210px;
+}
+.widget .block-title strong {
+  border-bottom: 2px solid #ffca14;
+  font-size: 28px !important;
+  font-weight: bold !important;
+}
+.cms-home .product-item-actions {
+  display: none !important;
+}
+.product-item .tocart {
+  display: none;
+}
+.block-customer-login .field .label,
+.customer-account-create .field .label {
+  display: none !important;
+}
+.block-customer-login .field.choice.newsletter label,
+.customer-account-create .field.choice.newsletter label {
+  display: block !important;
+  text-align: left;
+}
+.block-customer-login .control input,
+.customer-account-create .control input {
+  border: 1px solid #A7A9AC !important;
+  height: 50px !important;
+}
+.fieldset.create.info {
+  margin-bottom: 0;
+}
+.password-strength-meter {
+  color: #000 !important;
+  font-size: 13px;
+  font-weight: normal !important;
+  line-height: 18px;
+  height: auto;
+}
+input[type="text"]::-moz-placeholder,
+input[type="password"]::-moz-placeholder,
+input[type="url"]::-moz-placeholder,
+input[type="tel"]::-moz-placeholder,
+input[type="search"]::-moz-placeholder,
+input[type="number"]::-moz-placeholder,
+input[type="datetime"]::-moz-placeholder,
+input[type="email"]::-moz-placeholder {
+  color: #a7a9ac !important;
+  font-size: 18px;
+  font-weight: bold;
+  opacity: 1 !important;
+}
+.block-customer-login .block-title {
+  display: inline-block;
+  margin-bottom: 30px !important;
+  padding-bottom: 0 !important;
+  width: 100%;
+}
+.block-customer-login .field.password.required {
+  margin-bottom: 0;
+}
+.block-customer-login .actions-toolbar .primary {
+  margin-top: 65px;
+}
+.login-container .fieldset::after {
+  content: none;
+}
+.cms-home .block-products-list .block-title {
+  display: none;
+}
+.remember {
+  text-align: left;
+}
+.remember .remember-text {
+  display: inline-block;
+  text-align: left;
+  float: left;
+}
+.remember .action.remind {
+  float: right;
+  margin: 0 !important;
+}
+input[type="text"],
+input[type="password"],
+input[type="url"],
+input[type="tel"],
+input[type="search"],
+input[type="number"],
+input[type="datetime"],
+input[type="email"] {
+  border-radius: 4px;
+}
+/*Forgot Passoword*/
+.form.password.forget {
+  border: 1px solid #a7a9ac;
+  border-radius: 5px;
+  margin: 35px auto 20px;
+  min-width: 430px !important;
+  padding: 50px;
+  width: 400px !important;
+}
+.form.password.forget .field.note {
+  color: #a7a9ac;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  margin-bottom: 5px;
+}
+.form.password.forget .field .label {
+  display: none;
+}
+.form.password.forget .field .control input {
+  height: 50px;
+  border: 1px solid #a7a9ac !important;
+  border-radius: 4px;
+}
+.form.password.forget .primary {
+  width: 100%;
+}
+.form.password.forget .primary .submit {
+  background: #ffc91b;
+  border: 1px solid #ffc91b;
+  height: 50px;
+  margin: 0 !important;
+  width: 100%;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 23px;
+}
+/*Edit Account*/
+.account .page-main,
+.mymodule-account-changepassword .page-main {
+  margin: 0 auto !important;
+  max-width: 1200px !important;
+  min-width: 1200px !important;
+  width: 1200px !important;
+}
+.account .page-main .block-collapsible-nav .content,
+.mymodule-account-changepassword .page-main .block-collapsible-nav .content {
+  background: none;
+}
+.account .page-main .form-edit-account fieldset,
+.mymodule-account-changepassword .page-main .form-edit-account fieldset,
+.account .page-main .form-address-edit fieldset,
+.mymodule-account-changepassword .page-main .form-address-edit fieldset,
+.account .page-main .form-edit-account .primary,
+.mymodule-account-changepassword .page-main .form-edit-account .primary,
+.account .page-main .form-address-edit .primary,
+.mymodule-account-changepassword .page-main .form-address-edit .primary {
+  float: left !important;
+  width: 510px;
+  padding: 10px 30px;
+}
+.account .page-main .form-edit-account fieldset .control input,
+.mymodule-account-changepassword .page-main .form-edit-account fieldset .control input,
+.account .page-main .form-address-edit fieldset .control input,
+.mymodule-account-changepassword .page-main .form-address-edit fieldset .control input,
+.account .page-main .form-edit-account .primary .control input,
+.mymodule-account-changepassword .page-main .form-edit-account .primary .control input,
+.account .page-main .form-address-edit .primary .control input,
+.mymodule-account-changepassword .page-main .form-address-edit .primary .control input {
+  border-radius: 2px;
+  height: 45px;
+}
+.account .page-main .form-edit-account fieldset .save,
+.mymodule-account-changepassword .page-main .form-edit-account fieldset .save,
+.account .page-main .form-address-edit fieldset .save,
+.mymodule-account-changepassword .page-main .form-address-edit fieldset .save,
+.account .page-main .form-edit-account .primary .save,
+.mymodule-account-changepassword .page-main .form-edit-account .primary .save,
+.account .page-main .form-address-edit .primary .save,
+.mymodule-account-changepassword .page-main .form-address-edit .primary .save {
+  background: #ffc91b !important;
+  border: 1px solid #ffc91b !important;
+  border-radius: 18px;
+  float: none !important;
+  font-size: 23px !important;
+  height: 40px !important;
+  margin: 20px 0 0 !important;
+  width: 200x !important;
+  display: inline-block !important;
+}
+.account .page-main .form-edit-account fieldset .legend,
+.mymodule-account-changepassword .page-main .form-edit-account fieldset .legend,
+.account .page-main .form-address-edit fieldset .legend,
+.mymodule-account-changepassword .page-main .form-address-edit fieldset .legend,
+.account .page-main .form-edit-account .primary .legend,
+.mymodule-account-changepassword .page-main .form-edit-account .primary .legend,
+.account .page-main .form-address-edit .primary .legend,
+.mymodule-account-changepassword .page-main .form-address-edit .primary .legend {
+  border-bottom: none;
+}
+.account .page-main .form-edit-account fieldset .legend span,
+.mymodule-account-changepassword .page-main .form-edit-account fieldset .legend span,
+.account .page-main .form-address-edit fieldset .legend span,
+.mymodule-account-changepassword .page-main .form-address-edit fieldset .legend span,
+.account .page-main .form-edit-account .primary .legend span,
+.mymodule-account-changepassword .page-main .form-edit-account .primary .legend span,
+.account .page-main .form-address-edit .primary .legend span,
+.mymodule-account-changepassword .page-main .form-address-edit .primary .legend span {
+  border: none;
+  color: #000;
+  font-size: 28px;
+  font-weight: bold;
+}
+.sidebar.sidebar-main {
+  width: 25%!important;
+}
+.sidebar.sidebar-main ul li strong,
+.sidebar.sidebar-main ul .item.current strong {
+  border-bottom: 2px solid #ffca14 !important;
+  border-left: medium none !important;
+  color: #a7a9ac !important;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border-left: none !important;
+}
+.sidebar.sidebar-main ul li a,
+.sidebar.sidebar-main ul .item.current a {
+  color: #a7a9ac;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border-left: none;
+  border-bottom: 2px solid transparent !important;
+}
+.sidebar.sidebar-main ul li a:hover,
+.sidebar.sidebar-main ul .item.current a:hover,
+.sidebar.sidebar-main ul li a:focus,
+.sidebar.sidebar-main ul .item.current a:focus {
+  border-left: none !important;
+  color: #a7a9ac !important;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  background: none;
+  border-bottom: 2px solid #FFCA14 !important;
+}
+/* Shipping Page */
+.customer-address-form form fieldset,
+.mymodule-account-editaccount form fieldset,
+.mymodule-account-changepassword form fieldset {
+  margin: 0;
+  padding: 0 10px !important;
+}
+.customer-address-form form fieldset .field .control select,
+.mymodule-account-editaccount form fieldset .field .control select,
+.mymodule-account-changepassword form fieldset .field .control select {
+  height: 45px;
+  color: #a7a9ac;
+  font-size: 18px;
+  padding: 0 5px;
+}
+.customer-address-form form fieldset .field input,
+.mymodule-account-editaccount form fieldset .field input,
+.mymodule-account-changepassword form fieldset .field input {
+  color: #a7a9ac;
+  font-size: 18px;
+}
+.customer-address-form form fieldset .field.choice,
+.mymodule-account-editaccount form fieldset .field.choice,
+.mymodule-account-changepassword form fieldset .field.choice {
+  float: left !important;
+}
+.customer-address-form form fieldset .control,
+.mymodule-account-editaccount form fieldset .control,
+.mymodule-account-changepassword form fieldset .control {
+  margin: 0 0 15px;
+}
+.customer-address-form form fieldset .control .checkbox,
+.mymodule-account-editaccount form fieldset .control .checkbox,
+.mymodule-account-changepassword form fieldset .control .checkbox {
+  height: 14px !important;
+  line-height: 0 !important;
+}
+.customer-address-form form fieldset .field.user_agree.required,
+.mymodule-account-editaccount form fieldset .field.user_agree.required,
+.mymodule-account-changepassword form fieldset .field.user_agree.required {
+  margin: 0;
+}
+.customer-address-form form .fieldset.password legend,
+.mymodule-account-editaccount form .fieldset.password legend,
+.mymodule-account-changepassword form .fieldset.password legend {
+  display: none;
+}
+.customer-address-form form .fieldset.password label,
+.mymodule-account-editaccount form .fieldset.password label,
+.mymodule-account-changepassword form .fieldset.password label {
+  display: none !important;
+}
+.customer-address-form form .actions-toolbar .primary button,
+.mymodule-account-editaccount form .actions-toolbar .primary button,
+.mymodule-account-changepassword form .actions-toolbar .primary button {
+  padding: 5px 10px !important;
+  margin: 10px 0 0 !important;
+  width: 300px !important;
+}
+.customer-address-form form .legend.notification,
+.mymodule-account-editaccount form .legend.notification,
+.mymodule-account-changepassword form .legend.notification {
+  border-bottom: medium none;
+  margin: 0;
+  padding: 0;
+}
+.customer-address-form form .legend.notification span,
+.mymodule-account-editaccount form .legend.notification span,
+.mymodule-account-changepassword form .legend.notification span {
+  color: #000 !important;
+  font-size: 28px;
+  font-weight: bold;
+  margin-left: 5px;
+}
+.customer-address-form form span.email-sub,
+.mymodule-account-editaccount form span.email-sub,
+.mymodule-account-changepassword form span.email-sub {
+  margin: 0 5px;
+}
+.customer-address-form form .field.choice,
+.mymodule-account-editaccount form .field.choice,
+.mymodule-account-changepassword form .field.choice {
+  float: right;
+  line-height: 28px;
+  width: 72%;
+}
+.mymodule-account-changepassword .page-main .column.main,
+.customer-address-form .page-main .column.main,
+.mymodule-account-editaccount .page-main .column.main,
+.cancelaccount-account-cancel .page-main .column.main,
+.mymodule-account-changepassword .page-main .column.main {
+  width: 70% !important;
+}
+.cancelaccount-account-cancel form fieldset {
+  margin: 0;
+  padding: 0 !important;
+  display: block !important;
+}
+.cancelaccount-account-cancel form fieldset .field {
+  display: none;
+}
+.cancelaccount-account-cancel form fieldset legend {
+  padding: 15px 0 0 !important;
+}
+.cancelaccount-account-cancel form .fieldset.password legend {
+  display: none;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.cancelaccount-account-cancel form .cancel-accout-details ul {
+  margin: 0;
+}
+.cancelaccount-account-cancel form .cancel-accout-details .red-text {
+  color: #f26d6f;
+  line-height: 25px;
+}
+.cancelaccount-account-cancel form .actions-toolbar .primary button.action.save.primary {
+  background: #f26d6f !important;
+  width: 360px;
+  border: 1px solid #f26d6f !important;
+}
+/* edit-accout */
+.account.customer-account-edit .page-main {
+  max-width: 100% !important;
+  min-width: 100% !important;
+  width: 100% !important;
+}
+.account.customer-account-edit .page-main .messages {
+  margin: 0;
+}
+.account.customer-account-edit .page-main .form-edit-account fieldset {
+  float: none !important;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+  width: 100%;
+}
+.account.customer-account-edit .page-main .form-edit-account fieldset > .legend {
+  display: none !important;
+}
+.account.customer-account-edit .page-main .form-edit-account fieldset .legend + br {
+  display: none !important;
+}
+.account.customer-account-edit .page-main .form-edit-account fieldset .field {
+  margin: 35px auto !important;
+  width: 550px;
+}
+.account.customer-account-edit .page-main .form-edit-account fieldset .field input {
+  color: #a7a9ac;
+  font-size: 18px;
+}
+.account.customer-account-edit .page-main .form-edit-account fieldset .field.cover_image {
+  /*  background: rgba(0, 0, 0, 0) url("http://34.208.118.227/projects/aphro/pub/static/frontend/Custom/theme/en_US/images/cover.jpg") ;*/
+
+  height: 300px;
+  margin: 0 !important;
+  width: 100% !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: table;
+}
+.account.customer-account-edit .page-main .form-edit-account fieldset .field.cover_image label {
+  display: none !important;
+}
+.account.customer-account-edit .page-main .form-edit-account fieldset .field.cover_image .control {
+  display: table-cell;
+  vertical-align: middle;
+  position: relative;
+}
+.account.customer-account-edit .page-main .form-edit-account fieldset .field.cover_image .control input {
+  height: 50px !important;
+  opacity: 0;
+  z-index: 9;
+  position: absolute;
+  cursor: pointer;
+  width: 50px;
+  top: 150px;
+}
+.account.customer-account-edit .page-main .form-edit-account fieldset .field.cover_image .control .cover_img_icon {
+  height: 50px;
+  position: absolute;
+  width: auto;
+  top: 150px;
+}
+.account.customer-account-edit .page-main .form-edit-account fieldset .field.prof_image {
+  height: 100px;
+  margin: 40px auto !important;
+}
+.account.customer-account-edit .page-main .form-edit-account fieldset .field.prof_image label {
+  display: none !important;
+}
+.account.customer-account-edit .page-main .form-edit-account fieldset .field.prof_image .control {
+  /* background: rgba(0, 0, 0, 0) url("http://34.208.118.227/projects/aphro/pub/static/frontend/Custom/theme/en_US/images/edit-profile.png"); */
+
+  background-repeat: no-repeat;
+  background-size: 100px auto;
+  display: inline-block;
+  float: none;
+  height: 100px;
+  position: relative;
+  text-align: center;
+}
+.account.customer-account-edit .page-main .form-edit-account fieldset .field.prof_image .control input {
+  height: 32px !important;
+  margin: 0 auto;
+  opacity: 0;
+  position: relative;
+  top: 68px;
+  width: 100px;
+  cursor: pointer;
+}
+.account.customer-account-edit .page-main .form-edit-account fieldset .editprof-left-field {
+  display: inline-block;
+  width: 550px;
+}
+.account.customer-account-edit .page-main .form-edit-account fieldset .editprof-left-field .field.facebook,
+.account.customer-account-edit .page-main .form-edit-account fieldset .editprof-left-field .field.twitter,
+.account.customer-account-edit .page-main .form-edit-account fieldset .editprof-left-field .field.instagram,
+.account.customer-account-edit .page-main .form-edit-account fieldset .editprof-left-field .field.pinterest {
+  float: right;
+  width: 450px !important;
+  margin: 10px 0 !important;
+}
+.account.customer-account-edit .page-main .form-edit-account fieldset .editprof-left-field i {
+  color: #b0b2b4;
+  float: left;
+  font-size: 35px;
+  margin: 15px 2px;
+  width: 50px;
+}
+.account.customer-account-edit .page-main .form-edit-account fieldset .field.description {
+  margin-bottom: 30px !important;
+}
+.account.customer-account-edit .page-main .form-edit-account fieldset .field.description textarea::placeholder {
+  color: #a7a9ac ;
+  font-size: 18px;
+  font-weight: bold;
+  opacity: 1;
+}
+.account.customer-account-edit .page-main .form-edit-account .actions-toolbar {
+  text-align: center !important;
+  width: 100% !important;
+}
+.account.customer-account-edit .page-main .form-edit-account .actions-toolbar .primary {
+  display: inline-block;
+  float: none !important;
+  padding: 0;
+  width: 160px !important;
+}
+.account.customer-account-edit .page-main .form-edit-account .actions-toolbar .primary button {
+  background: #a1d187 !important;
+  color: #fff;
+  border: 1px solid #a1d187 !important;
+}
+/* after login header */
+header .panel.header .header.links {
+  text-align: center;
+}
+header .panel.header .customer-welcome {
+  bottom: 13px;
+  position: relative;
+}
+header .panel.header .customer-welcome .customer-name {
+  cursor: pointer;
+  line-height: 0;
+  padding: 0 !important;
+  right: 0;
+}
+header .panel.header .customer-welcome .customer-name > span {
+  opacity: 0;
+  font-size: 0;
+}
+header .panel.header .customer-welcome .action.switch::after {
+  opacity: 0;
+}
+header .panel.header .customer-welcome.active .customer-menu {
+  display: block !important;
+  position: relative;
+  top: -3px;
+}
+header .panel.header .customer-welcome.active .customer-menu .header.links {
+  background-color: #4a4f58;
+}
+header .panel.header .customer-welcome.active .customer-menu .header.links > li:hover {
+  background: #FFC91B;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+header .panel.header .customer-welcome.active .customer-menu .header.links li.authorization-link {
+  position: relative;
+  top: 0;
+}
+header .panel.header .headerSitemenu::after {
+  left: 94px;
+  position: relative;
+  right: 0;
+  top: -42px;
+  color: #fff;
+  content: "\f0d7";
+  display: inline-block;
+  font-family: fontawesome;
+  font-size: 18px;
+  cursor: pointer;
+}
+/* static pages */
+.cms-privacy-policy-cookie-restriction-mode .page-wrapper .breadcrumbs,
+.cms-terms-of-use .page-wrapper .breadcrumbs,
+.cms-copyright .page-wrapper .breadcrumbs,
+.cms-help .page-wrapper .breadcrumbs {
+  margin: 15px 0;
+  text-align: center;
+  width: 100%;
+  min-width: 100%;
+}
+.cms-privacy-policy-cookie-restriction-mode .page-wrapper .breadcrumbs .items,
+.cms-terms-of-use .page-wrapper .breadcrumbs .items,
+.cms-copyright .page-wrapper .breadcrumbs .items,
+.cms-help .page-wrapper .breadcrumbs .items {
+  color: #a7a8ac;
+  display: inline-block;
+  float: none;
+  text-align: left;
+  width: 93%;
+}
+.cms-privacy-policy-cookie-restriction-mode .page-wrapper .breadcrumbs .items .item,
+.cms-terms-of-use .page-wrapper .breadcrumbs .items .item,
+.cms-copyright .page-wrapper .breadcrumbs .items .item,
+.cms-help .page-wrapper .breadcrumbs .items .item {
+  font-size: 18px;
+}
+.cms-privacy-policy-cookie-restriction-mode .page-wrapper .breadcrumbs .items .item.cms_page,
+.cms-terms-of-use .page-wrapper .breadcrumbs .items .item.cms_page,
+.cms-copyright .page-wrapper .breadcrumbs .items .item.cms_page,
+.cms-help .page-wrapper .breadcrumbs .items .item.cms_page {
+  color: #a7a8ac;
+  font-weight: bold !important;
+}
+.cms-privacy-policy-cookie-restriction-mode .page-wrapper .breadcrumbs .items .item:not(:last-child)::after,
+.cms-terms-of-use .page-wrapper .breadcrumbs .items .item:not(:last-child)::after,
+.cms-copyright .page-wrapper .breadcrumbs .items .item:not(:last-child)::after,
+.cms-help .page-wrapper .breadcrumbs .items .item:not(:last-child)::after {
+  line-height: 28px;
+  vertical-align: top;
+}
+.cms-privacy-policy-cookie-restriction-mode .page-wrapper .breadcrumbs .items .item.home a:hover,
+.cms-terms-of-use .page-wrapper .breadcrumbs .items .item.home a:hover,
+.cms-copyright .page-wrapper .breadcrumbs .items .item.home a:hover,
+.cms-help .page-wrapper .breadcrumbs .items .item.home a:hover {
+  color: #ffca14;
+}
+.cms-privacy-policy-cookie-restriction-mode .page-wrapper .column.main,
+.cms-terms-of-use .page-wrapper .column.main,
+.cms-copyright .page-wrapper .column.main,
+.cms-help .page-wrapper .column.main {
+  text-align: center;
+  width: 100%;
+}
+.cms-privacy-policy-cookie-restriction-mode .page-wrapper .column.main .group.static-pages,
+.cms-terms-of-use .page-wrapper .column.main .group.static-pages,
+.cms-copyright .page-wrapper .column.main .group.static-pages,
+.cms-help .page-wrapper .column.main .group.static-pages {
+  display: inline-block;
+  float: none;
+  text-align: justify;
+  width: 90%;
+}
+.cms-privacy-policy-cookie-restriction-mode .page-wrapper .column.main .group.static-pages .main-heading,
+.cms-terms-of-use .page-wrapper .column.main .group.static-pages .main-heading,
+.cms-copyright .page-wrapper .column.main .group.static-pages .main-heading,
+.cms-help .page-wrapper .column.main .group.static-pages .main-heading {
+  font-size: 38px;
+  margin: 25px 0;
+}
+.cms-privacy-policy-cookie-restriction-mode .page-wrapper .column.main .group.static-pages .inner-heading,
+.cms-terms-of-use .page-wrapper .column.main .group.static-pages .inner-heading,
+.cms-copyright .page-wrapper .column.main .group.static-pages .inner-heading,
+.cms-help .page-wrapper .column.main .group.static-pages .inner-heading {
+  margin: 10px 0 !important;
+}
+.cms-privacy-policy-cookie-restriction-mode .page-wrapper .column.main .group.static-pages .inner-heading span,
+.cms-terms-of-use .page-wrapper .column.main .group.static-pages .inner-heading span,
+.cms-copyright .page-wrapper .column.main .group.static-pages .inner-heading span,
+.cms-help .page-wrapper .column.main .group.static-pages .inner-heading span {
+  font-size: 20px !important;
+}
+.cms-privacy-policy-cookie-restriction-mode .page-wrapper .column.main .group.static-pages .inner-heading1,
+.cms-terms-of-use .page-wrapper .column.main .group.static-pages .inner-heading1,
+.cms-copyright .page-wrapper .column.main .group.static-pages .inner-heading1,
+.cms-help .page-wrapper .column.main .group.static-pages .inner-heading1 {
+  font-size: 16px;
+  margin: 0 0 5px !important;
+}
+.cms-privacy-policy-cookie-restriction-mode .page-wrapper .column.main .group.static-pages .static-content,
+.cms-terms-of-use .page-wrapper .column.main .group.static-pages .static-content,
+.cms-copyright .page-wrapper .column.main .group.static-pages .static-content,
+.cms-help .page-wrapper .column.main .group.static-pages .static-content {
+  color: #a7a9ac;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 26px;
+}
+.cms-privacy-policy-cookie-restriction-mode .page-wrapper .column.main .group.static-pages .static-content a,
+.cms-terms-of-use .page-wrapper .column.main .group.static-pages .static-content a,
+.cms-copyright .page-wrapper .column.main .group.static-pages .static-content a,
+.cms-help .page-wrapper .column.main .group.static-pages .static-content a {
+  color: #ffca14;
+}
+.cms-privacy-policy-cookie-restriction-mode .page-wrapper .column.main .group.static-pages .static-content a:hover,
+.cms-terms-of-use .page-wrapper .column.main .group.static-pages .static-content a:hover,
+.cms-copyright .page-wrapper .column.main .group.static-pages .static-content a:hover,
+.cms-help .page-wrapper .column.main .group.static-pages .static-content a:hover,
+.cms-privacy-policy-cookie-restriction-mode .page-wrapper .column.main .group.static-pages .static-content a:focus,
+.cms-terms-of-use .page-wrapper .column.main .group.static-pages .static-content a:focus,
+.cms-copyright .page-wrapper .column.main .group.static-pages .static-content a:focus,
+.cms-help .page-wrapper .column.main .group.static-pages .static-content a:focus {
+  color: #a7a9ac ;
+}
+/* contact form */
+.contact-index-index .page-wrapper .page-main .columns .column.main form {
+  text-align: center;
+  width: 800px;
+}
+.contact-index-index .page-wrapper .page-main .columns .column.main form .fieldset {
+  display: inline-block;
+  float: none;
+  text-align: left;
+  width: 650px;
+}
+.contact-index-index .page-wrapper .page-main .columns .column.main form .fieldset legend {
+  border-bottom: medium none;
+  font-size: 32px;
+  font-weight: bold;
+  margin: 50px 0 20px;
+}
+.contact-index-index .page-wrapper .page-main .columns .column.main form .fieldset .field label {
+  display: none !important;
+}
+.contact-index-index .page-wrapper .page-main .columns .column.main form .fieldset .field input {
+  height: 45px;
+  color: #a7a9ac;
+  font-size: 18px;
+}
+.contact-index-index .page-wrapper .page-main .columns .column.main form .fieldset .field textarea {
+  border-radius: 4px;
+  height: 200px;
+}
+.contact-index-index .page-wrapper .page-main .columns .column.main form .fieldset .field textarea::placeholder {
+  color: #a7a9ac;
+  font-weight: bold;
+  opacity: 1;
+}
+.contact-index-index .page-wrapper .page-main .columns .column.main form .actions-toolbar {
+  text-align: center;
+}
+.contact-index-index .page-wrapper .page-main .columns .column.main form .actions-toolbar .primary {
+  display: inline-block;
+  float: none;
+  margin: 20px 0;
+}
+.contact-index-index .page-wrapper .page-main .columns .column.main form .actions-toolbar .primary .action.submit.primary {
+  background: #ffc91b none repeat scroll 0 0;
+  border: 1px solid #ffc91b;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 23px;
+  padding: 10px;
+  width: 250px;
+}
+@media (min-width: 768px) {
+  .page-wrapper header.page-header .panel.wrapper {
+    display: block;
+  }
+  .page-wrapper header.page-header .header.content ul.header.links li:first-child,
+  .page-wrapper header.page-header .header.content ul.header.links li:nth-child(3) {
+    /*display: none !important;*/
+  
+  }
+  header .panel.header .block.block-search .block-content {
+    margin: 0;
+  }
+  header .panel.header .block.block-search input {
+    position: static;
+  }
+  .sections .section-items .nav-sections-item-content {
+    display: none !important;
+  }
+}
+@media (max-width: 1279px) {
+  .product-item {
+    width: 20% !important;
+  }
+  .account .page-main,
+  .mymodule-account-changepassword .page-main {
+    margin: 0 auto !important;
+    max-width: 1170px !important;
+    min-width: 1170px !important;
+    width: 1170px !important;
+  }
+}
+@media (max-width: 1199px) {
+  .account .page-main,
+  .mymodule-account-changepassword .page-main {
+    margin: 0 auto !important;
+    max-width: 970px !important;
+    min-width: 970px !important;
+    width: 970px !important;
+  }
+  header .panel.header .header.links {
+    width: 13%;
+  }
+  header .panel.header .header.links li {
+    /*display: inline-block;
+  					  margin: 5px 10px;
+  					  padding: 0 5px;
+  					  text-align: center;*/
+  
+  }
+  header .panel.header .headerSitemenu {
+    /*display: inline-block;
+  				float: right;
+  				margin: auto 10px;
+  				width: 13%;*/
+  
+  }
+  .page-wrapper .page-main .columns .column.main .custom-slider .owl-carousel.owl-theme .owl-controls .owl-nav [class*="owl-"] {
+    top: 35%;
+  }
+  .page-wrapper .page-main .columns .column.main .custom-slider .owl-carousel.owl-theme .owl-dots {
+    bottom: 80px;
+  }
+  .product-item {
+    width: 22% !important;
+  }
+  .sidebar.sidebar-main {
+    width: 30% !important;
+  }
+  .mymodule-account-changepassword .column.main {
+    width: 70% !important;
+  }
+  .customer-menu .header.links > li {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+@media (max-width: 991px) {
+  .account .page-main,
+  .mymodule-account-changepassword .page-main {
+    margin: 0 auto !important;
+    max-width: 750px !important;
+    min-width: 750px !important;
+    width: 750px !important;
+  }
+  header .panel.header .header.links {
+    margin: 11px 7px;
+    width: 10%;
+  }
+  header .panel.header .header.links li a {
+    font-size: 16px;
+  }
+  header .panel.header .block.block-search {
+    width: 320px;
+    margin: 0 10px 0 16px;
+  }
+  header .panel.header .block.block-search input {
+    /*height: 35px !important;
+  				  margin: 3px 0;*/
+  
+  }
+  header .panel.header .block.block-search input::placeholder {
+    /*font-size: 11px;
+  				  font-weight: normal;*/
+  
+  }
+  header .panel.header .block.block-search .action.search {
+    /* right: 10px;
+  				  top: 3px;*/
+  
+  }
+  header .panel.header .block.block-search .action.search:before {
+    /* line-height: 35px;
+  				  margin: 0 3px 0 0;*/
+  
+  }
+  header .panel.header .headerSitemenu {
+    width: 105px !important;
+  }
+  header .panel.header .headerSitemenu .category {
+    font-size: 16px;
+  }
+  .page-wrapper .page-main .columns .column.main .custom-slider .owl-carousel.owl-theme .owl-controls .owl-nav [class*="owl-"] {
+    top: 30%;
+  }
+  .page-wrapper .page-main .columns .column.main .custom-slider .owl-carousel.owl-theme .owl-dots {
+    bottom: 112px;
+  }
+  header .header.content .headerSitemenu {
+    height: 50px;
+  }
+  header .header.content .headerSitemenu select {
+    font-size: 12px;
+    margin: 3px 0;
+  }
+  header .header.content .headerSitemenu:after {
+    font-size: 18px;
+    left: 77px;
+    position: relative;
+    right: 0;
+    top: -40px !important;
+  }
+  .product-item {
+    width: 30% !important;
+  }
+  .mymodule-account-changepassword .column.main fieldset {
+    width: 90% !important;
+  }
+  .customer-menu .header.links > li {
+    height: 35px;
+    margin: 0 !important;
+    padding: 0 !important;
+    vertical-align: middle;
+    width: 100%;
+  }
+}
+@media (max-width: 767px) {
+  .login-container {
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+    float: left;
+  }
+  .login-container .block.block-customer-login {
+    width: 90%;
+  }
+  .login-container .block.block-customer-login .block-content .fieldset.login {
+    padding: 10px 15px;
+    margin: 0 10px;
+  }
+  .customer-account-create .columns .column.main {
+    width: 90% !important;
+  }
+  .mymodule-account-changepassword .page-main .column.main,
+  .customer-address-form .page-main .column.main {
+    width: 94% !important;
+    display: inline-block;
+    padding-top: 50px;
+  }
+  .account .page-main .form-edit-account,
+  .mymodule-account-changepassword .page-main .form-edit-account,
+  .account .page-main .form-address-edit,
+  .mymodule-account-changepassword .page-main .form-address-edit {
+    width: 100%;
+  }
+  .account .page-main .primary,
+  .mymodule-account-changepassword .page-main .primary {
+    width: 100% !important;
+  }
+  .product-item {
+    width: 45% !important;
+  }
+  .block-content .fieldset.login {
+    margin: 0 5px;
+  }
+  .columns .column.main .form.create.account.form-create-account .fieldset.create.info .field,
+  .columns .column.main .form.create.account.form-create-account .fieldset.create.account .field {
+    margin: 0 5px;
+  }
+  .login-container .block.block-customer-login .block-title a,
+  .customer-account-create .block.block-customer-login .block-title a,
+  .login-container .fieldset.create.info .block-title a,
+  .customer-account-create .fieldset.create.info .block-title a,
+  .login-container .block.block-customer-login legend a,
+  .customer-account-create .block.block-customer-login legend a,
+  .login-container .fieldset.create.info legend a,
+  .customer-account-create .fieldset.create.info legend a {
+    font-size: 13px;
+  }
+  .form.password.forget {
+    min-width: 70% !important;
+    width: 70% !important;
+    padding: 20px;
+  }
+  .form.password.forget .fieldset {
+    width: 100%;
+  }
+  .block.block-collapsible-nav {
+    background: url("../projects/aphro/app/design/frontend/Custom/theme/web/images/menu.png");
+    background-repeat: no-repeat;
+    background-position: right ;
+    background-size: 50px auto;
+    border: 2px solid #a7a9ac;
+    border-radius: 5px;
+    left: 0;
+    margin: 0 auto;
+    right: 0;
+    width: 80%;
+  }
+  .block.block-collapsible-nav .title.block-collapsible-nav-title {
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+  }
+  .block.block-collapsible-nav .title.block-collapsible-nav-title strong {
+    font-size: 18px;
+  }
+  .block.block-collapsible-nav .title.block-collapsible-nav-title::after {
+    content: "\f0d7" !important;
+    font-family: fontawesome;
+  }
+  .block.block-collapsible-nav .block-collapsible-nav .title.active::after {
+    content: "\f0d8" !important;
+    font-family: fontawesome;
+  }
+  .block.block-collapsible-nav .block-collapsible-nav-content {
+    background: #fff !important;
+  }
+  .block.block-collapsible-nav .block-collapsible-nav-content ul .item.current strong {
+    border: none;
+    background: #ffca14 !important;
+    color: #fff !important;
+    display: block;
+  }
+  .sidebar.sidebar-main ul li a:hover,
+  .sidebar.sidebar-main ul li a:focus {
+    background: #ffca14;
+    color: #fff !important;
+    display: block;
+  }
+  .mymodule-account-changepassword .page-main .form-edit-account {
+    width: 90%;
+  }
+  .mymodule-account-changepassword .column.main fieldset {
+    width: 100% !important;
+  }
+  .account .page-main,
+  .mymodule-account-changepassword .page-main {
+    margin: 0 auto !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    width: 100% !important;
+  }
+  .customer-address-form .page-main .column.main,
+  .mymodule-account-editaccount .page-main .column.main,
+  .mymodule-account-changepassword .page-main .column.main {
+    display: inline-block;
+    padding-top: 50px;
+    width: 100% !important;
+    text-align: center;
+  }
+  .customer-address-form .page-main .column.main .container form .fieldset,
+  .mymodule-account-editaccount .page-main .column.main .container form .fieldset,
+  .mymodule-account-changepassword .page-main .column.main .container form .fieldset {
+    display: inline-block !important;
+    float: none !important;
+    width: 80% !important;
+  }
+  .customer-address-form .page-main .column.main .container form .fieldset .field .control select,
+  .mymodule-account-editaccount .page-main .column.main .container form .fieldset .field .control select,
+  .mymodule-account-changepassword .page-main .column.main .container form .fieldset .field .control select {
+    color: #a7a9ac;
+    font-size: 18px;
+    height: 45px;
+    padding: 0 35px 0 5px;
+  }
+  .customer-address-form .page-main .column.main .container form .fieldset .legend span,
+  .mymodule-account-editaccount .page-main .column.main .container form .fieldset .legend span,
+  .mymodule-account-changepassword .page-main .column.main .container form .fieldset .legend span {
+    font-size: 22px;
+    float: left;
+    text-align: left;
+  }
+  .customer-address-form .page-main .column.main .container form .fieldset .field.user_agree.required,
+  .mymodule-account-editaccount .page-main .column.main .container form .fieldset .field.user_agree.required,
+  .mymodule-account-changepassword .page-main .column.main .container form .fieldset .field.user_agree.required {
+    float: left;
+    text-align: justify;
+  }
+  .customer-address-form .page-main .column.main .container form .fieldset .field.choice,
+  .mymodule-account-editaccount .page-main .column.main .container form .fieldset .field.choice,
+  .mymodule-account-changepassword .page-main .column.main .container form .fieldset .field.choice {
+    float: left !important;
+    text-align: left;
+    line-height: 18px !important;
+  }
+  .customer-address-form .page-main .column.main .container form .primary,
+  .mymodule-account-editaccount .page-main .column.main .container form .primary,
+  .mymodule-account-changepassword .page-main .column.main .container form .primary {
+    display: inline-block;
+    float: none !important;
+    width: 200px !important;
+  }
+  .customer-address-form .page-main .column.main .container form .notification-block,
+  .mymodule-account-editaccount .page-main .column.main .container form .notification-block,
+  .mymodule-account-changepassword .page-main .column.main .container form .notification-block {
+    display: inline-block;
+    float: none;
+    padding: 10px 15px;
+    width: 80%;
+  }
+  .customer-address-form .page-main .column.main .container form .notification-block .legend.notification span,
+  .mymodule-account-editaccount .page-main .column.main .container form .notification-block .legend.notification span,
+  .mymodule-account-changepassword .page-main .column.main .container form .notification-block .legend.notification span {
+    float: left;
+    font-size: 24px;
+    text-align: left;
+    width: 100%;
+  }
+  .customer-address-form .page-main .column.main .container form .notification-block span.email-sub,
+  .mymodule-account-editaccount .page-main .column.main .container form .notification-block span.email-sub,
+  .mymodule-account-changepassword .page-main .column.main .container form .notification-block span.email-sub {
+    float: left;
+    margin: 12px 5px;
+    text-align: left;
+  }
+  .customer-address-form .page-main .column.main .container form .notification-block .field.choice,
+  .mymodule-account-editaccount .page-main .column.main .container form .notification-block .field.choice,
+  .mymodule-account-changepassword .page-main .column.main .container form .notification-block .field.choice {
+    float: left;
+    line-height: 28px;
+    margin: 0 5px;
+    text-align: left;
+    width: 100%;
+  }
+  .mymodule-account-editaccount .field.field-name-lastname.required {
+    margin: 0 !important;
+  }
+  .mymodule-account-editaccount .fieldset.password .field label {
+    display: none !important;
+  }
+  .cancelaccount-account-cancel .column.main {
+    width: 100% !important;
+  }
+  .cancelaccount-account-cancel .column.main form {
+    padding: 35px;
+  }
+  .cancelaccount-account-cancel .column.main form .fieldset.info {
+    width: 100% !important;
+  }
+  .cancelaccount-account-cancel .column.main form .actions-toolbar {
+    text-align: center;
+    width: 100%;
+  }
+  .cancelaccount-account-cancel .column.main form .actions-toolbar .primary {
+    text-align: center !important;
+    width: 100%;
+  }
+  .cancelaccount-account-cancel .column.main form .actions-toolbar .primary .action.save.primary {
+    display: inline-block;
+    float: none !important;
+    font-size: 18px !important;
+    width: 310px !important;
+  }
+  .sections.nav-sections .nav-sections-items .nav-sections-item-content {
+    text-align: left;
+  }
+  .page-wrapper .page-main .columns .column.main .custom-slider .owl-carousel.owl-theme .owl-controls .owl-nav [class*="owl-"] {
+    top: 21%;
+  }
+  .page-wrapper .page-main .columns .column.main .custom-slider .owl-carousel.owl-theme .owl-dots {
+    bottom: 0;
+    top: 72px;
+  }
+  header .panel.header {
+    height: 40px;
+    margin: 0;
+  }
+  header .panel.header .headerSitemenu {
+    display: none;
+  }
+  header .panel.header .logo {
+    min-width: 60%;
+    text-align: right;
+    width: 70%;
+  }
+  header .panel.header .logo img {
+    display: inline-block;
+    float: none;
+    height: auto;
+    margin: 12px;
+    text-align: center;
+    vertical-align: middle;
+    width: 115px;
+  }
+  header .panel.header .minicart-wrapper {
+    display: inline-block;
+    float: right;
+    position: absolute;
+    right: 18px;
+    top: 20px;
+    margin: 0;
+  }
+  header .panel.header .minicart-wrapper .action.showcart:hover::before {
+    color: #ffc91b !important;
+  }
+  header .panel.header .block.block-search {
+    bottom: 38px;
+    float: right !important;
+    position: relative;
+    right: 28px;
+  }
+  header .panel.header .block.block-search .block-content .control {
+    border: medium none;
+  }
+  header .panel.header .block.block-search .block-content .label::before {
+    color: #fff;
+    cursor: pointer;
+  }
+  header .panel.header .block.block-search .block-content .label:hover::before,
+  header .panel.header .block.block-search .block-content .label:focus::before {
+    color: #FFC91B;
+  }
+  header .panel.header .nav-toggle::before {
+    color: #fff;
+    font-size: 35px;
+    font-weight: normal;
+    line-height: 35px;
+    overflow: hidden;
+    text-align: center;
+    vertical-align: middle;
+  }
+  .customer-account-edit .columns .column.main {
+    display: inline-block;
+    text-align: center;
+    width: 100% !important;
+  }
+  .customer-account-edit .columns .column.main form fieldset {
+    display: inline-block !important;
+    float: none !important;
+    margin: 0 auto;
+    min-width: 50% !important;
+    padding: 0;
+    text-align: center;
+    width: 100% !important;
+  }
+  .customer-account-edit .columns .column.main form fieldset .field {
+    margin: 35px auto !important;
+    width: 80%;
+  }
+  .customer-account-edit .columns .column.main form fieldset .editprof-left-field {
+    display: inline-block;
+    width: 80%;
+  }
+  .customer-account-edit .columns .column.main form fieldset .editprof-left-field .field.required {
+    float: right;
+    margin: 10px 0 !important;
+    width: 78% !important;
+  }
+  .customer-account-edit .columns .column.main form fieldset .editprof-left-field i {
+    color: #b0b2b4;
+    float: left;
+    font-size: 35px;
+    margin: 15px 2px;
+    width: 15%;
+  }
+  .cms-privacy-policy-cookie-restriction-mode .page-wrapper .column.main .group.static-pages .main-heading,
+  .cms-terms-of-use .page-wrapper .column.main .group.static-pages .main-heading,
+  .cms-copyright .page-wrapper .column.main .group.static-pages .main-heading,
+  .cms-help .page-wrapper .column.main .group.static-pages .main-heading {
+    font-size: 35px;
+    margin: 20px 0;
+  }
+  .cms-privacy-policy-cookie-restriction-mode .page-wrapper .breadcrumbs,
+  .cms-terms-of-use .page-wrapper .breadcrumbs,
+  .cms-copyright .page-wrapper .breadcrumbs,
+  .cms-help .page-wrapper .breadcrumbs {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 5px;
+  }
+  .cms-privacy-policy-cookie-restriction-mode .page-wrapper .breadcrumbs .items .item,
+  .cms-terms-of-use .page-wrapper .breadcrumbs .items .item,
+  .cms-copyright .page-wrapper .breadcrumbs .items .item,
+  .cms-help .page-wrapper .breadcrumbs .items .item {
+    font-size: 16px !important;
+  }
+  .page.messages {
+    margin: 0 auto;
+    text-align: center;
+    width: 100% !important;
+  }
+  .page.messages .message.error {
+    background: #fae5e5 none repeat scroll 0 0;
+    display: inline-block;
+    padding: 12px 0 12px 48px;
+    position: relative;
+    text-align: left !important;
+    width: 90% !important;
+  }
+  .page.messages .messages {
+    float: none;
+    margin: 0 auto;
+    text-align: left !important;
+    width: 90%;
+  }
+  .contact-index-index .page-wrapper .page-main .columns .column.main form {
+    text-align: center;
+    width: 100%;
+  }
+  .contact-index-index .page-wrapper .page-main .columns .column.main form .fieldset {
+    display: inline-block;
+    float: none;
+    text-align: left;
+    width: 90%;
+  }
+}
+@media (max-width: 480px) {
+  .product-item {
+    margin-bottom: 15px !important;
+  }
+  .product-item .product-item-details {
+    display: inline-block;
+    height: auto;
+    text-align: left;
+    width: 90%;
+  }
+  .product-item .price-box {
+    display: inline-block;
+    width: 100%;
+  }
+  .columns .column.main .form.create.account.form-create-account .fieldset.create.info .field,
+  .columns .column.main .form.create.account.form-create-account .fieldset.create.account .field {
+    margin: 0 5px !important;
+  }
+  .cancelaccount-account-cancel .column.main form fieldset .legend span {
+    border: medium none;
+    color: #000;
+    font-size: 23px !important;
+    font-weight: bold;
+  }
+  .cancelaccount-account-cancel .column.main form .actions-toolbar .primary {
+    padding: 0;
+  }
+  .cancelaccount-account-cancel .column.main form .actions-toolbar .primary .action.save.primary {
+    width: 257px !important;
+  }
+  header .panel.header .logo {
+    min-width: 68%;
+    text-align: right;
+    width: 70%;
+  }
+}

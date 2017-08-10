@@ -1,0 +1,22 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<div class="cart-row">
+  <h2 class="cart-title" style="text-align: center;font-weight: bold;"><?php /* @escapeNotVerified */ echo __('My shopping cart') ?></h2>
+</div>
+<hr>
+<?php
+/**
+ * Shopping cart template
+ *
+ * @var $block \Magento\Checkout\Block\Cart
+ */
+
+if ($block->getItemsCount()) {
+    echo $block->getChildHtml('with-items');
+} else {
+    echo $block->getChildHtml('no-items');
+}

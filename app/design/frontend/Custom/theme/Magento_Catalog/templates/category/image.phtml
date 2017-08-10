@@ -1,0 +1,55 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+if ($category = $objectManager->get('Magento\Framework\Registry')->registry('current_category')) {
+    ?>
+    <div class="category-section">
+        <ul style="list-style: none;">
+            <?php
+            $category = $objectManager->get('Magento\Framework\Registry')->registry('current_category');
+            $cat_id = $category->getId();
+            $cat_name = $category->getName();
+
+
+            $subcategories = $category->getChildrenCategories();
+            //echo $cat_name."-".$cat_id;die;
+            if (count($subcategories) > 0) {
+                ?>
+                <li class="current-category catgs" style="display:inline-block; float: none"><div class="cat-img"><a href="<?php echo $category->getUrl(); ?>"><img src="<?php echo $category->getImageUrl(); ?>" alt="<?php echo $cat_name; ?>" title="<?php echo $cat_name; ?>" class="category-image" height="75" width="75" style="border-radius: 100%"/></div><div  class="cat-title"><?php echo $cat_name; ?></div></a></li>
+                <?php
+                foreach ($subcategories as $subcategorie) {
+
+                    //print_r($subcategorie);die;
+                    $sub_cat_id = $subcategorie->getId();
+                    $sub_cat_name = $subcategorie->getName();
+                    $sub_C = $objectManager->create('Magento\Catalog\Model\Category')->load($sub_cat_id);
+                    ?>
+                    <li class="sub-category catgs" style="display:inline-block; float: none">
+                        <div class="cat-img"><a href="<?php echo $subcategorie->getUrl(); ?>"><img src="<?php echo $sub_C->getImageUrl(); ?>" alt="<?php echo $sub_cat_name; ?>" title="<?php echo $sub_cat_name; ?>" class="category-image" height="75" width="75" style="border-radius: 100%"/></div>
+                        <div  class="cat-title"><?php echo $sub_cat_name; ?></a></div>
+                    </li>
+                    <?php
+                }
+                ?><?php
+            } else {
+                $parentCategory = $category->getParentCategory();
+                $subcategories = $parentCategory->getChildrenCategories();                
+                foreach ($subcategories as $subcategorie) {
+
+                    //print_r($subcategorie);die;
+                    $sub_cat_id = $subcategorie->getId();
+                    $sub_cat_name = $subcategorie->getName();
+                    $sub_C = $objectManager->create('Magento\Catalog\Model\Category')->load($sub_cat_id);
+                    ?>
+                    <li class="sub-category <?php if($sub_cat_id==$category->getId()) echo "current-category"; ?> catgs" style="display:inline-block; float: none">
+                        <div class="cat-img"><a href="<?php echo $subcategorie->getUrl(); ?>"><img src="<?php echo $sub_C->getImageUrl(); ?>" alt="<?php echo $sub_cat_name; ?>" title="<?php echo $sub_cat_name; ?>" class="category-image" height="75" width="75" style="border-radius: 100%"/></div>
+                        <div  class="cat-title"><?php echo $sub_cat_name; ?></a></div>
+                    </li>
+                    <?php
+                }
+                ?><?php
+            }
+            ?>                        
+        </ul>
+    </div><?php
+}
+?>

@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <head>
+        <css src="Artist_Artwork::css/arts.css"/>
+    </head>
+    <body>
+        <attribute name="class" value="artwork-account-shop"/>
+        <referenceBlock name="customer-account-navigation-account-link" remove="true"/>
+        <referenceBlock name="customer-account-navigation-account-edit-link" remove="true"/>
+        <referenceBlock name="customer-account-navigation-newsletter-subscriptions-link" remove="true"/>
+        <referenceBlock name="customer-account-navigation-account-editshipping-link" remove="true"/>
+        <referenceBlock name="customer-account-navigation-account-productpricing-link" remove="true"/>
+        <referenceBlock name="customer-account-navigation-account-changepassword-link" remove="true"/>
+        <referenceBlock name="customer-account-navigation-account-cancelaccount-link" remove="true"/>
+        <referenceBlock name="customer-account-navigation-account-getpaid-link" remove="true"/>
+        <referenceBlock name="customer-account-navigation-account-transfer-link" remove="true"/>
+        <referenceBlock name="product_tab" remove="true" />
+        <referenceBlock name="artist_slider" remove="true" />
+        <referenceBlock name="head.components">
+            <block class="Magento\Framework\View\Element\Js\Components" name="customer_account_edit_head_components" template="Magento_Customer::js/components.phtml"/>
+        </referenceBlock>
+        <referenceBlock name="page.main.title">
+            <action method="setPageTitle">
+                <argument translate="true" name="title" xsi:type="string"></argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <block class="Artist\Artwork\Block\Artistfollowers" name="artistfollower" template="form/artistfollowers.phtml" cacheable="false"/>
+        </referenceContainer>
+    </body>
+</page>

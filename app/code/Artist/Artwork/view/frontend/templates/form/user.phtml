@@ -1,0 +1,414 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+// @codingStandardsIgnoreFile
+
+/** @var \Magento\Customer\Block\Form\Edit $block */
+?>
+<?php
+//$artist = $_REQUEST['artist'];
+//print_r($artist);
+//exit();
+//$url = $this->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
+$artist = $this->getRequest()->getParam('id');
+//print_r($artist);
+//print_r($url);
+//exit();
+//$artist = 35;
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+//$media_url=$objectManager->get('Magento\Store\Model\StoreManagerInterface')->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+//$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+//$currency = $objectManager->get('\Magento\Directory\Model\Currency');
+//$priceHelper = $objectManager->create('Magento\Framework\Pricing\Helper\Data');
+$customerSession = $objectManager->create('Magento\Customer\Model\Session');
+if ($customerSession->isLoggedIn()) {
+    $cid = $customerSession->getCustomer()->getId();
+    //$name = $customerSession->getCustomer()->getName(); 
+    ?>
+    <input type="hidden" id="cust_id" name="cust_id" value="<?php echo $cid; ?>">
+    <?php
+}
+
+$connection = $objectManager->get('Magento\Framework\App\ResourceConnection')->getConnection('\Magento\Framework\App\ResourceConnection::DEFAULT_CONNECTION');
+//$result1 = $connection->fetchAll("SELECT * FROM art_table");
+$result1 = $connection->fetchAll("SELECT * FROM art_table WHERE art_user =" . $artist);
+?>
+
+<div class="container">
+
+    <?php
+    $media_url = $objectManager->get('Magento\Store\Model\StoreManagerInterface')->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+    $priceHelper = $objectManager->create('Magento\Framework\Pricing\Helper\Data');
+    $storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+    $baseURL = $storeManager->getStore()->getBaseUrl();
+    $customerRepository = $objectManager->get('Magento\Customer\Api\CustomerRepositoryInterface');
+    $customer = $customerRepository->getById($artist);
+    $customer_obj = $objectManager->get('Magento\Customer\Model\Customer')->load($artist);
+    $pslogin = $storeManager->getStore()->getBaseUrl() . "pub/media/pslogin/photo/";
+    $bu = $storeManager->getStore()->getBaseUrl() . "pub/media/customer";
+    $base_url = $storeManager->getStore()->getBaseUrl();
+    $edit = $storeManager->getStore()->getBaseUrl() . "customer/account/edit";
+//    $followers = $storeManager->getStore()->getBaseUrl() . "#";
+    $followers = $storeManager->getStore()->getBaseUrl() . "artwork/account/artistfollowers/id/" . $artist;
+    $following = $storeManager->getStore()->getBaseUrl() . "artwork/account/artistfollowings/id/" . $artist;
+//    $following = $storeManager->getStore()->getBaseUrl() . "#";
+    $favorited = $storeManager->getStore()->getBaseUrl() . "#";
+//    $followers = $storeManager->getStore()->getBaseUrl() . "artwork/account/followers";
+//    $following = $storeManager->getStore()->getBaseUrl() . "artwork/account/following";
+//    $favorited = $storeManager->getStore()->getBaseUrl() . "artwork/account/favorited";
+    $stat_cov = $storeManager->getStore()->getBaseUrl() . "pub/static/frontend/Custom/theme/en_US/images/cover.jpg";
+    $stat_prof = $storeManager->getStore()->getBaseUrl() . "pub/static/frontend/Custom/theme/en_US/images/edit-profile.png";
+    $result2 = $connection->fetchAll("SELECT * FROM plumrocket_sociallogin_account WHERE customer_id=" . $artist);
+    $result3 = $connection->fetchAll("SELECT artist_follower_id FROM artist_follow_followers WHERE artist_following_id=" . $artist);
+    $result4 = $connection->fetchAll("SELECT artist_following_id FROM artist_follow_followers WHERE artist_follower_id=" . $artist);
+    $isFollower = false;
+    if (isset($cid)) {
+        $result5 = $connection->fetchAll("SELECT artist_following_id FROM artist_follow_followers WHERE artist_following_id=" . $artist . " AND artist_follower_id = " . $cid);
+        if (count($result5)) {
+            $isFollower = true;
+        }
+    }
+    $count = count($result2);
+    $follow_count = count($result3);
+    $following_count = count($result4);
+    $prof_img = "";
+    $cover_img = "";
+    $username = "";
+    $png = '.png';
+    $artist_first_name = $customer_obj->getData('firstname');
+    $artist_last_name = $customer_obj->getData('lastname');
+    if ($customer->getCustomAttribute('description')) {
+        $description = $customer->getCustomAttribute('description')->getValue();
+    }
+    if ($customer->getCustomAttribute('uname')) {
+        $username = $customer->getCustomAttribute('uname')->getValue();
+    }
+    if ($count == 1) {
+        if ($customer->getCustomAttribute('prof_image')) {
+            $prof_img = $customer->getCustomAttribute('prof_image')->getValue();
+            $artist_pic = $bu . $prof_img;
+        } else {
+            $fb_user = $result2[0]['customer_id'];
+            $artist_pic = $pslogin . $fb_user . $png;
+        }
+    } else {
+        if ($customer->getCustomAttribute('prof_image')) {
+            $prof_img = $customer->getCustomAttribute('prof_image')->getValue();
+            $artist_pic = $bu . $prof_img;
+        } else {
+            $artist_pic = $base_url . "pub/static/frontend/Custom/theme/en_US/images/edit-profile.png";
+        }
+    }
+    if ($customer->getCustomAttribute('cover_image')) {
+        $cover_img = $customer->getCustomAttribute('cover_image')->getValue();
+    }
+    ?>
+
+    <div class="field cover_image" data-container="change-cover_image">
+        <label class="label" for="cover_image"><span><?php /* @escapeNotVerified */ echo __('') ?></span></label>
+        <div class="cover_center">
+            <img src="<?php
+            if ($cover_img)
+                echo $bu . $cover_img;
+            else
+                echo $stat_cov;
+            ?>" id="cov_img" alt="" width="100%" height="auto">
+        </div>
+    </div>
+
+    <div class="field prof_image" data-container="change-prof_image">
+        <label class="label" for="prof_image"><span><?php /* @escapeNotVerified */ echo __('') ?></span></label>
+        <img src="<?php echo $artist_pic; ?>" id="pro_img" alt="" width="100px" height="100px" />
+        <span><?php echo $artist_first_name . ' ' . $artist_last_name; ?></span>
+    </div>
+
+    <div class="follow">
+        <a class="" href="<?php echo $followers; ?>"><span><?php /* @escapeNotVerified */ echo __('Followers') ?></span></a>
+        <a class="" href="<?php echo $following; ?>"><span><?php /* @escapeNotVerified */ echo __('Following') ?></span></a>
+<!--        <a class="" href="<?php echo $favorited; ?>"><span><?php /* @escapeNotVerified */ echo __('Favorited') ?></span></a>-->
+        <?php //exit ();   ?>
+
+    </div>
+
+    <div class="count-follow">
+        <span><?php echo $follow_count; ?></span>
+        <span><?php echo $following_count; ?></span>
+        <?php
+        $whishlishCollection = $objectManager->create('\Magento\Wishlist\Model\ResourceModel\Item\Collection');
+        $whishlishCollection1 = $whishlishCollection->addCustomerIdFilter($artist);
+        ?>
+        <!--<span><?php echo count($whishlishCollection1); ?></span>-->
+    </div>
+
+    <div class="editprof-left-field">
+        <?php
+        if ($customer->getCustomAttribute('facebook')) {
+            ?>
+            <a target="_blank" href="https://<?php echo $customer->getCustomAttribute('facebook')->getValue(); ?>"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+            <?php
+        }
+        if ($customer->getCustomAttribute('twitter')) {
+            ?>
+            <a target="_blank" href="https://<?php echo $customer->getCustomAttribute('twitter')->getValue(); ?>"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <?php
+        }
+        if ($customer->getCustomAttribute('instagram')) {
+            ?>
+            <a target="_blank" href="https://<?php echo $customer->getCustomAttribute('instagram')->getValue(); ?>"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+            <?php
+        }
+        if ($customer->getCustomAttribute('pinterest')) {
+            ?>
+            <a target="_blank" href="https://<?php echo $customer->getCustomAttribute('pinterest')->getValue(); ?>"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a>
+            <?php
+        }
+        ?>
+        <span>
+            <?php
+            if ($customer->getCustomAttribute('description')) {
+                echo $customer->getCustomAttribute('description')->getValue();
+            }
+            ?>
+        </span>
+<!--<a class="follow" href="<?php ?>"><span><?php /* @escapeNotVerified */ echo __('Follow') ?></span></a>-->
+        <?php
+        if (isset($cid) && $cid != $artist) {
+            $dataFollow = 0;
+            $title = __("Follow");
+            if ($isFollower) {
+                $dataFollow = 1;
+                $title = __("Unfollow");
+            }
+            ?>
+            <a class="btn yellow" data-follow='<?php echo $dataFollow; ?>' id="follow" onclick="myFunction()" href="javascript:void(0);"><span id="follow_text"><?php /* @escapeNotVerified */ echo $title; ?></span></a>
+        <?php } ?>
+        <div id="result"></div>
+    </div>
+    <legend class="legend"></legend>
+    <div class="dropdown1">
+        <a class="dropbtn"> <i class="fa fa-bars" aria-hidden="true"></i> <i class="fa fa-caret-down" aria-hidden="true"></i> Artwork Category<?php
+            if (isset($_REQUEST['category'])) {
+                $category = $objectManager->create('Magento\Catalog\Model\Category')->load($_REQUEST['category']);
+                ?> - <strong><?php echo $category->getName(); ?></strong><?php
+            }
+            ?></a>
+        <div id="myDropdown" class="dropdown-content">
+            <ul>
+                <li>
+                    <a href="<?php echo $storeManager->getStore()->getBaseUrl() . "artwork/account/user/id/" . $artist; ?>" class="art-cat-link <?php
+                    if (!isset($_REQUEST['category'])) {
+                        echo 'art-active';
+                    }
+                    ?>"><?php echo "All Category" ?></a>
+                </li>
+                <?php
+                $selectedCategory = (isset($_REQUEST['category']) && $_REQUEST['category']) ? $_REQUEST['category'] : false;
+                $categoryCollectionFactory = $objectManager->create("Magento\Catalog\Model\ResourceModel\Category\CollectionFactory");
+                $collection = $categoryCollectionFactory->create();
+                $collection->addAttributeToSelect('*');
+
+                $collection->addIsActiveFilter();
+
+                $collection->addLevelFilter(2);
+
+                foreach ($collection as $category) {
+                    if (strtolower($category->getName()) == "default category")
+                        continue;
+                    $category = $objectManager->create('Magento\Catalog\Model\Category')->load($category->getId());
+                    $categoryId = $category->getId();
+                    $childCategories = explode(",", $category->getChildren());
+                    ?>
+                    <li>
+                        <a href="javascript:void(0)" class="art-cat-link level-1 <?php
+                        if ($selectedCategory && ($selectedCategory == $categoryId || in_array($selectedCategory, $childCategories))) {
+                            echo 'art-active';
+                        }
+                        ?>"><?php echo $category->getName(); ?></a>
+                           <?php
+                           if (count($childCategories)) {
+                               echo "<ul>";
+                               foreach ($childCategories as $child) {
+                                   $child = $objectManager->create('Magento\Catalog\Model\Category')->load($child);
+                                   $childId = $child->getId();
+                                   ?>   
+                                <a href="<?php echo $storeManager->getStore()->getBaseUrl() . "artwork/account/user/id/" . $artist . "?category=" . $childId; ?>" class = "art-cat-link level-2 <?php
+                                if ($selectedCategory && ($selectedCategory == $childId)) {
+                                    echo 'art-active';
+                                }
+                                ?>"><?php echo $child->getName();
+                                ?>                                   
+                                </a>
+                                <?php
+                            }
+                            echo "</ul>";
+                        }
+                        ?>
+                    </li>
+                    <?php
+                }
+                ?>                                       
+            </ul>
+        </div>         
+    </div>
+</div>
+
+<div class="container">
+    <div class="row product-list">
+        <div class="all-products"><?php
+//            $tempQuery = $connection->fetchAll("SELECT * FROM art_enable_prouct WHERE artist_id = 137");
+//            foreach ($tempQuery as $tempRecord) {
+//                $product = $objectManager->get('Magento\Catalog\Model\Product')->load(intval($tempRecord['art_product']));
+//                $categories = [];
+//                $categories = $product->getCategoryIds();
+//                $category = $categories[0];                
+//                $sql1 = "UPDATE art_enable_prouct SET art_product_category=$category WHERE id=" . $tempRecord['id'];
+//                $connection->query($sql1);
+//            }
+
+            if (isset($_REQUEST['category'])) {
+                foreach ($result1 as $key) {
+                    $art_id = $key['art_id'];
+                    $artwork_category = $_REQUEST['category'];
+                    //echo "SELECT * FROM artwork_category WHERE artwork_id=".$art_id." AND artwork_category_id =". $artwork_category;die;                    
+                    $result2 = $connection->fetchAll("SELECT * FROM art_enable_prouct WHERE art_id=" . $art_id . " AND art_product_category =" . $artwork_category . " AND art_status=1");
+                    if (count($result2) > 0) {
+                        $cat_id2 = $result2[0]['art_product'];
+                        $product = $objectManager->get('Magento\Catalog\Model\Product')->load($cat_id2);
+                        $cat_img = $product->getData('thumbnail');
+                        if ($product->getTypeId() != "simple") {
+                            $price = $product->getSpecialPrice();
+                        } else {
+                            $price = $product->getPrice();
+                        }
+                        $formattedPrice = $priceHelper->currency($price, true, false);
+                        ?>
+                        <div class="col-lg-4 product-div" style="width: 250px;margin: 10px;position: relative;">
+                            <div class="slide-overlay" style="border: 2px solid gray;height: 300px;width: 240;">
+                                <div class="img-cell">
+                                    <a href="<?php echo $baseURL . $product->getData("url_key"); ?>" target="_blank">
+                                        <div class="img-middle">
+                <!--                                <img src="<?php echo $media_url . "artwork/" . $key['art_image']; ?>" class="canvas-export" alt="<?php echo $key['art_title']; ?>">-->
+                                            <img src="<?php echo $media_url . "catalog/product" . $cat_img; ?>"  style="height: 100%;width: 100%" alt="<?php echo $product->getName(); ?>">
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="art-block">
+                                <div class="title-tag-price">                                    
+                                    <a href="<?php echo $baseURL . $product->getData("url_key"); ?>" target="_blank"><strong><?php echo $key['art_title']; ?> </strong></a>&nbsp;<strong class="price" style="width:70px;"><?php echo $formattedPrice; ?></strong>
+                                </div>
+                                <div class="name-edit">
+                                    <span class="cust_name">by <?php echo $artist_first_name . ' ' . $artist_last_name; ?></span>
+                                </div>
+                            </div>
+                        </div><?php
+                    }
+                }
+            } else {
+                foreach ($result1 as $key) {
+                    $cat_id2 = $key['art_cat'];
+                    $art_id = $key['art_id'];
+                    $product = $objectManager->get('Magento\Catalog\Model\Product')->load($cat_id2);
+                    $cat_img = $product->getData('thumbnail');
+                    if ($product->getTypeId() != "simple") {
+                        $price = $product->getSpecialPrice();
+                    } else {
+                        $price = $product->getPrice();
+                    }
+                    $formattedPrice = $priceHelper->currency($price, true, false);
+                    ?>
+                    <div class="col-lg-4 product-div" style="width: 250px;margin: 10px;position: relative;">
+                        <div class="slide-overlay" style="border: 2px solid gray;height: 300px;width: 240;">
+                            <div class="img-cell">
+                                <a href="<?php echo $baseURL . $product->getData("url_key"); ?>" target="_blank">
+                                    <div class="img-middle">                                    
+            <!--                                <img src="<?php echo $media_url . "artwork/" . $key['art_image']; ?>" class="canvas-export" alt="<?php echo $key['art_title']; ?>">-->
+                                        <img src="<?php echo $media_url . "catalog/product" . $cat_img; ?>"  style="height: 100%;width: 100%" alt="<?php echo $product->getName(); ?>">                                    
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="art-block">
+                            <div class="title-tag-price">
+                                <a href="<?php echo $baseURL . $product->getData("url_key"); ?>" target="_blank"><strong><?php echo $key['art_title']; ?> </strong></a>&nbsp;<strong class="price" style="width:70px;"><?php echo $formattedPrice; ?></strong>
+                            </div>
+                            <div class="name-edit">
+                                <span class="cust_name">by <?php echo $artist_first_name . ' ' . $artist_last_name; ?></span>
+                            </div>
+                        </div>
+                    </div><?php
+                }
+            }
+            ?>
+
+        </div>
+    </div>
+</div>
+
+<?php
+$count1 = 0;
+//if ($cid) {
+//    $result5 = $connection->fetchAll("SELECT artist_follower_id FROM artist_follow_followers WHERE artist_following_id=" . $artist . " AND artist_follower_id=" . $cid);
+//    $count1 = count($result5);
+//}
+?>
+<!--<input type="hidden" name="count_id" id="count_id" value="<?php echo $count1; ?>">-->
+<input type="hidden" id="artist" name="artist" value="<?php echo $artist; ?>">
+
+<script>
+//    var count_id = document.getElementById('count_id').value;
+
+    require(['jquery', 'jquery/ui'], function ($) {
+        $(document).ready(function ($) {
+//            if (count_id == 1) {
+//                jQuery('#follow').attr('data-follow', 1);
+//                jQuery('#follow_text').text('Unfollow');
+//            } else {
+//                jQuery('#follow').attr('data-follow', 0);
+//                jQuery('#follow_text').text('Follow');
+//            }
+            $('.dropbtn').click(function () {
+                $('#myDropdown').slideToggle();
+            });
+        });
+    });
+</script>
+<script>
+    function myFunction()
+    {
+        var button = document.getElementById('follow');
+        var artist = document.getElementById('artist').value;
+        var follow = button.getAttribute('data-follow');
+        var cust_id = document.getElementById('cust_id').value;
+
+
+        //alert(artist);
+
+
+        jQuery.ajax({
+            type: 'POST',
+            url: "<?php echo $baseURL; ?>artwork/index/view",
+            data: {"label": artist, "var1": cust_id, "var2": follow},
+            //data: data,
+
+            success: function (response) {
+                //jQuery('#result').html(response);
+                if (follow == 0) {
+                    jQuery('#follow').attr('data-follow', 1);
+                    jQuery('#follow_text').text('Unfollow');
+                } else {
+                    jQuery('#follow').attr('data-follow', 0);
+                    jQuery('#follow_text').text('Follow');
+                }
+
+                //$(".user").html(response);    
+            },
+            error: function (error) {
+                jQuery('#result').html(error);
+            }
+        });
+    }
+</script>
+

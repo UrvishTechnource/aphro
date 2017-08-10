@@ -1,0 +1,196 @@
+<?php
+/**
+ * @copyright   Copyright (c) http://www.manadev.com
+ * @license     http://www.manadev.com/license  Proprietary License
+ */
+/**
+ * @var $block \Manadev\LayeredNavigation\Blocks\Navigation
+ *
+ * Based on app/code/Magento/LayeredNavigation/view/frontend/templates/layer/view.phtml (diff to check
+ * what has changed).
+ */
+?>
+
+<?php if ($block->isVisible()): ?>
+    <div class="block filter mana-filter-block" id="layered-filter-block" data-mage-init='{"collapsible":{"openedState": "active", "collapsible": true, "active": false, "collateral": { "openedState": "filter-active", "element": "body" } }}'>
+        <?php $filtered = count(iterator_to_array($block->getAppliedFilters())) ?>
+        <div class="block-title filter-title" data-count="<?php echo $filtered; ?>">
+            <strong data-role="title"><?php echo __('Shop By') ?></strong>
+        </div>
+        <div class="block-content filter-content">
+            <?php if ($block->hasState() && $block->isAppliedFilterVisible()) : ?>
+                <div class="filter-current" data-mage-init='{"collapsible":{"openedState": "active", "collapsible": true, "active": false }}'>
+                    <strong class="block-subtitle filter-current-subtitle" role="heading" aria-level="2" data-role="title" data-count="<?php echo $filtered; ?>"><?php echo __('Now Shopping by') ?></strong>
+                    <ol class="items">
+                        <?php foreach ($block->getAppliedFilters() as $engineFilter): ?>
+                            <?php foreach ($engineFilter->getAppliedItems() as $item) : ?>
+                                <li class="item"><?php echo $block->renderAppliedItem($engineFilter, $item) ?></li>
+                            <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    </ol>
+                </div>
+
+                <div class="block-actions filter-actions">
+                    <a href="<?php echo $block->getClearUrl() ?>"<?php echo $this->noFollow() ?> class="action clear filter-clear"><span><?php echo __('Clear All') ?></span></a>
+                </div>
+            <?php endif; ?>
+
+            <strong role="heading" aria-level="2" class="block-subtitle filter-subtitle"><?php echo __('Shopping Options') ?></strong>
+            <?php $noFilters = true; ?>
+
+            <div class="filter-options" id="narrow-by-list" data-role="content" data-mage-init='{"accordion":{"openedState": "active", "collapsible": true, "active": false, "multipleCollapsible": false}}'>
+                <?php foreach ($block->getFilters() as $filter): ?>
+                    <?php
+                    $noFilters = false;
+                    if (strtolower($filter->getName()) != 'category') {
+                        ?>
+                        <div data-role="collapsible" class="filter-options-item">
+                            <div data-role="title" class="filter-options-title"><?php echo __($filter->getName()) ?></div>
+                            <div data-role="content" class="filter-options-content"><?php echo $block->renderFilter($filter); ?></div>
+                        </div>
+                        <?php
+                    }
+                endforeach;
+                ?>
+                <div data-role="collapsible" class="filter-options-item">
+                    <div data-role="title" class="filter-options-title"><?php echo "Artist" ?></div>
+                    <?php
+                    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+                    $storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+                    $base_url = $storeManager->getStore()->getBaseUrl();
+                    $connection = $objectManager->get('Magento\Framework\App\ResourceConnection')->getConnection('\Magento\Framework\App\ResourceConnection::DEFAULT_CONNECTION');
+                    //Get artist list
+                    $artist_list = $connection->fetchAll("SELECT art_user,COUNT(art_user) AS numberofarts FROM art_table WHERE art_who=1 AND art_title IS NOT NULL GROUP BY art_user ORDER BY numberofarts DESC");
+                    $id = "";
+                    $artistFollowingIds = array();
+                    $customerSession = $objectManager->create('Magento\Customer\Model\Session');
+                    if ($customerSession->isLoggedIn()) {
+                        $id = $customerSession->getCustomer()->getId();
+                        $following_list = $connection->fetchAll("SELECT artist_following_id FROM artist_follow_followers WHERE artist_follower_id=" . $id);
+                        foreach ($following_list as $following) {
+                            $artistFollowingIds[] = $following['artist_following_id'];
+                        }
+                        $following_count = count($following_list); //Total following
+                    }
+
+                    $artist_count = count($artist_list); //Total Artist
+                    $currentURL = $this->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
+                    $urlPieces = explode("?", $currentURL);
+                    $parameters = $_REQUEST;
+                    $artistIds = array();
+                    if (isset($parameters['artist-id'])) {
+                        $artistIds = explode("_", $parameters['artist-id']);
+                    }
+                    $extraParametersString = "";
+                    foreach ($parameters as $key => $value) {
+                        if ($key != "artist-id") {
+                            $extraParametersString.="&" . $key . "=" . $value;
+                        }
+                    }
+                    $extraParametersString = ltrim($extraParametersString, "&");
+                    ?>
+                    <div data-role="content" class="filter-options-content">
+                        <ol class="items"><?php
+                            try {
+                                foreach ($artist_list as $al) {
+                                    $artist_id = $al['art_user'];
+                                    $artist_obj = $objectManager->get('Magento\Customer\Model\Customer')->load($artist_id);
+                                    $artist_fname = $artist_obj->getData('firstname');
+                                    $artist_lname = $artist_obj->getData('lastname');
+                                    $arrayKey = array_search($artist_id, $artistIds);
+                                    $artistClass = "not-selected";
+                                    $temparray = $artistIds;
+                                    $newURL = $urlPieces[0];
+                                    if ($arrayKey !== false) {
+                                        unset($temparray[$arrayKey]);
+                                        $temparray = array_values($temparray);
+                                        if (count($temparray)) {
+                                            $newURL = $urlPieces[0] . "?artist-id=" . implode("_", $temparray);
+                                            if ($extraParametersString) {
+                                                $newURL.="&" . $extraParametersString;
+                                            }
+                                        } else if ($extraParametersString) {
+                                            $newURL = $urlPieces[0] . "?" . $extraParametersString;
+                                        }
+                                        $artistClass = "selected";
+                                    } else {
+                                        $temparray[] = $artist_id;
+                                        $newURL = $urlPieces[0] . "?artist-id=" . implode("_", $temparray);
+                                        if ($extraParametersString) {
+                                            $newURL.="&" . $extraParametersString;
+                                        }
+                                    }
+                                    $arrayKey = false;
+                                    ?>
+                                    <li class="item <?php echo $artistClass; ?>"><a href="<?php echo $newURL; ?>"><?php echo $artist_fname . " " . $artist_lname ?></a><?php if (in_array($artist_id, $artistFollowingIds)) {
+                                        ?><i class="fa fa-star" aria-hidden="true"></i><?php }
+                                    ?></li><?php
+                                }
+                            } catch (Exception $e) {
+                                echo $e->getMessage();
+                            }
+                            ?>
+                        </ol>
+                        <?php
+                        if (count($artistFollowingIds)) {
+                            ?>
+                            <div class="following-artist-notice"><i class="fa fa-star" aria-hidden="true"></i> are the artist you are following.</div>
+                            <?php
+                        }
+                        ?>
+                    </div>
+                </div>
+                <?php
+                if (false) {
+                    $customerSession = $objectManager->create('Magento\Customer\Model\Session');
+                    if ($customerSession->isLoggedIn()) {
+                        $id = $customerSession->getCustomer()->getId();
+                        ?>
+                        <div data-role="collapsible" class="filter-options-item">
+                            <div data-role="title" class="filter-options-title"><?php echo "Following" ?></div>
+                            <div data-role="content" class="filter-options-content"><?php
+                                //Get following id list
+                                $following_list = $connection->fetchAll("SELECT artist_following_id FROM artist_follow_followers WHERE artist_follower_id=" . $id);
+                                $following_count = count($following_list); //Total following
+                                if ($following_count > 0) {
+                                    ?>
+                                    <ol class="items"><?php
+                                        foreach ($following_list as $fl) {
+                                            $following_id = $fl['artist_following_id'];
+                                            //echo $following_id;
+                                            $customer_obj = $objectManager->get('Magento\Customer\Model\Customer')->load($following_id);
+                                            $following_first_name = $customer_obj->getData('firstname');
+                                            $following_last_name = $customer_obj->getData('lastname');
+                                            ?>
+                                            <li class="item"><a href="<?php echo $base_url . "catalog/account/following/id/" . $following_id; ?>"><?php echo $following_first_name . " " . $following_last_name ?></a></li><?php }
+                                        ?>
+                                    </ol><?php } else {
+                                        ?>
+                                    <ol class="items">
+                                        <li class="item"><a href="javascript:void(0);">Following Not Found.</a></li>
+                                    </ol><?php }
+                                    ?>
+                            </div>
+                        </div><?php
+                    }
+                }
+                ?>
+            </div>
+    <?php if ($noFilters) : ?>
+                <script>
+                    require([
+                        'jquery'
+                    ], function ($) {
+                        $('#layered-filter-block').addClass('filter-no-options');
+                    });
+                </script>
+            <?php endif; ?>
+
+    <?php if ($block->getScripts()) : ?>
+                <script type="text/x-magento-init">
+                <?php echo $block->renderScripts() ?>
+                </script>
+    <?php endif; ?>
+        </div>
+    </div>
+<?php endif; ?>

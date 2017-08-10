@@ -1,0 +1,64 @@
+<div class="history-container">
+    <div class="history-title">
+        <h1><b>Order History</b></h1>
+    </div>
+    <div class="history-box">
+        <?php $_orders = $block->getOrders(); ?>
+        <?php //echo $block->getChildHtml('info'); ?>
+        <?php
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $imageHelper = $objectManager->get('\Magento\Catalog\Helper\Image');
+        ?>
+        <table>
+            <thead>
+                <tr>
+                    <td>Order</td>
+                    <td>Purchase Date</td>
+                    <td>QTY</td>
+                    <td>Amount</td>
+                    <td>Destination</td>
+                    <td>Status</td>
+                </tr>
+            </thead>
+            <tbody>
+
+                <?php foreach ($_orders as $_order): ?>
+                    <tr><td colspan="5"><?php echo "Order #" . $_order->getRealOrderId(); ?></td></tr>
+                    <?php
+                    if ($_order->getShippingAddress()) {
+                        $shipping_destination = $_order->getShippingAddress();
+                        $shippingAddressArray = $shipping_destination->getData();
+                    } else {
+                        $shippingAddressArray = array();
+                    }
+                    $_items = $_order->getItemsCollection();
+                    foreach ($_items as $_item) {
+                        $_pro_id = $_item->getProductId();
+                        $_product = $objectManager->get('Magento\Catalog\Model\Product')->load($_item->getProductId());
+                        if ($_product->getTypeId() == \Magento\ConfigurableProduct\Model\Product\Type\Configurable::TYPE_CODE) {
+                            continue;
+                        }
+                        $item_image = $imageHelper->init($_product, 'product_page_image_small')->setImageFile($_product->getFile())->resize(100, 100)->getUrl();
+                        $purchase_date = $_order->getCreatedAt();
+                        $qty = $_item->getQtyOrdered();
+                        $price = $_product->getPrice();
+                        ?>
+                        <tr>
+                            <td><img src="<?php echo $item_image ?>" /></td>
+                            <td><?php echo date("Y/m/d", strtotime($purchase_date)) ?></td>
+                            <td><?php echo $qty * 1 ?></td>
+                            <td><?php echo $_order->formatPrice($price) ?></td>
+                            <td><?php if (!empty($shippingAddressArray)) echo $shippingAddressArray['street'] . " " . $shippingAddressArray['city'] . " " . $shippingAddressArray['region'] . " " . $shippingAddressArray['postcode']; ?></td>
+                            <td><?php echo $_order->getStatusLabel() ?></td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        <?php if ($block->getPagerHtml()): ?>
+            <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+        <?php endif ?>
+    </div>
+</div>

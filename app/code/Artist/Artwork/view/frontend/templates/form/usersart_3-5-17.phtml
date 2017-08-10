@@ -1,0 +1,40 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var \Magento\Customer\Block\Form\Edit $block */
+?>
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance(); 
+$customerSession = $objectManager->get('Magento\Customer\Model\Session');
+$cid=$customerSession->getCustomer()->getId();
+$media_url=$objectManager->get('Magento\Store\Model\StoreManagerInterface')->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+$connection = $objectManager->get('Magento\Framework\App\ResourceConnection')->getConnection('\Magento\Framework\App\ResourceConnection::DEFAULT_CONNECTION'); 
+$result1 = $connection->fetchAll("SELECT * FROM art_table where art_user=".$cid); 
+?>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 text-center">
+      <h4>ArtWork Portfolio</h4>
+    </div>
+  </div>
+  <hr>
+  <div class="row product-list">
+      <?php foreach ($result1 as $key) {?>
+        <div class="col-lg-4 product-div" style="width: 250px;float: left;margin: 10px;position: relative;">
+        <div class="slide-overlay" style="border: 2px solid gray;height: 300px;width: 240;">
+          
+          <img src="<?php echo $media_url."customer".$key['art_image'];?>"  style="height: 100%;width: 100%" alt="<?php echo $key['art_title'];?>">  
+        </div>
+         <div class="preview-info" style="text-align: center">
+          <strong><?php echo $key['art_title'];?></strong>
+        </div>
+      </div>
+      <?php } ?>
+  </div>
+  

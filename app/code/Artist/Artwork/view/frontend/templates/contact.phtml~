@@ -1,0 +1,5 @@
+<form action="<?php echo $block->getFormAction() ?>" method="post">
+    <input name="subject" type="text">
+    <input name="message" type="text">
+    <input type="submit" value="Send contact message">
+</form>

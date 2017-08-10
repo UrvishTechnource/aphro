@@ -1,0 +1,10 @@
+<?php
+namespace Artwork\Artist\Block;
+ 
+class Artist extends \Magento\Framework\View\Element\Template
+{
+    public function getArtistTxt()
+    {
+        return 'Hello Artist!';
+    }
+}

@@ -1,0 +1,18 @@
+<?php
+  $image =imagecreatefromstring(file_get_contents(base64_decode($_GET['image'])));
+  // load watermark to memory
+  $watermark = imagecreatefromstring(file_get_contents(base64_decode($_GET['watermark'])));
+  // watermark shall be placed in the lower right corner)
+  $watermark_pos_x = imagesx($image) - imagesx($watermark) - 8;
+  $watermark_pos_y = imagesy($image) - imagesy($watermark) - 10;
+  // merge the source image and the watermark
+  imagecopy($image, $watermark,  $watermark_pos_x, $watermark_pos_y, 0, 0, imagesx($watermark), imagesy($watermark));
+
+  // output watermarked image to browser
+  header('Content-Type: image/jpeg');
+  imagejpeg($image, NULL, 100);  // use best image quality (100)
+
+  // remove the images from memory
+  imagedestroy($image);
+  imagedestroy($watermark);
+?>

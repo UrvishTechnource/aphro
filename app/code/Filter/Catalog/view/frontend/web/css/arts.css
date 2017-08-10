@@ -1,0 +1,201 @@
+.product-div{
+    width: 250px;
+    float: left;
+    margin: 10px;
+    position: relative;
+}
+.slide-overlay{
+    border: 2px solid gray;
+    height: 300px;
+    width: 240;
+}
+.canvas-export {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -20px;
+    margin-top: -50px;
+}
+
+.btn-end { 
+  color: #FFFFFF; 
+  background-color: #4CAF50; 
+  border-color: #FAF9FC; 
+  border-radius: 24px;
+  float: right;
+} 
+ 
+.btn-end:hover, 
+.btn-end:focus, 
+.btn-end:active, 
+.btn-end.active, 
+.open .dropdown-toggle.btn-end { 
+  color: #FFFFFF; 
+  background-color: #F2EBFA; 
+  border-color: #FAF9FC; 
+} 
+ 
+.btn-end:active, 
+.btn-end.active, 
+.open .dropdown-toggle.btn-end { 
+  background-image: none; 
+} 
+ 
+.btn-end.disabled, 
+.btn-end[disabled], 
+fieldset[disabled] .btn-end, 
+.btn-end.disabled:hover, 
+.btn-end[disabled]:hover, 
+fieldset[disabled] .btn-end:hover, 
+.btn-end.disabled:focus, 
+.btn-end[disabled]:focus, 
+fieldset[disabled] .btn-end:focus, 
+.btn-end.disabled:active, 
+.btn-end[disabled]:active, 
+fieldset[disabled] .btn-end:active, 
+.btn-end.disabled.active, 
+.btn-end[disabled].active, 
+fieldset[disabled] .btn-end.active { 
+  background-color: #4CAF50; 
+  border-color: #FAF9FC; 
+} 
+ 
+.btn-end .badge { 
+  color: #4CAF50; 
+  background-color: #FFFFFF; 
+}
+
+.btn-edit { 
+  color: #585759; 
+  background-color: #FAF9FC; 
+  border-color: #585759; 
+  border-radius: 24px;
+  float: left;
+} 
+ 
+.btn-edit:hover, 
+.btn-edit:focus, 
+.btn-edit:active, 
+.btn-edit.active, 
+.open .dropdown-toggle.btn-edit { 
+  color: #585759; 
+  background-color: #4CAF50; 
+  border-color: #585759; 
+} 
+ 
+.btn-edit:active, 
+.btn-edit.active, 
+.open .dropdown-toggle.btn-edit { 
+  background-image: none; 
+} 
+ 
+.btn-edit.disabled, 
+.btn-edit[disabled], 
+fieldset[disabled] .btn-edit, 
+.btn-edit.disabled:hover, 
+.btn-edit[disabled]:hover, 
+fieldset[disabled] .btn-edit:hover, 
+.btn-edit.disabled:focus, 
+.btn-edit[disabled]:focus, 
+fieldset[disabled] .btn-edit:focus, 
+.btn-edit.disabled:active, 
+.btn-edit[disabled]:active, 
+fieldset[disabled] .btn-edit:active, 
+.btn-edit.disabled.active, 
+.btn-edit[disabled].active, 
+fieldset[disabled] .btn-edit.active { 
+  background-color: #FAF9FC; 
+  border-color: #585759; 
+} 
+ 
+.btn-edit .badge { 
+  color: #FAF9FC; 
+  background-color: #585759; 
+}
+
+.btn {
+display: inline-block;
+padding: 9px 12px;
+padding-top: 7px;
+margin-bottom: 0;
+font-size: 14px;
+line-height: 20px;
+color: #5e5e5e;
+text-align: center;
+vertical-align: middle;
+cursor: pointer;
+background-color: #d1dade;
+-webkit-border-radius: 3px;
+-webkit-border-radius: 3px;
+-webkit-border-radius: 3px;
+background-image: none !important;
+border: none;
+text-shadow: none;
+box-shadow: none;
+transition: all 0.12s linear 0s !important;
+font: 14px/20px "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.btn-cons {
+margin-right: 5px;
+min-width: 120px;
+margin-bottom: 8px;
+}
+.btn-default {
+color: #333;
+background-color: #fff;
+border-color: #ccc;
+}
+.btn-primary {
+color: #fff;
+background-color: #428bca;
+border-color: #357ebd;
+}
+.btn-success {
+color: #fff;
+background-color: #5cb85c;
+border-color: #4cae4c;
+}
+.btn-info {
+color: #fff;
+background-color: #5bc0de;
+border-color: #46b8da;
+}
+.btn-warning {
+color: #fff;
+background-color: #f0ad4e;
+border-color: #eea236;
+}
+.btn-danger {
+color: #fff;
+background-color: #d9534f;
+border-color: #d43f3a;
+}
+.btn-white {
+color: #5e5e5e;
+background-color: #fff;
+border: 1px solid #e5e9ec;
+}
+.btn-link, .btn-link:active, .btn-link[disabled], fieldset[disabled] .btn-link {
+background-color: transparent;
+-webkit-box-shadow: none;
+box-shadow: none;
+}
+.btn-link, .btn-link:hover, .btn-link:focus, .btn-link:active {
+border-color: transparent;
+}
+.btn-link {
+color: #5e5e5e;
+background-color: transparent;
+border: none;
+}
+.btn-link, .btn-link:hover, .btn-link:focus, .btn-link:active {
+border-color: transparent;
+}
+.btn-default, .btn-primary, .btn-success, .btn-info, .btn-warning, .btn-danger {
+text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
+-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.15),0 1px 1px rgba(0,0,0,0.075);
+box-shadow: inset 0 1px 0 rgba(255,255,255,0.15),0 1px 1px rgba(0,0,0,0.075);
+}
+.btn-round{
+    border-radius: 24px;
+}

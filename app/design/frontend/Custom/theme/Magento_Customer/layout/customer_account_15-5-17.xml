@@ -1,0 +1,82 @@
+<?xml version="1.0"?> 
+ 
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        
+ 
+      <referenceBlock name="customer_account_navigation">
+	<block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-navigation-account-edit-link">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">Edit Account</argument>
+                        <argument name="path" xsi:type="string">mymodule/account/editaccount</argument>
+                    </arguments>
+                </block>
+		<move element="customer-account-navigation-account-editshipping-link"  destination="customer_account_navigation" after="customer-account-navigation-changepassword-link"/>
+            <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-navigation-account-editshipping-link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Edit Shipping Details</argument>
+                    <argument name="path" xsi:type="string">customer/address/form</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+
+	<referenceBlock name="customer_account_navigation">
+            <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-navigation-account-productpricing-link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Product Pricing</argument>
+                    <argument name="path" xsi:type="string">mymod/acc/productpricing</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+
+	<referenceBlock name="customer_account_navigation">
+            <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-navigation-account-changepassword-link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Change Password</argument>
+                    <argument name="path" xsi:type="string">mymodule/account/changepassword</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+
+	<referenceBlock name="customer_account_navigation">
+            <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-navigation-account-cancelaccount-link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Cancel Account</argument>
+                    <argument name="path" xsi:type="string">cancelaccount/account/cancel</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+
+	<referenceBlock name="customer_account_navigation">
+            <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-navigation-account-getpaid-link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Getting Paid</argument>
+                    <argument name="path" xsi:type="string">mymod2/acc2/getpaid</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+
+	<referenceBlock name="customer_account_navigation">
+            <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-navigation-account-transfer-link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Transfer</argument>
+                    <argument name="path" xsi:type="string">mymod3/acc3/acctrans</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+
+        <!-- account link -->
+        <!--<referenceBlock name="customer-account-navigation-account-link" remove="true"/>-->
+        <!-- account edit link -->
+        <!--<referenceBlock name="customer-account-navigation-account-edit-link" remove="true"/>-->
+        <!-- address link -->
+        <referenceBlock name="customer-account-navigation-address-link" remove="true"/>
+	<move element="customer-account-navigation-account-productpricing-link" destination="customer_account_navigation" after="customer-account-navigation-account-editshipping-link"/>
+	<move element="customer-account-navigation-account-changepassword-link" destination="customer_account_navigation" after="customer-account-navigation-account-productpricing-link"/>
+	<move element="customer-account-navigation-account-editshipping-link" destination="customer_account_navigation" after="customer-account-navigation-newsletter-subscriptions-link"/>
+	<move element="customer-account-navigation-account-cancelaccount-link" destination="customer_account_navigation" after="customer-account-navigation-account-changepassword-link"/>
+	<move element="customer-account-navigation-account-transfer-link" destination="customer_account_navigation" after="customer-account-navigation-account-getpaid-link"/>
+	
+
+    </body>
+</page>

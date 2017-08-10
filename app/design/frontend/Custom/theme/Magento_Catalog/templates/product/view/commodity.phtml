@@ -1,0 +1,95 @@
+<?php //echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('delivery_info')->toHtml();                    ?>
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
+$_productId = $block->getProduct()->getId();
+$currentProduct = $objectManager->get('Magento\Catalog\Model\Product')->load($_productId);
+$userid = $currentProduct->getData("yourcustomattribute_id");
+$artworkId = $currentProduct->getData("product_artwork_id");
+$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+$baseURL = $storeManager->getStore()->getBaseUrl();
+$media_url = $objectManager->get('Magento\Store\Model\StoreManagerInterface')->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+$connection = $objectManager->get('Magento\Framework\App\ResourceConnection')->getConnection('\Magento\Framework\App\ResourceConnection::DEFAULT_CONNECTION');
+
+$result1 = $connection->fetchAll("SELECT * FROM art_enable_prouct INNER JOIN art_table ON art_table.art_id = art_enable_prouct.art_id WHERE art_enable_prouct.art_status=1 AND art_table.art_user=" . $userid." AND art_table.art_id = ".$artworkId." AND art_enable_prouct.art_product !=".$_productId);
+//$result2 = $connection->fetchAll("SELECT * FROM art_table");
+$arr = array();
+//foreach ($result2 as $key2) {
+//    $artwork_img = $key2['art_image'];
+//    $artwork_title = $key2['art_title'];
+//}
+?>
+<div class="container">
+    <div class="row product-list">
+        <?php
+
+        $_productCategoryArray = array();
+        foreach ($result1 as $key1) {
+            $pro_id = $key1['art_product'];
+            $_product = $objectManager->get('Magento\Catalog\Model\Product')->load($pro_id);
+
+          $_productcategoryId=$key1['art_product_category'];
+            if (count($_productcategoryId)) {
+              $_productCategory = $objectManager->create('Magento\Catalog\Model\Category')->load($_productcategoryId);
+
+              $_productParentCategory = $_productCategory->getParentCategory();
+              $key=$_productParentCategory->getId();
+              $_productCategoryArray[$key][]=$_product->getId();
+            }
+          }
+
+          $_product=null;
+          if(count($_productCategoryArray)){
+          foreach($_productCategoryArray as $categoryId => $_products_ids){
+                //show category
+              $_productCategory = $objectManager->create('Magento\Catalog\Model\Category')->load($categoryId);
+              ?>
+              <div class="col-md-4">
+              <div class="product-category-heading"><?php echo $_productCategory->getName(); ?></div>
+              <div class="product-category-products">
+              <?php
+              foreach($_products_ids as $_product_id){
+
+                $_productcate = $objectManager->get('Magento\Catalog\Model\Product')->load($_product_id);
+                $pro_img = $_productcate->getData('thumbnail');
+                $productURLkey = $_productcate->getData("url_key");
+                ?>
+            <div class="product-div" style="width: 250px;float: left;margin: 10px;position: relative;">
+                <a href="<?php echo $baseURL.$productURLkey; ?>" test="<?php echo $_productcate->getId(); ?>">
+                    <div class="slide-overlay" style="border: 2px solid gray;height: 300px;width: 240;">
+                        <img src="<?php echo $media_url . "catalog/product" . $pro_img; ?>"  style="height: 100%;width: 100%" alt="<?php echo $_productcate->getName(); ?>">
+                        <div class="pro_name">
+                            <span><?php
+                                $_productArtworkName = $_productcate->getName();
+                                $artworkName = explode(":", $_productArtworkName);
+
+                                $artworkName = trim($artworkName[0]);
+                                echo $artworkName;
+                                ?></span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+      <?php }
+      ?>
+      </div>
+    </div>
+      <?php
+      }
+    }
+    else{
+      echo "NO COMMODITY";      
+    }
+      ?>
+
+    </div>
+</div>
+<script>
+require(['jquery', 'jquery/ui'], function ($) {
+$(document).ready(function ($) {
+  var comm="<?php echo count($_productCategoryArray);?>";
+   document.getElementById('commodity_no').innerHTML=comm;
+});
+});
+</script>

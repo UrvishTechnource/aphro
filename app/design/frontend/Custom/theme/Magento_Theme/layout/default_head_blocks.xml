@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+        <css src="css/local-l.css"/>
+	<css src="css/local-m.css"/>
+	<css src="css/font-awesome.min.css"/>
+	<css src="css/mytab.css"/>
+	<!--<css src="css/slider.css"/>-->
+       <!--<css src="css/flexslider.css" />-->
+	<!--<script type="text/javascript" src="js/slider.js"></script>-->
+	<script type="text/javascript" src="js/mytab.js"></script>
+        <script type="text/javascript" src="js/footer-links.js"></script>
+<!--<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>-->
+       <!--<script src="js/jquery.flexslider.js"  type="text/javascript" xml="space"></script>
+       <script src="js/custom_slider.js"></script>-->
+	
+        
+	
+    </head>
+</page>
+

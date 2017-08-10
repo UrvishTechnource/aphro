@@ -1,0 +1,16 @@
+
+<body>
+	<referenceContainer name="header.panel">
+            <block class="Magento\Framework\View\Element\Html\Links" name="top.links">
+
+
+                 <block class="Magento\Framework\View\Element\Html\Link\Current" name="edit-profile">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">Edit Profile</argument>
+                        <argument name="path" xsi:type="string">customer/account/edit</argument>
+                    </arguments>
+                </block>                   
+            </block>
+    </referenceContainer>
+      
+</body>

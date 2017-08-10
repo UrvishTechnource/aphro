@@ -1,0 +1,29 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+// @codingStandardsIgnoreFile
+?>
+<style>
+/*    .tech_social_share::before {
+        content:"\f045";
+    }*/
+</style>
+<?php $_product = $block->getProduct() ?>
+<?php if ($block->canEmailToFriend()): ?>
+    
+<a href="javascript:;"
+       class="tech_social_share"><i class="fa fa-share-square-o" aria-hidden="true"></i><span><?php /* @escapeNotVerified */ echo __('') ?></span></a>
+    <!--    <a href="<?php /* @escapeNotVerified */ echo $this->helper('Magento\Catalog\Helper\Product')->getEmailToFriendUrl($_product) ?>"
+       class="action mailto friend"><span><?php /* @escapeNotVerified */ echo __('') ?></span></a>-->
+<?php endif; ?>
+<script>
+    require(['jquery', 'jquery/ui'], function ($) {
+        $(document).ready(function ($) {
+            jQuery(".tech_social_share").click(function () {
+                jQuery('.wdm-social-icons').slideToggle();
+            });
+        });
+    });
+</script>

@@ -1,0 +1,62 @@
+<?php
+/*$categories = $this->getStoreCategories(true,false,true);
+$categoryHelper = $this->getCategoryHelper();
+?>
+<ul>
+<?php
+foreach($categories as $category):
+     if (!$category->getIsActive()) {
+        continue;
+     }
+
+?>
+<li><a href="<?php echo $categoryHelper->getCategoryUrl($category) ?>"><?php echo $category->getName() ?></a></li>
+<?php  
+if($childrenCategories = $this->getChildCategories($category)):
+?>
+<ul>
+<?php
+foreach($childrenCategories as $childrenCategory):
+     if (!$childrenCategory->getIsActive()) {
+        continue;
+     }
+?>
+<li><a href="<?php echo $categoryHelper->getCategoryUrl($childrenCategory) ?>"><?php echo $childrenCategory->getName() ?></a></li>
+<?php
+endforeach;
+?>
+</ul>
+<?php
+endif;
+endforeach;
+?>
+</ul>*/ ?>
+<div class="cat">Category</div>
+<div class="example">
+<ul class="dropdown" id="nav" style="display:none;">
+<?php echo $this->getHtml() ?>
+</ul>
+</div>
+
+<script>
+require([ 'jquery', 'jquery/ui'], function($){ $(document).ready(function($) {
+
+
+$('.cat').click(function() {
+$('.dropdown').toggle();
+//$('.cat').toggleClass('category');
+$(".headerSitemenu a").toggleClass('myclass');
+//$('.level0 nav-2 last parent').css("display","none");
+//alert("hello");
+});
+
+});
+$(document).on("click", function(event){
+        var $trigger = $(".headerSitemenu");
+        if($trigger !== event.target && !$trigger.has(event.target).length){
+            $(".dropdown").slideUp("fast");
+        }            
+    });
+
+ });
+</script>

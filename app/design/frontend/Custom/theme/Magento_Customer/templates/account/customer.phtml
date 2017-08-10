@@ -1,0 +1,95 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+ 
+           
+?>
+<?php if($block->customerLoggedIn()): ?>
+
+<?php
+
+	//$om = \Magento\Framework\App\ObjectManager::getInstance();
+	$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+	$customerSession = $objectManager->create('Magento\Customer\Model\Session');
+	$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+
+	if($customerSession->isLoggedIn()) {
+      $id = $customerSession->getCustomer()->getId();
+      $name = $customerSession->getCustomer()->getName();
+    }
+	$bu =  $storeManager->getStore()->getBaseUrl()."pub/media/customer";
+	$stat_img =  $storeManager->getStore()->getBaseUrl()."pub/static/frontend/Custom/theme/en_US/images/profile.png";
+
+	$customerRepository = $objectManager->get('Magento\Customer\Api\CustomerRepositoryInterface');
+	$customer = $customerRepository->getById($id);
+	$cattrValue = "";
+	if($customer->getCustomAttribute('prof_image')){
+      $cattrValue = $customer->getCustomAttribute('prof_image')->getValue();
+	}
+	$username = "";
+	if($customer->getCustomAttribute('uname')){
+      $customer_obj = $objectManager->get('Magento\Customer\Model\Customer')->load($id);
+      $username =  $customer_obj->getData('firstname')." ".$customer_obj->getData('lastname');
+      //$username = $customer->getCustomAttribute('uname')->getValue();
+	}
+	?>
+    <li class="customer-welcome">
+        <span class="customer-name"
+              role="link"
+              tabindex="0"
+              data-mage-init='{"dropdown":{}}'
+              data-toggle="dropdown"
+              data-trigger-keypress-button="true"
+              data-bind="scope: 'customer'"><span><?php echo $username; ?></span>
+            <!--<span data-bind="text: customer().fullname"></span>-->
+		<?php 
+		$photoPath = $this->helper('Plumrocket\SocialLoginFree\Helper\Data')->getPhotoPath();
+		if (isset($_SESSION['customer_base']['pslogin_referer_store']) && $cattrValue!='')
+		{ ?>
+			<img src="<?php echo $bu.$cattrValue; ?>" alt="" width="50px" height="50px" />
+		<?php }
+		elseif(isset($_SESSION['customer_base']['pslogin_referer_store']) && $cattrValue=='')
+		{ ?>
+			<img src="<?php echo $photoPath; ?>" alt="" width="50px" height="50px" />
+		<?php }
+		elseif(!isset($_SESSION['customer_base']['pslogin_referer_store']) && $cattrValue!='')
+		{ ?>
+			<img src="<?php echo $bu.$cattrValue; ?>" alt="" width="50px" height="50px" />
+			
+		<?php }
+		else
+		{ ?>
+			<img src="<?php echo $stat_img; ?>" alt="" width="50px" height="50px" />
+		<?php } ?>
+            <button type="button"
+                    class="action switch"
+                    tabindex="-1"
+                    data-action="customer-menu-toggle">
+                <span><?php /* @escapeNotVerified */ echo __('Change')?></span>
+            </button>
+        </span>
+        <script type="text/x-magento-init">
+        {
+            "*": {
+                "Magento_Ui/js/core/app": {
+                    "components": {
+                        "customer": {
+                            "component": "Magento_Customer/js/view/customer"
+                        }
+                    }
+                }
+            }
+        }
+        </script>
+        <?php if($block->getChildHtml()):?>
+        <div class="customer-menu" data-target="dropdown">
+            <?php echo $block->getChildHtml();?>
+        </div>
+        <?php endif; ?>
+    </li>
+<?php endif; ?>
